@@ -417,7 +417,14 @@ Scala  Scilab  Smalltalk  TeX  VB.NET  VBScript  VHDL  Vala</div>
                         <p><pre><code class="html">&lt;pre&gt;&lt;code&gt; this language will be automatically determined &lt;/code&gt;&lt;/pre&gt;</code></pre></p>
                         <p><pre><code class="html">&lt;pre&gt;&lt;code class="html"&gt; highlight the code with certain language &lt;/code&gt;&lt;/pre&gt;</code></pre></p>', 'wp-code-highlight.js'); ?></td>
                 </tr>
-            </table>
+                 <tr>
+                    <td width="120px" align="center"><?php echo __('Thanks To', 'wp-code-highlight.js'); ?></td>
+                    <td><p>
+                        <a href="http://kalnitsky.org">kalnitsky</a> (for his <a href="https://wordpress.org/plugins/wp-highlightjs/">wp-highlight.js</a> plugin)
+                    </p></td>
+                </tr>
+
+           </table>
     </div>
 
     <!-- /html code of settings page -->
