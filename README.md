@@ -23,7 +23,7 @@ Author: [OWenT](http://owent.net/)
 Installation
 ======
 
-1. Upload `WP-CodeHighlight.js` to the `/wp-content/plugins/` directory
+1. Upload `WP-Code-Highlight.js` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Use `[code lang="some_lang"]some code[/code]` construction for highlighting
    or `[code]some code[/code]` for highlighting with language autodetection.
