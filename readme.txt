@@ -1,17 +1,23 @@
-WP Code Highlight.js
-============
+=== WP Code Highlight.js ===
+Donate link: http://owent.net/
+Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
+Requires at least: 3.0
+Tested up to: 3.9.1
+Stable tag: 0.1.0
+
 This is a wordpress plugin for highlight.js library.
 
-Description
-======
+== Description ==
+
 This is a wordpress plugin for highlight.js library.
 Highlight.js highlights syntax in code examples on any web pages. 
-It's very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
+It's very easy to use because it works automatically: finds
+blocks of code, detects a language, highlights it.
 This plugin allow you load highlight.js from local storage or from CDN.
-If you use local highlight.js you an also choose some your language packages to reduce file size loaded.
+If you use local highlight.js you an also choose some your 
+language packages to reduce file size loaded.
 
-Features:
-------
+= Features: =
 * works with comments
 * high performance
 * nice colorshemes
@@ -20,8 +26,7 @@ Features:
 
 Author: [OWenT](http://owent.net/)
 
-Installation
-======
+== Installation ==
 
 1. Upload `wp-highlight.js` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
@@ -30,8 +35,7 @@ Installation
    You also can use `<pre><code>` tags instead `[code]` bb-tag.
 
 
-Changelog
-======
-0.1.0
-------
+== Changelog ==
+
+= 0.1.0 =
 create

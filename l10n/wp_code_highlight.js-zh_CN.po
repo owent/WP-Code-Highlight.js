@@ -1,0 +1,117 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Code Highlight.js\n"
+"POT-Creation-Date: 2014-06-06 11:07+0800\n"
+"PO-Revision-Date: 2014-06-06 11:13+0800\n"
+"Last-Translator: \n"
+"Language-Team: OWenT <owent@owent.net>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2,c\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:222
+msgid "WP Code Highlight.js Settings"
+msgstr "WP Code Highlight.js 设置"
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:222
+msgid "WP Code Highlight.js"
+msgstr ""
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:232
+msgid "Settings"
+msgstr "设置"
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:272
+msgid "All configurations successfully saved..."
+msgstr "配置保存成功"
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:305
+msgid "CDN"
+msgstr "内容分发来源"
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:313
+msgid "Package"
+msgstr "包"
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:361
+msgid "Color Scheme:"
+msgstr "颜色方案"
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:370
+msgid "Highlight.js Option - Tab replace:"
+msgstr "Highlight.js 选项 - Tab 替换:"
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:373
+msgid "Highlight.js Option - Class prefix:"
+msgstr "Highlight.js 选项 - css类前缀:"
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:376
+msgid "Highlight.js Option - Use BR:"
+msgstr "Highlight.js 选项 - 使用BR标签作为换行符（用于高亮非pre标签时）:"
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:379
+msgid "Highlight.js Option - Languages:"
+msgstr "Highlight.js 选项 - 自动检测的语言:"
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:385
+msgid "You can add some additional CSS rules for better display:"
+msgstr "在这里添加额外的CSS规则"
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:390
+msgid "Save"
+msgstr "保存"
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:397
+msgid "Author"
+msgstr "作者"
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:398
+msgid "OWenT"
+msgstr ""
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:402
+msgid "Plugin Info"
+msgstr "插件信息"
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:403
+msgid ""
+"This is simple wordpress plugin for <a href=\"http://highlightjs.org/"
+"\">highlight.js</a> library. <a href=\"http://highlightjs.org/\">Highlight."
+"js</a> highlights syntax in code examples on blogs, forums and in fact on "
+"any web pages. It&acute;s very easy to use because it works automatically: "
+"finds blocks of code, detects a language, highlights it."
+msgstr ""
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:407
+msgid "Plugin Usage"
+msgstr "使用方法"
+
+#: /home/owent/workspace/oschina/WP-Code-Highlight.js/wp_code_highlight.js.php:408
+msgid ""
+"<p>For code highlighting you should use one of the following ways.</p>\n"
+"                        \n"
+"                        <p><strong>The first way</strong> is to use bb-codes:"
+"</p>\n"
+"                        \n"
+"                        <p><pre><code>[code] this language will be "
+"automatically determined [/code]</code></pre></p>\n"
+"                        <p><pre><code>[code lang=\"cpp\"] highlight the code "
+"with certain language [/code]</code></pre></p>\n"
+"                        \n"
+"                        <p><strong>The second way</strong> is to use html-"
+"tags:</p>\n"
+"                        \n"
+"                        <p><pre><code class=\"html\">&lt;pre&gt;&lt;code&gt; "
+"this language will be automatically determined &lt;/code&gt;&lt;/pre&gt;</"
+"code></pre></p>\n"
+"                        <p><pre><code class=\"html\">&lt;pre&gt;&lt;code "
+"class=\"html\"&gt; highlight the code with certain language &lt;/code&gt;"
+"&lt;/pre&gt;</code></pre></p>"
+msgstr ""
