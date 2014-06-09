@@ -3,7 +3,7 @@
  * Plugin Name: WP Code Highlight.js
  * Plugin URI: https://github.com/owt5008137/WP-Code-Highlight.js 
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
- * Version: 0.1.0
+ * Version: 0.1.1
  * Author: OWenT
  * Author URI: http://owent.net/
  * License: 3-clause BSD
@@ -12,8 +12,6 @@
 
 $PLUGIN_DIR =  plugins_url() . '/' . dirname(plugin_basename(__FILE__));
 
-
-init_hljs_textdomain();  # initialize localization functions: _e(), __()
 
 /**
  * Get version of Highlight.js 
@@ -28,27 +26,32 @@ function hljs_get_lib_version() {
 function hljs_cdn_list() {
     return array(
         'local' => array(
-            'cdn' => 'local', 
+            'cdn' => 'local',
+            'desc', => __('local', 'wp-code-highlight.js')
             'css' => '', 
             'js' => ''
         ),
         'CdnJs' => array(
-            'cdn' => '//cdnjs.cloudflare.com/ajax/libs/highlight.js/' . hljs_get_lib_version(), 
+            'cdn' => '//cdnjs.cloudflare.com/ajax/libs/highlight.js/' . hljs_get_lib_version(),
+            'desc' => 'Public CDN: cdnjs',
             'css' => '.min', 
             'js' => '.min'
         ), 
         'jsDelivr' => array(
             'cdn' => '//cdn.jsdelivr.net/highlight.js/8.0/highlight.min.js/' . hljs_get_lib_version(), 
+            'desc' => 'Public CDN: jsDelivr',
             'css' => '', 
             'js' => '.min'
         ),
         'Yandex' => array(
             'cdn' => 'https://yandex.st/highlightjs/' . hljs_get_lib_version(), 
+            'desc' => 'Public CDN: Yandex (highlightjs.org recommend)',
             'css' => '.min', 
             'js' => '.min'
         ),
         'BootCSS' => array(
             'cdn' => 'http://cdn.bootcss.com/highlight.js/' . hljs_get_lib_version(), 
+            'desc' => 'Public CDN: BootCSS(http only)',
             'css' => '.min', 
             'js' => '.min'
         )
@@ -70,7 +73,9 @@ function hljs_install() {
             'useBR' => false,
             'languages' => ''
         ),
-        'additional_css' => "pre.hljs {padding: 0px; overflow: scroll;}\npre.hljs code {border: 1px solid #ccc; padding: 5px;}"
+        'additional_css' => "pre.hljs {padding: 0px;}\npre.hljs code {border: 1px solid #ccc; padding: 5px;}",
+        'syntaxhighlighter_compatible' => false,
+        'prettify_compatible' => false
     ));
 }
 register_activation_hook(__FILE__, 'hljs_install');
@@ -121,6 +126,10 @@ function hljs_include() {
     if (!empty($hljs_cdn_list[$hljs_location]))
         $hljs_cdn_info = $hljs_cdn_list[$hljs_location];
 
+    // inject jquery
+    wp_enqueue_script('jquery');
+
+    // inject js & css file
     if ('local' == $hljs_cdn_info['cdn']) { ?>
     <script type="text/javascript" src="<?php echo ($PLUGIN_DIR . '/highlight.' . $hljs_package .'.pack.js'); ?>"></script>
     <link rel="stylesheet" href="<?php echo ($PLUGIN_DIR . '/styles/' . $hljs_code_option['theme'] . '.css'); ?>" />
@@ -129,6 +138,7 @@ function hljs_include() {
     <link rel="stylesheet" href="<?php echo ($hljs_cdn_info['cdn'] . '/styles/' . $hljs_code_option['theme'] . $hljs_cdn_info['css'] . '.css'); ?>" />
 <?php } 
 
+    // inject init script
     $hljs_lib_configure = false;
     foreach ($hljs_code_option['hljs_option'] as $key => $val) {
         if (!empty($val)) {
@@ -136,13 +146,38 @@ function hljs_include() {
         }
     }
 ?>
-    <script type="text/javascript">
-<?php if (count($hljs_lib_config) > 0) { ?>
-    hljs.configure(<?php echo json_encode($hljs_lib_config); ?>);
-<?php } ?>
-    hljs.initHighlightingOnLoad();
-    </script>
     <style><?php echo $hljs_code_option['additional_css']; ?></style>
+    <script type="text/javascript">
+    (function($, window) {
+        $(document).ready(function(){
+ <?php if (count($hljs_lib_config) > 0) { ?>
+            hljs.configure(<?php echo json_encode($hljs_lib_config); ?>);
+<?php } ?>
+            $('pre code').each(function(i, block) {
+                hljs.highlightBlock(block);
+            });
+<?php 
+    // inject compatible support
+    if (hljs_get_option('hljs_syntaxhighlighter_compatible')){ ?>
+            $('pre:not(:has(code))').each(function(i, block){
+                var class_desc = $(block).attr("class");
+                var reg_mat = class_desc.match(/brush\s*:\s*([\w\d]+)/i);
+                if(!reg_mat || reg_mat.length < 2)
+                    return;
+
+                var code_content = $(block).removeClass("brush:").removeClass("ruler:").removeClass("first-line:").removeClass("highlight:").removeClass(reg_mat[1] + ";").removeClass("true;").removeClass("false;").html();
+                $(block).empty().append($("<code></code>").addClass('language-' + reg_mat[1]).html(code_content));
+                hljs.highlightBlock(block);
+            });
+<?php }
+
+    if (hljs_get_option('hljs_prettify_compatible')) {?>
+
+<?php }
+           
+        });
+    })(jQuery, window);
+    </script>
 <?php
 }
 add_action('wp_head', 'hljs_include');
@@ -156,6 +191,7 @@ function init_hljs_textdomain() {
         load_plugin_textdomain('wp-code-highlight.js', false, dirname(plugin_basename( __FILE__ )) . '/' . 'l10n');
     }
 }
+add_action('init', 'init_hljs_textdomain');
 
 /**
  * Print CDN location addrs
@@ -166,7 +202,7 @@ function hljs_get_location_list($current_location) {
          ?><option value="<?php echo $key; ?>" <?php
         if($key == $current_location)
             echo ' selected="selected"';
-        ?>><?php echo $key; ?></option><?php
+        ?>><?php echo empty($val['desc'])? $key: $val['desc']; ?></option><?php
     }
 }
 
@@ -263,11 +299,14 @@ function hljs_settings_page() {
             'hljs_option' => array(
                 'tabReplace' => $_POST['hljs_option_tab_replace'],
                 'classPrefix' => $_POST['hljs_option_class_prefix'],
-                'useBR' => (isset($_POST['hljs_option_use_br']) && $_POST['hljs_option_use_br'] == 1)? true: false,
+                'useBR' => (isset($_POST['hljs_option_use_br']) && $_POST['hljs_option_use_br'])? true: false,
                 'languages' => $_POST['hljs_option_languages']
             ),
-            'additional_css' => $_POST['hljs_additional_css']
+            'additional_css' => $_POST['hljs_additional_css'],
+            'syntaxhighlighter_compatible' => (isset($_POST['hljs_syntaxhighlighter_compatible']) && $_POST['hljs_syntaxhighlighter_compatible'])? true: false,
+            'prettify_compatible' => (isset($_POST['hljs_prettify_compatible']) && $_POST['hljs_prettify_compatible'])? true: false
         );
+
         update_option('hljs_code_option', $upload_options);
         echo '<p class="info">' . __('All configurations successfully saved...', 'wp-code-highlight.js') . '</p>';
     }
@@ -315,38 +354,47 @@ function hljs_settings_page() {
              <?php hljs_get_package_list(hljs_get_option('package')); ?>
           </select>
           <div>
-            <h3>Support List:</h3>
-            <h4>Common</h4>
-            <div>Apache  Bash  C#  C++  CSS  CoffeeScript  Diff  HTML, XML  HTTP  Ini  JSON
-Java  JavaScript  Makefile  Markdown  Nginx  Objective C  PHP  Perl  Python
-Ruby  SQL</div>
-            <h4>Ext.</h4>
-            <div>Apache  Bash  C#  C++  CSS  CoffeeScript  Diff  HTML, XML  HTTP  Ini  JSON
-Java  JavaScript  Makefile  Markdown  Nginx  Objective C  PHP  Perl  Python
-Ruby  SQL
-ActionScript  AppleScript CMake D  DOS.bat Erlang  F#  Go Lisp Lua Matlab
-Python profile SCSS Tes VB.Net VBScript</div>
-            <h4>All</h4>
-            <div>Apache  Bash  C#  C++  CSS  CoffeeScript  Diff  HTML, XML  HTTP  Ini  JSON
-Java  JavaScript  Makefile  Markdown  Nginx  Objective C  PHP  Perl  Python
-Ruby  SQL
-1C  AVR Assembler  ActionScript  AppleScript  AsciiDoc  AutoHotkey  Axapta
-Brainfuck  CMake  Clojure  D  DOS .bat  Delphi  Django  Erlang  Erlang REPL
-F#  FIX  GLSL  Go  Haml  Handlebars  Haskell  Lasso  Lisp  LiveCode server and
-revIgniter  Lua  MEL  Mathematica  Matlab  Mizar  OCaml  Oracle Rules Language
-Oxygene  Parser3  Python profile  R  RenderMan RIB  RenderMan RSL  Rust  SCSS
-Scala  Scilab  Smalltalk  TeX  VB.NET  VBScript  VHDL  Vala</div>
-        </div>
+              <h3>Support List:</h3>
+              <div class="language_support_list" id="language_support_list_common">
+                  <h4>Common</h4>
+                  <div>Apache  Bash  C#  C++  CSS  CoffeeScript  Diff  HTML, XML  HTTP  Ini  JSON
+        Java  JavaScript  Makefile  Markdown  Nginx  Objective C  PHP  Perl  Python
+        Ruby  SQL</div>
+              </div>
+              <div class="language_support_list" id="language_support_list_ex">
+                  <h4>Ext.</h4>
+                  <div>Apache  Bash  C#  C++  CSS  CoffeeScript  Diff  HTML, XML  HTTP  Ini  JSON
+        Java  JavaScript  Makefile  Markdown  Nginx  Objective C  PHP  Perl  Python
+        Ruby  SQL
+        ActionScript  AppleScript CMake D  DOS.bat Erlang  F#  Go Lisp Lua Matlab
+        Python profile SCSS Tes VB.Net VBScript</div>
+              </div>
+              <div class="language_support_list" id="language_support_list_all">
+                  <h4>All</h4>
+                  <div>Apache  Bash  C#  C++  CSS  CoffeeScript  Diff  HTML, XML  HTTP  Ini  JSON
+        Java  JavaScript  Makefile  Markdown  Nginx  Objective C  PHP  Perl  Python
+        Ruby  SQL
+        1C  AVR Assembler  ActionScript  AppleScript  AsciiDoc  AutoHotkey  Axapta
+        Brainfuck  CMake  Clojure  D  DOS .bat  Delphi  Django  Erlang  Erlang REPL
+        F#  FIX  GLSL  Go  Haml  Handlebars  Haskell  Lasso  Lisp  LiveCode server and
+        revIgniter  Lua  MEL  Mathematica  Matlab  Mizar  OCaml  Oracle Rules Language
+        Oxygene  Parser3  Python profile  R  RenderMan RIB  RenderMan RSL  Rust  SCSS
+        Scala  Scilab  Smalltalk  TeX  VB.NET  VBScript  VHDL  Vala</div>
+              </div>
+          </div>
         </div>
         <script type="text/javascript">
         (function($, window){
             $(document).ready(function(){
                 var show_package_fn = (function(){
-                    if ($("#hljs_location").val() == "local") {
-                        $("#hljs_local_package").show();
-                    } else {
+                    if ($("#hljs_location").val() != "local") {
                         $("#hljs_local_package").hide();
+                        return;
                     }
+
+                    $("#hljs_local_package").show();
+                    $(".language_support_list").hide();
+                    $("#language_support_list" + $("#hljs_package").val()).show();
                 });
 
                 show_package_fn();
@@ -374,7 +422,7 @@ Scala  Scilab  Smalltalk  TeX  VB.NET  VBScript  VHDL  Vala</div>
           <input type="text" name="hljs_option_class_prefix" id="hljs_option_class_prefix" value="<?php echo hljs_get_lib_option('classPrefix'); ?>" /><br />
 
           <label for="hljs_option_use_br"><?php echo __('Highlight.js Option - Use BR:', 'wp-code-highlight.js') ?></label><br/>
-          <input type="checkbox" name="hljs_option_use_br" id="hljs_option_use_br" value="1" <?php if(hljs_get_lib_option('useBR')) echo ' checked="checked"'; ?>" /><br />
+          <input type="checkbox" name="hljs_option_use_br" id="hljs_option_use_br" value="1" <?php if(hljs_get_lib_option('useBR')) echo ' checked="checked"'; ?> /><br />
 
           <label for="hljs_option_languages"><?php echo __('Highlight.js Option - Languages:', 'wp-code-highlight.js'); ?></label><br/>
           <textarea type="text" name="hljs_option_languages" id="hljs_option_languages" value="<?php echo hljs_get_lib_option('languages'); ?>"><?php echo hljs_get_lib_option('languages'); ?></textarea><br />
@@ -385,6 +433,15 @@ Scala  Scilab  Smalltalk  TeX  VB.NET  VBScript  VHDL  Vala</div>
           <label for="hljs_additional_css"><?php echo __('You can add some additional CSS rules for better display:', 'wp-code-highlight.js'); ?></label><br/>
           <textarea type="text" name="hljs_additional_css" id="hljs_additional_css"><?php echo hljs_get_option('additional_css'); ?></textarea>
         </p>
+
+        <!-- check box : compatible options -->
+        <p class="section">
+          <label for="hljs_syntaxhighlighter_compatible"><?php echo __('SyntaxHighlighter Compatiable:', 'wp-code-highlight.js') ?></label>
+          <input type="checkbox" name="hljs_syntaxhighlighter_compatible" id="hljs_syntaxhighlighter_compatible" value="1" <?php if(hljs_get_lib_option('syntaxhighlighter_compatible')) echo ' checked="checked"'; ?> />
+          <label for="hljs_prettify_compatible"><?php echo __('Prettify Compatible:', 'wp-code-highlight.js') ?></label>
+          <input type="checkbox" name="hljs_prettify_compatible" id="hljs_prettify_compatible" value="1" <?php if(hljs_get_lib_option('prettify_compatible')) echo ' checked="checked"'; ?> /><br />
+      </p>
+
 
         <input type="hidden" name="cmd" value="hljs_save" />
         <input type="submit" name="submit" value="<?php echo __('Save', 'wp-code-highlight.js'); ?>" id="submit" />
@@ -417,13 +474,18 @@ Scala  Scilab  Smalltalk  TeX  VB.NET  VBScript  VHDL  Vala</div>
                         <p><pre><code class="html">&lt;pre&gt;&lt;code&gt; this language will be automatically determined &lt;/code&gt;&lt;/pre&gt;</code></pre></p>
                         <p><pre><code class="html">&lt;pre&gt;&lt;code class="html"&gt; highlight the code with certain language &lt;/code&gt;&lt;/pre&gt;</code></pre></p>', 'wp-code-highlight.js'); ?></td>
                 </tr>
-                 <tr>
+                <tr>
                     <td width="120px" align="center"><?php echo __('Thanks To', 'wp-code-highlight.js'); ?></td>
                     <td><p>
-                        <a href="http://kalnitsky.org">kalnitsky</a> (for his <a href="https://wordpress.org/plugins/wp-highlightjs/">wp-highlight.js</a> plugin)
+                        <a href="http://softwaremaniacs.org/">Ivan Sagalaev</a> (for his <a href="http://highlightjs.org/">highlight.js</a> plugin)
                     </p></td>
                 </tr>
-
+                <tr>
+                    <td width="120px" align="center"><?php echo __('Thanks To', 'wp-code-highlight.js'); ?></td>
+                    <td><p>
+                        <a href="http://kalnitsky.org">Igor Kalnitsky</a> (for his <a href="https://wordpress.org/plugins/wp-highlightjs/">wp-highlight.js</a> plugin)
+                    </p></td>
+                </tr>
            </table>
     </div>
 
