@@ -160,7 +160,7 @@ function hljs_include() {
     // inject compatible support
     if (hljs_get_option('syntaxhighlighter_compatible')){ ?>
             $('pre:not(:has(code))').each(function(i, block){
-                var class_desc = $(block).attr("class");
+                var class_desc = $(block).attr("class") || "";
                 var reg_mat = class_desc.match(/brush\s*:\s*([\w\d]+)/i);
                 if(!reg_mat || reg_mat.length < 2)
                     return;
