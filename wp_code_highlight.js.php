@@ -73,7 +73,7 @@ function hljs_install() {
             'useBR' => false,
             'languages' => ''
         ),
-        'additional_css' => "pre.hljs {padding: 0px;}\npre.hljs code {border: 1px solid #ccc; padding: 5px;}",
+        'additional_css' => "pre.hljs {padding: 5px;}\npre.hljs code {}",
         'syntaxhighlighter_compatible' => false,
         'prettify_compatible' => false
     ));
@@ -165,14 +165,25 @@ function hljs_include() {
                 if(!reg_mat || reg_mat.length < 2)
                     return;
 
-                var code_content = $(block).removeClass("brush:").removeClass("ruler:").removeClass("first-line:").removeClass("highlight:").removeClass("brush:" + reg_mat[1]).removeClass(reg_mat[1] + ";").removeClass("true;").removeClass("false;").html();
+                var code_content = $(block).removeClass("brush:").removeClass("ruler:").removeClass("first-line:").removeClass("highlight:")
+                    .removeClass("brush:" + reg_mat[1] + ";").removeClass(reg_mat[1] + ";").removeClass("true;").removeClass("false;").html();
                 $(block).empty().append($("<code></code>").addClass('language-' + reg_mat[1]).html(code_content));
                 hljs.highlightBlock(block);
             });
 <?php }
 
-    if (hljs_get_option('prettify_compatible')) {?>
+    if (hljs_get_option('prettify_compatible')) { ?>
+        $('pre.prettyprint:not(.prettyprinted), code.prettyprint:not(.prettyprinted), xmp.prettyprint:not(.prettyprinted)').each(function(i, block){
+            var jblock = $(block).removeClass("prettyprint");
+            if (jblock.prop("tagName").toLowerCase() == "code" && jblock.parent().prop("tagName").toLowerCase() == "pre") {
+                hljs.highlightBlock(jblock.parent().get(0));
+                return;
+            }
 
+            var code_content = jblock.html();
+            jblock.replaceWith($("<pre></pre>").append($("<code></code>").html(code_content)));
+            hljs.highlightBlock(jblock.get(0));
+        });
 <?php } ?>
            
         });
@@ -426,7 +437,7 @@ function hljs_settings_page() {
           <label for="hljs_option_class_prefix"><?php echo __('Highlight.js Option - Class prefix:', 'wp-code-highlight.js') ?></label><br/>
           <input type="text" name="hljs_option_class_prefix" id="hljs_option_class_prefix" value="<?php echo hljs_get_lib_option('classPrefix'); ?>" /><br />
 
-          <label for="hljs_option_use_br"><?php echo __('Highlight.js Option - Use BR:', 'wp-code-highlight.js') ?></label><br/>
+          <label for="hljs_option_use_br"><?php echo __('Highlight.js Option - Use BR:', 'wp-code-highlight.js') ?></label>
           <input type="checkbox" name="hljs_option_use_br" id="hljs_option_use_br" value="1" <?php if(hljs_get_lib_option('useBR')) echo ' checked="checked"'; ?> /><br />
 
           <label for="hljs_option_languages"><?php echo __('Highlight.js Option - Languages:', 'wp-code-highlight.js'); ?></label><br/>
