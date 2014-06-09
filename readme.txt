@@ -3,7 +3,7 @@ Donate link: http://owent.net/
 Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
 Requires at least: 3.0
 Tested up to: 3.9.1
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 
 This is a wordpress plugin for highlight.js library.
 
