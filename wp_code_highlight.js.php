@@ -27,7 +27,7 @@ function hljs_cdn_list() {
     return array(
         'local' => array(
             'cdn' => 'local',
-            'desc', => __('local', 'wp-code-highlight.js')
+            'desc' => __('local', 'wp-code-highlight.js'),
             'css' => '', 
             'js' => ''
         ),
@@ -158,22 +158,22 @@ function hljs_include() {
             });
 <?php 
     // inject compatible support
-    if (hljs_get_option('hljs_syntaxhighlighter_compatible')){ ?>
+    if (hljs_get_option('syntaxhighlighter_compatible')){ ?>
             $('pre:not(:has(code))').each(function(i, block){
                 var class_desc = $(block).attr("class");
                 var reg_mat = class_desc.match(/brush\s*:\s*([\w\d]+)/i);
                 if(!reg_mat || reg_mat.length < 2)
                     return;
 
-                var code_content = $(block).removeClass("brush:").removeClass("ruler:").removeClass("first-line:").removeClass("highlight:").removeClass(reg_mat[1] + ";").removeClass("true;").removeClass("false;").html();
+                var code_content = $(block).removeClass("brush:").removeClass("ruler:").removeClass("first-line:").removeClass("highlight:").removeClass("brush:" + reg_mat[1]).removeClass(reg_mat[1] + ";").removeClass("true;").removeClass("false;").html();
                 $(block).empty().append($("<code></code>").addClass('language-' + reg_mat[1]).html(code_content));
                 hljs.highlightBlock(block);
             });
 <?php }
 
-    if (hljs_get_option('hljs_prettify_compatible')) {?>
+    if (hljs_get_option('prettify_compatible')) {?>
 
-<?php }
+<?php } ?>
            
         });
     })(jQuery, window);
@@ -386,6 +386,11 @@ function hljs_settings_page() {
         <script type="text/javascript">
         (function($, window){
             $(document).ready(function(){
+                var show_package_language = (function(){
+                    $(".language_support_list").hide();
+                    $("#language_support_list_" + $("#hljs_package").val()).show();
+               });
+
                 var show_package_fn = (function(){
                     if ($("#hljs_location").val() != "local") {
                         $("#hljs_local_package").hide();
@@ -393,12 +398,12 @@ function hljs_settings_page() {
                     }
 
                     $("#hljs_local_package").show();
-                    $(".language_support_list").hide();
-                    $("#language_support_list" + $("#hljs_package").val()).show();
+                    show_package_language();
                 });
 
                 show_package_fn();
-                $("#hljs_location").click(function(){ show_package_fn(); });
+                $("#hljs_location").change(function(){ show_package_fn(); });
+                $("#hljs_package").change(function(){ show_package_language(); });
             });
         })(jQuery, window);
 
@@ -437,9 +442,9 @@ function hljs_settings_page() {
         <!-- check box : compatible options -->
         <p class="section">
           <label for="hljs_syntaxhighlighter_compatible"><?php echo __('SyntaxHighlighter Compatiable:', 'wp-code-highlight.js') ?></label>
-          <input type="checkbox" name="hljs_syntaxhighlighter_compatible" id="hljs_syntaxhighlighter_compatible" value="1" <?php if(hljs_get_lib_option('syntaxhighlighter_compatible')) echo ' checked="checked"'; ?> />
+          <input type="checkbox" name="hljs_syntaxhighlighter_compatible" id="hljs_syntaxhighlighter_compatible" value="1" <?php if(hljs_get_option('syntaxhighlighter_compatible')) echo ' checked="checked"'; ?> />
           <label for="hljs_prettify_compatible"><?php echo __('Prettify Compatible:', 'wp-code-highlight.js') ?></label>
-          <input type="checkbox" name="hljs_prettify_compatible" id="hljs_prettify_compatible" value="1" <?php if(hljs_get_lib_option('prettify_compatible')) echo ' checked="checked"'; ?> /><br />
+          <input type="checkbox" name="hljs_prettify_compatible" id="hljs_prettify_compatible" value="1" <?php if(hljs_get_option('prettify_compatible')) echo ' checked="checked"'; ?> /><br />
       </p>
 
 
@@ -477,7 +482,7 @@ function hljs_settings_page() {
                 <tr>
                     <td width="120px" align="center"><?php echo __('Thanks To', 'wp-code-highlight.js'); ?></td>
                     <td><p>
-                        <a href="http://softwaremaniacs.org/">Ivan Sagalaev</a> (for his <a href="http://highlightjs.org/">highlight.js</a> plugin)
+                        <a href="http://softwaremaniacs.org/">Ivan Sagalaev</a> (for his <a href="http://highlightjs.org/">highlight.js</a>)
                     </p></td>
                 </tr>
                 <tr>
