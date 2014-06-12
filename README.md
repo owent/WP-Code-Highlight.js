@@ -5,13 +5,13 @@
 Project Information
 ------
 #### Project Name: 
-**WP Code Highlight.js**[7]
+[**WP Code Highlight.js**][7]
 #### Github Home: 
 https://github.com/owt5008137/WP-Code-Highlight.js
 #### Plugin Home:
 http://wordpress.org/plugins/wp-code-highlightjs/
 #### Description: 
-This is a plugin of *[Wordpress][3]* using **Highlight.js**[4] to make codes on posts, articles or any web pages more beautiful and easier to read.
+This is a plugin of *[Wordpress][3]* using [**Highlight.js**][4] to make codes on posts, articles or any web pages more beautiful and easier to read.
 
 This plugin allow you to load [Highlight.js][4] from local web server or some of public CDN we collected.
 
@@ -21,11 +21,13 @@ At the same time, [**WP Code Highlight.js**][7] also allow you to set options of
 
 #### Usage:
 Install from wordpress 
+
 1. Open plugin installing page
 2. Search  WP Code Highlight.js
 3. Install it
 
 Install custom
+
 1. Download release package
 2. Unzip and rename folder name into wp-code-highlight.js
 3. Move this folder into *[your wordpress path]/wp-content/plugins/* folder
@@ -63,6 +65,8 @@ Any questions please mailto [owent@owent.net](mailto:owent@owent.net) or [owt500
 Report Problems: https://github.com/owt5008137/WP-Code-Highlight.js/issues
 
 
+Notes
+------
 
   [stackedit]: [StackEdit](https://stackedit.io/) is a full-featured, open-source Markdown editor based on PageDown, the Markdown library used by Stack Overflow and the other Stack Exchange sites.
 
