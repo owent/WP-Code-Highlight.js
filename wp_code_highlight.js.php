@@ -38,7 +38,7 @@ function hljs_cdn_list() {
             'js' => '.min'
         ), 
         'jsDelivr' => array(
-            'cdn' => '//cdn.jsdelivr.net/highlight.js/8.0/highlight.min.js/' . hljs_get_lib_version(), 
+            'cdn' => '//cdn.jsdelivr.net/highlight.js/' . hljs_get_lib_version(), 
             'desc' => 'Public CDN: jsDelivr',
             'css' => '', 
             'js' => '.min'
@@ -49,6 +49,12 @@ function hljs_cdn_list() {
             'css' => '.min', 
             'js' => '.min'
         ),
+        'Baidu' => array(
+            'cdn' => 'http://apps.bdimg.com/libs/highlight.js/' . hljs_get_lib_version(),
+            'desc' => 'Public CDN: Baidu',
+            'css' => '.min', 
+            'js' => '.min'
+        ), 
         'BootCSS' => array(
             'cdn' => 'http://cdn.bootcss.com/highlight.js/' . hljs_get_lib_version(), 
             'desc' => 'Public CDN: BootCSS(http only)',
