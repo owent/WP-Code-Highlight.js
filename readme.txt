@@ -3,7 +3,7 @@ Donate link: http://owent.net/
 Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
 Requires at least: 3.0
 Tested up to: 3.9.1
-Stable tag: 0.1.3
+Stable tag: 0.1.4
 
 This is a wordpress plugin for highlight.js library.
 
@@ -43,6 +43,9 @@ Author: [OWenT](http://owent.net/)
    just 
 
 == Changelog ==
+
+= 0.1.4 =
+1. fix $(document).ready() not actived in some mobile browser
 
 = 0.1.3 =
 1. add Baidu CDN
