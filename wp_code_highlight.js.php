@@ -3,7 +3,7 @@
  * Plugin Name: WP Code Highlight.js
  * Plugin URI: https://github.com/owt5008137/WP-Code-Highlight.js 
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
- * Version: 0.1.4
+ * Version: 0.1.6
  * Author: OWenT
  * Author URI: http://owent.net/
  * License: 3-clause BSD
@@ -17,7 +17,7 @@ $PLUGIN_DIR =  plugins_url() . '/' . dirname(plugin_basename(__FILE__));
  * Get version of Highlight.js 
  */
 function hljs_get_lib_version() {
-    return '8.0';
+    return '8.2';
 }
 
 /**
@@ -48,19 +48,32 @@ function hljs_cdn_list() {
             'desc' => 'Public CDN: Yandex (highlightjs.org recommend)',
             'css' => '.min', 
             'js' => '.min'
-        ),
-        'Baidu' => array(
-            'cdn' => 'http://apps.bdimg.com/libs/highlight.js/' . hljs_get_lib_version(),
-            'desc' => 'Public CDN: Baidu',
-            'css' => '.min', 
-            'js' => '.min'
         ), 
         'BootCSS' => array(
             'cdn' => 'http://cdn.bootcss.com/highlight.js/' . hljs_get_lib_version(), 
             'desc' => 'Public CDN: BootCSS(http only)',
             'css' => '.min', 
             'js' => '.min'
+        ),
+        'Baidu' => array(
+            'cdn' => 'http://apps.bdimg.com/libs/highlight.js/8.0',// . hljs_get_lib_version(),
+            'desc' => 'Public CDN: Baidui(http only, highlight.js 8.0 only)',
+            'css' => '.min', 
+            'js' => '.min'
+        ), 
+        'Qihoo360' => array(
+            'cdn' => 'http://libs.useso.com/js/highlight.js/8.0',// . hljs_get_lib_version(), 
+            'desc' => 'Public CDN: QiHoo 360(http only, highlight.js 8.0 only)',
+            'css' => '.min', 
+            'js' => '.min'
+        ), 
+        'Qiniu' => array(
+            'cdn' => 'http://cdn.staticfile.org/highlight.js/8.0',// . hljs_get_lib_version(), 
+            'desc' => 'Public CDN: Qiniu(http only, highlight.js 8.0 only)',
+            'css' => '.min', 
+            'js' => '.min'
         )
+
    );
 }
 
@@ -237,9 +250,9 @@ function hljs_get_location_list($current_location) {
  */
 function hljs_get_package_list($current_package) {
     $pkgs = array(
-        'common' => 'Common(about 31KB)',
-        'ex' => 'Ext.(about 54KB)',
-        'all' => 'All(about 184KB)'
+        'common' => 'Common(about 35KB)',
+        'ex' => 'Ext.(about 62KB)',
+        'all' => 'All(about 240KB)'
     );
 
     foreach($pkgs as $key => $val) {
@@ -366,12 +379,15 @@ function hljs_settings_page() {
         </style>
 
         <!-- combo box with location -->
-        <p class="section">
+        <div class="section">
           <label for="hljs_location"><?php echo __('CDN', 'wp-code-highlight.js'); ?></label><br/>
           <select name="hljs_location" id="hljs_location">
              <?php hljs_get_location_list(hljs_get_option('location')); ?>
           </select>
-        </p>
+          <div>
+            Current Highlight.js Version: <?php echo hljs_get_lib_version(); ?>
+          </div>
+        </div>
 
         <!-- combo box with local source package -->
         <div class="section" id="hljs_local_package">
@@ -392,8 +408,8 @@ function hljs_settings_page() {
                   <div>Apache  Bash  C#  C++  CSS  CoffeeScript  Diff  HTML, XML  HTTP  Ini  JSON
         Java  JavaScript  Makefile  Markdown  Nginx  Objective C  PHP  Perl  Python
         Ruby  SQL
-        ActionScript  AppleScript CMake D  DOS.bat Erlang  F#  Go Lisp Lua Matlab
-        Python profile SCSS Tes VB.Net VBScript</div>
+        ActionScript  AppleScript  Cap'n Proto  CMake  D  DOS.bat Erlang  F#  Go Lisp Lua Matlab
+        Protocol Buffers Python profile Scala SCSS Swift Tex Typescript</div>
               </div>
               <div class="language_support_list" id="language_support_list_all">
                   <h4>All</h4>
@@ -401,11 +417,11 @@ function hljs_settings_page() {
         Java  JavaScript  Makefile  Markdown  Nginx  Objective C  PHP  Perl  Python
         Ruby  SQL
         1C  AVR Assembler  ActionScript  AppleScript  AsciiDoc  AutoHotkey  Axapta
-        Brainfuck  CMake  Clojure  D  DOS .bat  Delphi  Django  Erlang  Erlang REPL
-        F#  FIX  GLSL  Go  Haml  Handlebars  Haskell  Lasso  Lisp  LiveCode server and
-        revIgniter  Lua  MEL  Mathematica  Matlab  Mizar  OCaml  Oracle Rules Language
-        Oxygene  Parser3  Python profile  R  RenderMan RIB  RenderMan RSL  Rust  SCSS
-        Scala  Scilab  Smalltalk  TeX  VB.NET  VBScript  VHDL  Vala</div>
+        Brainfuck  Cap'n Proto  CMake  Clojure  D  Dart  DOS .bat  Delphi  Django  Dust  Erlang  Erlang Elixir REPL
+        F#  FIX  G-Code  Gherkin  GLSL  Go  Gradle  Groovy  Haml  Handlebars  Haskell  Haxe  Lasso  Lisp  LiveCode server and
+        revIgniter  Lua  MEL  Mathematica  Matlab  Mizar  Monkey  Nimrod  Nix  NSIS  OCaml  Oracle Rules Language
+        Oxygene  Parser3  Protocol Buffers  Python profile  Q  R  RenderMan RIB  RenderMan RSL  Rust  SCSS
+        Scala  Scheme  Scilab  Smalltalk  Swift  TeX  Thrift  Typescript  VB.NET  VBScript  VHDL  Vim script  Vala  x86asm</div>
               </div>
           </div>
         </div>
@@ -436,13 +452,19 @@ function hljs_settings_page() {
         </script>
 
         <!-- combo box with styles -->
-        <p class="section">
+        <div class="section">
           <label for="hljs_theme"><?php echo __('Color Scheme:', 'wp-code-highlight.js'); ?></label><br/>
 
           <select name="hljs_theme" id="hljs_theme">
              <?php hljs_get_style_list(hljs_get_option('theme')); ?>
           </select>
-        </p>
+          <div>You can get a quick look of all style and all language at <a href="https://highlightjs.org/static/test.html">https://highlightjs.org/static/test.html</a>
+          </div>
+          <div>
+            Notice: some cdn support only highligh.js v8.0 and some style is unusable, see <a href="https://highlightjs.org/" target="_blank">https://highlightjs.org/</a> for detail
+          </div>
+
+        </div>
 
         <!-- text edit : tab replace -->
         <p class="section">
