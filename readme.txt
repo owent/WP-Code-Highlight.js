@@ -3,7 +3,7 @@ Donate link: http://owent.net/
 Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
 Requires at least: 3.0
 Tested up to: 4.0.0
-Stable tag: 0.1.6
+Stable tag: 0.1.7
 
 This is a wordpress plugin for highlight.js library.
 And you can easily migrate from SynaxHighlight or Google Prettify without change
@@ -45,6 +45,9 @@ Author: [OWenT](http://owent.net/)
    just 
 
 == Changelog ==
+
+= 0.1.7 =
+1. commit files to publish cdn and update cdn conf
 
 = 0.1.6 =
 1. upgrade highlight.js to 8.2
