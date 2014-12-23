@@ -1,86 +1,101 @@
-[WP Code Highlight.js]	Project
-====================
+# Highlight.js
+
+[![Build Status](https://travis-ci.org/isagalaev/highlight.js.svg?branch=master)](https://travis-ci.org/isagalaev/highlight.js)
+
+Highlight.js is a syntax highlighter written in JavaScript. It works in the
+browser as well as on the server. It works with pretty much any markup,
+doesn't depend on any framework and has automatic language detection.
 
 
-Project Information
-------
-#### Project Name: 
-[**WP Code Highlight.js**][7]
-#### Github Home: 
-https://github.com/owt5008137/WP-Code-Highlight.js
-#### Plugin Home:
-http://wordpress.org/plugins/wp-code-highlightjs/
-#### Description: 
-This is a plugin of *[Wordpress][3]* using [**Highlight.js**][4] to make codes on posts, articles or any web pages more beautiful and easier to read.
+## Getting Started
 
-This plugin allow you to load [Highlight.js][4] from local web server or some of public CDN we collected.
+The bare minimum for using highlight.js on a web page is linking to the library
+along with one of the styles and calling [`initHighlightingOnLoad`][1]:
 
-To make you easier to migrate from [SyntaxHilighter][5] and [Google Prettify][6] to [Highlight.js][4], this plugin will provide some compatible mode so that you need not to change any code on your old web pages. They will be converted automaticly.
+```html
+<link rel="stylesheet" href="/path/to/styles/default.css">
+<script src="/path/to/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+```
 
-At the same time, [**WP Code Highlight.js**][7] also allow you to set options of [Highlight.js][4] in the setting page of your wordpress. And we also provide some other useful options.For example, you can use only common language package 
+This will find and highlight code inside of `<pre><code>` tags trying to detect
+the language automatically. If automatic detection doesn't work for you, you can
+specify the language in the class attribute:
 
-#### Usage:
-Install from wordpress 
+```html
+<pre><code class="html">...</code></pre>
+```
 
-1. Open plugin installing page
-2. Search  WP Code Highlight.js
-3. Install it
+The list of supported language classes is available in the [class reference][8].
+Classes can also be prefixed with either `language-` or `lang-`.
 
-Install custom
+To disable highlighting altogether use the `nohighlight` class:
 
-1. Download release package
-2. Unzip and rename folder name into wp-code-highlight.js
-3. Move this folder into *[your wordpress path]/wp-content/plugins/* folder
+```html
+<pre><code class="nohighlight">...</code></pre>
+```
 
-Have fun.
+## Custom Initialization
 
-About:
--------
-#### Why [Highlight.js][4] ?
-Recently, I determine to turn to use **Markdown** to write blog. But here is a problem, I use [SyntaxHighlighter][5] before and I'm  failed to find a tool to support [SyntaxHighlighter][5] and markdown very well. But with [Highlight.js][4] it's very easy.
+When you need a bit more control over the initialization of
+highlight.js, you can use the [`highlightBlock`][2] and [`configure`][3]
+functions. This allows you to control *what* to highlight and *when*.
 
-There is a web markdown editor named **StackEdit** you can use to write markdown and publish to Github, Wordpress, Blog and etc. or export it to html. It allow you to write code like what you do in github but it's more powerful. Especially , it has [Highlight.js][4] and [Prettify][6] plugin to highlight codes. Or you can disable code highlight and it will use **&lt;pre&gt;&lt;code&gt;** to wrap codes. This also can be used by [Highlight.js][4].
+Here's an equivalent way to calling [`initHighlightingOnLoad`][1] using jQuery:
 
-If you would like to just use vim, emacs or other text editor. There is also a tool named [**Pandoc**][8] that you can use to convert markdown to many formats. with option --no-highlight, it will also use **&lt;pre&gt;&lt;code&gt;** to wrap codes.
+```javascript
+$(document).ready(function() {
+  $('pre code').each(function(i, block) {
+    hljs.highlightBlock(block);
+  });
+});
+```
 
-#### Start to write a plugin
-There is already a plugin named [wp-highlight.js][2] which can be used in [Wordpress][3]. But it load the full version of [Highlight.js][4]. It cost too much data traffic(*about 180+KB*). It will slow down loading time and I really don't need so many languages(especially some of them I have never heard of). I don't want to pay for it. So I need a plugin to load just the languages I need, or download [Highlight.js][4] from public CDN.
+You can use any tags instead of `<pre><code>` to mark up your code. If you don't
+use a container that preserve line breaks you will need to configure
+highlight.js to use the `<br>` tag:
 
-At the same time, I wrote many blogs before and using [SyntaxHighlighter][5] for years, I do not want to fix my codes that already puhlished. So I need a plugin to convert those code automaticly.
+```javascript
+hljs.configure({useBR: true});
 
-Then this plugin starts. It allow user only load common package of [Highlight.js][4] (*only 31KB*) or extended package(*about 54KB*). It also can analysis doms on web page, find codes in [SyntaxHighlighter][5] format or [Prettify][6] format, and then turn them into [Highlight.js][4] format, and finally , highlight them.
+$('div.code').each(function(i, block) {
+  hljs.highlightBlock(block);
+});
+```
 
-Thanks to
-------
-This plugin fork from [wp-highlight.js][2] and rewrote all the codes. So we must thanks to [wp-highlight.js][2]'s author [Igor Kalnitsky](http://kalnitsky.org).
-
-Also thanks to [Highlight.js][4]'s author [Ivan Sagalaev](http://softwaremaniacs.org/)
-
-And thanks to all  contributors and users. You make this plugin better.
-
-FAQ
-------
-Any questions please mailto [owent@owent.net](mailto:owent@owent.net) or [owt5008137@live.com](mailto:owt5008137@live.com)
-
-Report Problems: https://github.com/owt5008137/WP-Code-Highlight.js/issues
+For other options refer to the documentation for [`configure`][3].
 
 
-Notes
-------
+## Getting the Library
 
-  [stackedit]: [StackEdit](https://stackedit.io/) is a full-featured, open-source Markdown editor based on PageDown, the Markdown library used by Stack Overflow and the other Stack Exchange sites.
+You can get highlight.js as a hosted or custom-build browser script or as a
+server module. Head over to the [download page][4] for all the options.
 
-  [highlight.js]: [Highlight.js][4]  is a syntax highlighter written in JavaScript. It works in the browser as well as on the server. It works with pretty much any markup, doesn't depend on any framework and has automatic language detection. 
+Note, that the library is not supposed to work straight from the source on
+GitHub, it requires building. If none of the pre-packaged options work for you
+refer to the [building documentation][5].
 
-  [wp-code-highlight.js]: [WP Code Highlight.js][7] is a syntax highlight plugin for [Wordpress][3], which using [highlight.js][4] to highlight codes.
 
-  [pandoc]: [Pandoc][8] is a tool to  convert files from one markup format into another, it support more than ten format as input and even more format as output.
+## License
 
-  [1]: http://wordpress.org/plugins/wp-code-highlightjs/
-  [2]: http://wordpress.org/plugins/wp-highlightjs/
-  [3]: http://wordpress.org
-  [4]: http://highlightjs.org/
-  [5]: http://alexgorbatchev.com/SyntaxHighlighter/
-  [6]: https://code.google.com/p/google-code-prettify/
-  [7]: https://github.com/owt5008137/WP-Code-Highlight.js
-  [8]: http://johnmacfarlane.net/pandoc/
+Highlight.js is released under the BSD License. See [LICENSE][10] file for
+details.
+
+
+## Links
+
+The official site for the library is at <https://highlightjs.org/>.
+
+Further in-depth documentation for the API and other topics is at
+<http://highlightjs.readthedocs.org/>.
+
+Authors and contributors are listed in the [AUTHORS.en.txt][9] file.
+
+[1]: http://highlightjs.readthedocs.org/en/latest/api.html#inithighlightingonload
+[2]: http://highlightjs.readthedocs.org/en/latest/api.html#highlightblock-block
+[3]: http://highlightjs.readthedocs.org/en/latest/api.html#configure-options
+[4]: https://highlightjs.org/download/
+[5]: http://highlightjs.readthedocs.org/en/latest/building-testing.html
+[8]: http://highlightjs.readthedocs.org/en/latest/css-classes-reference.html
+[9]: https://github.com/isagalaev/highlight.js/blob/master/AUTHORS.en.txt
+[10]: https://github.com/isagalaev/highlight.js/blob/master/LICENSE
