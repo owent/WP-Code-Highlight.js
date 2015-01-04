@@ -3,7 +3,7 @@ Donate link: http://owent.net/
 Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
 Requires at least: 3.0
 Tested up to: 4.1.0
-Stable tag: 0.1.8
+Stable tag: 0.2.0
 
 This is a wordpress plugin for highlight.js library.
 And you can easily migrate from SynaxHighlight or Google Prettify without change
@@ -31,20 +31,35 @@ other libraries. For now, we support SyntaxHighlighter and Prettify.
 * choose language packages
 * SyntaxHighlighter compatible mode
 * Prettify compatible mode
+* Work well with [pandoc](http://johnmacfarlane.net/pandoc/) and [stackeditor](https://stackedit.io/editor) and other similar markdown editors
 
 Author: [OWenT](http://owent.net/)
 
 == Installation ==
 
-1. Upload `WP-Code-Highlight.js` to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Use `[code lang="some_lang"]some code[/code]` construction for highlighting
-   or `[code]some code[/code]` for highlighting with language autodetection.
-   You also can use `<pre><code>` tags instead `[code]` bb-tag.
-4. Or enable SyntaxHighlighter compatible and Prettify compatible and then
-   just 
+Install from wordpress 
+
+1. Open plugin installing page
+2. Search  WP Code Highlight.js
+3. Install it
+4. Use `<pre><code>` and `</code></pre>` to wrapper your code.(see [highlightjs](https://github.com/isagalaev/highlight.js) for detail)
+5. Enable SyntaxHighlighter compatible mode and Prettify compatible mode if you need it.
+
+Install custom
+
+1. Download release package
+2. Unzip and rename folder name into wp-code-highlight.js
+3. Move this folder into *[your wordpress path]/wp-content/plugins/* folder
+4. Use `<pre><code>` and `</code></pre>` to wrapper your code.(see [highlightjs](https://github.com/isagalaev/highlight.js) for detail)
+5. Enable SyntaxHighlighter compatible mode and Prettify compatible mode if you need it.
+
+Just have fun.
 
 == Changelog ==
+
+= 0.2.0 =
+1. close BBCode of [code] for default([BUS #1](https://github.com/owt5008137/WP-Code-Highlight.js/issues/1))
+2. update highlight.js to 8.4
 
 = 0.1.8 =
 1. tested under wordpress 4.1.0

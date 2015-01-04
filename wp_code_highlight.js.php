@@ -3,7 +3,7 @@
  * Plugin Name: WP Code Highlight.js
  * Plugin URI: https://github.com/owt5008137/WP-Code-Highlight.js 
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
- * Version: 0.1.8
+ * Version: 0.2.0
  * Author: OWenT
  * Author URI: http://owent.net/
  * License: 3-clause BSD
@@ -51,13 +51,14 @@ function hljs_cdn_list() {
         ), 
         'BootCSS' => array(
             //'cdn' => 'http://cdn.bootcss.com/highlight.js/' . hljs_get_lib_version(), 
-			'cdn' => 'http://cdn.bootcss.com/highlight.js/8.3', 
+            'cdn' => 'http://cdn.bootcss.com/highlight.js/8.3', 
             'desc' => 'Public CDN: BootCSS(http only, lastest version: 8.3)',
             'css' => '.min', 
             'js' => '.min'
         ),
         'Baidu' => array(
-            'cdn' => 'http://apps.bdimg.com/libs/highlight.js/' . hljs_get_lib_version(),
+            //'cdn' => 'http://apps.bdimg.com/libs/highlight.js/' . hljs_get_lib_version(),
+            'cdn' => 'http://apps.bdimg.com/libs/highlight.js/8.2',
             'desc' => 'Public CDN: Baidui(http only)',
             'css' => '.min', 
             'js' => '.min'
@@ -95,7 +96,8 @@ function hljs_install() {
         ),
         'additional_css' => "pre.hljs {padding: 5px;}\npre.hljs code {}",
         'syntaxhighlighter_compatible' => false,
-        'prettify_compatible' => false
+        'prettify_compatible' => false,
+        'shortcode' => false
     ));
 }
 register_activation_hook(__FILE__, 'hljs_install');
@@ -315,13 +317,17 @@ add_filter('plugin_action_links', 'hljs_add_settings_link', 10, 2);
 /**
  * Add BB-Tag for highlighting.
  *
- *   Usage: [CODE lang=C++]...[/CODE]
+ *   Usage: [CODE lang=cpp]...[/CODE]
  */
 function hljs_code_handler($atts, $content) {
-    $language = $atts['lang'];
-    return "<pre class=\"hljs\"><code class=\"$language\">" . ltrim($content, '\n') . '</code></pre>';
+    $language = '';
+    if (!empty($atts['lang']))
+        $language = "class=\"${atts['lang']}\"";
+    return "<pre class=\"hljs\"><code $language>" . ltrim($content, '\n') . '</code></pre>';
 }
-add_shortcode('code', 'hljs_code_handler');
+if (hljs_get_lib_option('shortcode')) {
+    add_shortcode('code', 'hljs_code_handler');
+}
 
 
 /**
@@ -344,7 +350,8 @@ function hljs_settings_page() {
             ),
             'additional_css' => $_POST['hljs_additional_css'],
             'syntaxhighlighter_compatible' => (isset($_POST['hljs_syntaxhighlighter_compatible']) && $_POST['hljs_syntaxhighlighter_compatible'])? true: false,
-            'prettify_compatible' => (isset($_POST['hljs_prettify_compatible']) && $_POST['hljs_prettify_compatible'])? true: false
+            'prettify_compatible' => (isset($_POST['hljs_prettify_compatible']) && $_POST['hljs_prettify_compatible'])? true: false,
+            'shortcode' => (isset($_POST['hljs_enable_shortcode']) && $_POST['hljs_enable_shortcode'])? true: false
         );
 
         update_option('hljs_code_option', $upload_options);
@@ -494,8 +501,13 @@ function hljs_settings_page() {
           <input type="checkbox" name="hljs_syntaxhighlighter_compatible" id="hljs_syntaxhighlighter_compatible" value="1" <?php if(hljs_get_option('syntaxhighlighter_compatible')) echo ' checked="checked"'; ?> />
           <label for="hljs_prettify_compatible"><?php echo __('Prettify Compatible:', 'wp-code-highlight.js') ?></label>
           <input type="checkbox" name="hljs_prettify_compatible" id="hljs_prettify_compatible" value="1" <?php if(hljs_get_option('prettify_compatible')) echo ' checked="checked"'; ?> /><br />
-      </p>
-
+        </p>
+        
+        <!-- check box : shortcode options -->
+        <p class="section">
+          <label for="hljs_enable_shortcode"><?php echo __('Enable [code]code content ...[/code] support:', 'wp-code-highlight.js') ?></label>
+          <input type="checkbox" name="hljs_enable_shortcode" id="hljs_enable_shortcode" value="1" <?php if(hljs_get_option('shortcode')) echo ' checked="checked"'; ?> />
+        </p>
 
         <input type="hidden" name="cmd" value="hljs_save" />
         <input type="submit" name="submit" value="<?php echo __('Save', 'wp-code-highlight.js'); ?>" id="submit" />

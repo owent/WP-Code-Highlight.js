@@ -17,7 +17,7 @@ This plugin allow you to load [Highlight.js][4] from local web server or some of
 
 To make you easier to migrate from [SyntaxHilighter][5] and [Google Prettify][6] to [Highlight.js][4], this plugin will provide some compatible mode so that you need not to change any code on your old web pages. They will be converted automaticly.
 
-At the same time, [**WP Code Highlight.js**][7] also allow you to set options of [Highlight.js][4] in the setting page of your wordpress. And we also provide some other useful options.For example, you can use only common language package 
+[**WP Code Highlight.js**][7] also allow you to set options of [Highlight.js][4] in the setting page of your wordpress. And we also provide some other useful options.For example, you can use only common language package 
 
 #### Usage:
 Install from wordpress 
@@ -64,6 +64,7 @@ Any questions please mailto [owent@owent.net](mailto:owent@owent.net) or [owt500
 
 Report Problems: https://github.com/owt5008137/WP-Code-Highlight.js/issues
 
+See [readme.txt](readme.txt) for more detail
 
 Notes
 ------
