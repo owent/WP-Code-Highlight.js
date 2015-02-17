@@ -270,7 +270,7 @@ function hljs_get_package_list($current_package) {
  * Print Combobox With Styles
  */
 function hljs_get_style_list($current_theme) {
-    $styleDir = '..' . '/' . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__)) . '/' . 'styles'; # dirty hack
+    $styleDir = plugin_dir_path( __FILE__ ) . 'styles';
 
     if ($dir = opendir($styleDir))
     {
