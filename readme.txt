@@ -2,8 +2,8 @@
 Donate link: http://owent.net/
 Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
 Requires at least: 3.0
-Tested up to: 4.1.0
-Stable tag: 0.2.1
+Tested up to: 4.1.1
+Stable tag: 0.2.2
 
 This is a wordpress plugin for highlight.js library.
 And you can easily migrate from SynaxHighlight or Google Prettify without change
@@ -56,6 +56,11 @@ Install custom
 Just have fun.
 
 == Changelog ==
+
+= 0.2.2 =
+1. fix bug in no default plugin directory, merge [Request 4](https://github.com/owt5008137/WP-Code-Highlight.js/pull/4) [Issues 3](https://github.com/owt5008137/WP-Code-Highlight.js/issues/3)
+2. add maxcdn
+3. set jdfilvr .min css files
 
 = 0.2.1 =
 1. open ver 8.4 in baidu cdn,(lib is merged [Request 48](https://github.com/Clouda-team/baiducdnstatic/pull/48)
