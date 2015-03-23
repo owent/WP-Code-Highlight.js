@@ -3,7 +3,7 @@
  * Plugin Name: WP Code Highlight.js
  * Plugin URI: https://github.com/owt5008137/WP-Code-Highlight.js 
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
- * Version: 0.2.3
+ * Version: 0.2.4
  * Author: OWenT
  * Author URI: http://owent.net/
  * License: 3-clause BSD
@@ -12,6 +12,12 @@
 
 $PLUGIN_DIR =  plugins_url() . '/' . dirname(plugin_basename(__FILE__));
 
+/**
+ * Get version of this plugins
+ */
+function hljs_get_version() {
+    return '0.2.4';
+}
 
 /**
  * Get version of Highlight.js 
@@ -156,16 +162,22 @@ function hljs_include() {
 
     // inject js & css file    
     if ( 'local' == $hljs_cdn_info['cdn'] ) {
-        wp_enqueue_script( 'hljs', $PLUGIN_DIR . '/highlight.' . $hljs_package .'.pack.js', 'jquery' );
-        wp_enqueue_style( 'hljstheme', $PLUGIN_DIR . '/styles/' . $hljs_code_option['theme'] . '.css' );
+        wp_enqueue_script( 'hljs', $PLUGIN_DIR . '/highlight.' . $hljs_package .'.pack.js', array('jquery'), hljs_get_version(), true );
+        wp_enqueue_style( 'hljstheme', $PLUGIN_DIR . '/styles/' . $hljs_code_option['theme'] . '.css', array(), hljs_get_version() );
     } else {
-        wp_enqueue_script( 'hljs', $hljs_cdn_info['cdn'] . '/highlight' . $hljs_cdn_info['js'] . '.js', 'jquery' );
-        wp_enqueue_style( 'hljstheme', $hljs_cdn_info['cdn'] . '/styles/' . $hljs_code_option['theme'] . $hljs_cdn_info['css'] . '.css' );
+        wp_enqueue_script( 'hljs', $hljs_cdn_info['cdn'] . '/highlight' . $hljs_cdn_info['js'] . '.js', array('jquery'), hljs_get_version(), true );
+        wp_enqueue_style( 'hljstheme', $hljs_cdn_info['cdn'] . '/styles/' . $hljs_code_option['theme'] . $hljs_cdn_info['css'] . '.css', array(), hljs_get_version() );
     }
-    
+}
+add_action('wp_head', 'hljs_include');
+
+/**
+ * Attach init code to the current page
+ */
+function hljs_append_init_codes() {
+    $hljs_code_option = get_option('hljs_code_option');
 
     // inject init script
-    $hljs_lib_configure = false;
     foreach ($hljs_code_option['hljs_option'] as $key => $val) {
         if (!empty($val)) {
             $hljs_lib_config[$key] = $val;
@@ -226,8 +238,7 @@ function hljs_include() {
     </script>
 <?php
 }
-add_action('wp_head', 'hljs_include');
-
+add_action('wp_footer', 'hljs_append_init_codes');
 
 /**
  * Initialize Localization Functions

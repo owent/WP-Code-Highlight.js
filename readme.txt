@@ -3,7 +3,7 @@ Donate link: http://owent.net/
 Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
 Requires at least: 3.0
 Tested up to: 4.1.1
-Stable tag: 0.2.3
+Stable tag: 0.2.4
 
 This is a wordpress plugin for highlight.js library.
 And you can easily migrate from SynaxHighlight or Google Prettify without change
@@ -56,6 +56,9 @@ Install custom
 Just have fun.
 
 == Changelog ==
+
+= 0.2.4 =
+1. turn wp-highlight.js's codes into footer
 
 = 0.2.3 =
 1. merge [Request 5](https://github.com/owt5008137/WP-Code-Highlight.js/pull/5)
