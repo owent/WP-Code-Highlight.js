@@ -57,6 +57,7 @@ This plugin fork from [wp-highlight.js][2] and rewrote all the codes. So we must
 Also thanks to [Highlight.js][4]'s author [Ivan Sagalaev](http://softwaremaniacs.org/)
 
 And thanks to all  contributors and users. You make this plugin better.
+> [@geraint](https://github.com/geraintp)
 
 FAQ
 ------
