@@ -163,11 +163,13 @@ function hljs_include() {
 
     // inject js & css file    
     if ( 'local' == $hljs_cdn_info['cdn'] ) {
-        wp_enqueue_script( 'hljs', $PLUGIN_DIR . '/highlight.' . $hljs_package .'.pack.js', array('jquery'), hljs_get_version(), true );
-        wp_enqueue_style( 'hljstheme', $PLUGIN_DIR . '/styles/' . $hljs_code_option['theme'] . '.css', array(), hljs_get_version() );
-    } elseif ( 'custom' == $hljs_cdn_info['cdn'] ) {
-        wp_enqueue_script( 'hljs', $PLUGIN_DIR . '/highlight.common.pack.js', array('jquery'), hljs_get_version(), true );
-        wp_enqueue_script( 'hljs_custom', $PLUGIN_DIR . '/highlight.custom.pack.js', array('hljs'), hljs_get_version(), true );
+        $dep_libs = array('jquery');
+        if ('custom' == $hljs_package) {
+            wp_enqueue_script( 'hljs_preload', $PLUGIN_DIR . '/highlight.common.pack.js', $dep_libs, hljs_get_version(), true );
+            $dep_libs = array('hljs_preload');
+        }
+
+        wp_enqueue_script( 'hljs', $PLUGIN_DIR . '/highlight.' . $hljs_package .'.pack.js', $dep_libs, hljs_get_version(), true );
         wp_enqueue_style( 'hljstheme', $PLUGIN_DIR . '/styles/' . $hljs_code_option['theme'] . '.css', array(), hljs_get_version() );
     } else {
         wp_enqueue_script( 'hljs', $hljs_cdn_info['cdn'] . '/highlight' . $hljs_cdn_info['js'] . '.js', array('jquery'), hljs_get_version(), true );
@@ -379,21 +381,24 @@ function hljs_settings_page() {
         // generate custom language pack
         if ('local' == $upload_options['location'] && 'custom' == $upload_options['package']) {
             $upload_options['custom_lang'] = array();
-            $custom_pack_file = $PLUGIN_DIR . DIRECTORY_SEPARATOR . 'highlight.custom.pack.js';
+            $plugin_root_dir = plugin_dir_path( __FILE__ );
+            $custom_pack_file = $plugin_root_dir . DIRECTORY_SEPARATOR . 'highlight.custom.pack.js';
 
             file_put_contents($custom_pack_file, '');
             foreach($_POST as $key => $val) {
-                if ('.js' == substr($key, -3) && intval($val) == 1) {
-                    $file_name = $PLUGIN_DIR . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . $key;
-                    if (file_exists($file_name)) {
+                $suffix = substr($key, -3);
+                if (('.js' == $suffix || '_js' == $suffix )&& intval($val) == 1) {
+                    $file_name = substr($key, 0, strlen($key) - 3) . '.min.js';
+                    $full_path = $plugin_root_dir . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . $file_name;
+                    if (file_exists($full_path)) {
                         array_push($upload_options['custom_lang'], $key);
-                        $fc = file_get_contents($file_name);
-                        file_put_contents($custom_pack_file, $fc, FILE_APPEND);
+                        $fc = file_get_contents($full_path);
+                        file_put_contents($custom_pack_file, $fc . PHP_EOL, FILE_APPEND);
                     } else {
                         echo '<p class="warn">' .
                             __('Language file', 'wp-code-highlight.js') .
-                            ' ' . $key . ' ' .
-                            __('not found', 'wp-code-highlight.js') .
+                            ' ' . $file_name . ' ' .
+                            __('not found', 'wp-code-highlight.js') . ', ' .
                             __('ignored', 'wp-code-highlight.js') . '</p>';
                     }
                 }
@@ -452,7 +457,7 @@ function hljs_settings_page() {
           <div>
               <h3>Support List:</h3>
               <div class="language_support_list" id="language_support_list">
-                <p><b>Common</b></p><ul>
+                <p><b>Common</b></p><ul id="language_support_list_common">
                       <li><label><input name="apache.js" checked type="checkbox" value="0" class="hljs_lang common"> Apache</label></li>
                       <li><label><input name="bash.js" checked type="checkbox" value="0" class="hljs_lang common"> Bash</label></li>
                       <li><label><input name="cs.js" checked type="checkbox" value="0" class="hljs_lang common"> C#</label></li>
@@ -476,7 +481,7 @@ function hljs_settings_page() {
                       <li><label><input name="ruby.js" checked type="checkbox" value="0" class="hljs_lang common"> Ruby</label></li>
                       <li><label><input name="sql.js" checked type="checkbox" value="0" class="hljs_lang common"> SQL</label></li></ul>
                 <p><b>Other</b>
-                </p><ul>
+                </p><ul id="language_support_list_other">
                       <li><label><input name="1c.js" type="checkbox" value="1"> 1C</label></li>
                       <li><label><input name="avrasm.js" type="checkbox" value="1"> AVR Assembler</label></li>
                       <li><label><input name="actionscript.js" type="checkbox" value="1" class="hljs_lang ext"> ActionScript</label></li>
@@ -573,16 +578,35 @@ function hljs_settings_page() {
                       <li><label><input name="vim.js" type="checkbox" value="1"> Vim Script</label></li>
                       <li><label><input name="xl.js" type="checkbox" value="1"> XL</label></li>
                       <li><label><input name="pf.js" type="checkbox" value="1"> pf</label></li></ul>
+                  </div>
+              <div style="clear: both;"></div>
               </div>
         </div>
         <script type="text/javascript">
         (function($, window){
             $(document).ready(function(){
+                $("#language_support_list ul").css({
+                    overflow: 'auto',
+                    margin: '1em 0px',
+                    padding: '0px'
+                });
+
+                $("#language_support_list ul li").css({
+                    margin: '0.2em 0px',
+                    padding: '0px',
+                    'list-style': 'outside none none',
+                    float: 'left',
+                    width: '24.5%'
+                });
+
+                $("#language_support_list_common input").prop("disabled", true);
+                $("#language_support_list_common input").prop("checked", true);
+
                 var show_package_language = (function(){
                     var hljs_package_name = $("#hljs_package").val();
                     if ("custom" == hljs_package_name) {
-                        $("#language_support_list input").prop("disabled", false);
-                        $("#language_support_list input").prop("checked", false);
+                        $("#language_support_list_other input").prop("disabled", false);
+                        $("#language_support_list_other input").prop("checked", false);
 
                         // 自定义语言选项
                         var selected_langs = "<?php
@@ -593,22 +617,22 @@ function hljs_settings_page() {
                         ?>".split(/[ \t\r\n]/);
                         $.each(selected_langs, function(k, v) {
                             if (v) {
-                                $("#language_support_list input[name=" + v　+ "]").prop("checked", true);
+                                $('#language_support_list_other input[name="' + v.replace(/_js$/, ".js")　+ '"]').prop("checked", true);
                             }
                         });
 
                     } else {
                         // 向前兼容，勾选默认的语言选项
-                        $("#language_support_list input").prop("disabled", true);
+                        $("#language_support_list_other input").prop("disabled", true);
 
                         if ("all" == hljs_package_name) {
-                            $("#language_support_list input").prop("checked", true);
+                            $("#language_support_list_other input").prop("checked", true);
                         } else {
-                            $("#language_support_list input").prop("checked", false);
-                            $("#language_support_list input.common").prop("checked", true);
+                            $("#language_support_list_other input").prop("checked", false);
 
-                            if ("ext" == hljs_package_name)
-                                $("#language_support_list input.ext").prop("checked", true);
+                            if ("ex" == hljs_package_name) {
+                                $("#language_support_list_other input.ext").prop("checked", true);
+                            }
                         }
                     }
                });
@@ -727,6 +751,12 @@ function hljs_settings_page() {
                     <td><p>
                         <a href="http://kalnitsky.org">Igor Kalnitsky</a> (for his <a href="https://wordpress.org/plugins/wp-highlightjs/">wp-highlight.js</a> plugin)
                     </p></td>
+                </tr>
+                <tr>
+                    <td width="120px" align="center"><?php echo __('Thanks To', 'wp-code-highlight.js'); ?></td>
+                    <td><p>
+                            <a href="http://geraint.co">Geraint Palmer</a>
+                        </p></td>
                 </tr>
            </table>
     </div>
