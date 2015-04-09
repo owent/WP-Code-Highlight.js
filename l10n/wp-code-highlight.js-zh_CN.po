@@ -1,111 +1,141 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Code Highlight.js\n"
-"POT-Creation-Date: 2014-06-09 14:25+0800\n"
-"PO-Revision-Date: 2014-06-09 14:31+0800\n"
+"POT-Creation-Date: 2015-04-09 15:09+0800\n"
+"PO-Revision-Date: 2015-04-09 15:12+0800\n"
 "Last-Translator: OWenT <owent@owent.net>\n"
 "Language-Team: OWenT <owent@owent.net>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.7.4\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2,c\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../wp_code_highlight.js.php:30
+#: ../wp_code_highlight.js.php:36
 msgid "local"
 msgstr "本地"
 
-#: ../wp_code_highlight.js.php:237
+#: ../wp_code_highlight.js.php:321
 msgid "WP Code Highlight.js Settings"
 msgstr "WP Code Highlight.js 设置"
 
-#: ../wp_code_highlight.js.php:237
+#: ../wp_code_highlight.js.php:321
 msgid "WP Code Highlight.js"
-msgstr ""
+msgstr "WP Code Highlight.js"
 
-#: ../wp_code_highlight.js.php:247
+#: ../wp_code_highlight.js.php:331
 msgid "Settings"
 msgstr "设置"
 
-#: ../wp_code_highlight.js.php:290
+#: ../wp_code_highlight.js.php:394
+msgid "Language file"
+msgstr "语言文件"
+
+#: ../wp_code_highlight.js.php:396
+msgid "not found"
+msgstr "未找到"
+
+#: ../wp_code_highlight.js.php:397
+msgid "ignored"
+msgstr "忽略"
+
+#: ../wp_code_highlight.js.php:404
 msgid "All configurations successfully saved..."
 msgstr "配置保存成功"
 
-#: ../wp_code_highlight.js.php:323
+#: ../wp_code_highlight.js.php:437
 msgid "CDN"
 msgstr "内容分发来源"
 
-#: ../wp_code_highlight.js.php:331
+#: ../wp_code_highlight.js.php:448
 msgid "Package"
 msgstr "包"
 
-#: ../wp_code_highlight.js.php:388
+#: ../wp_code_highlight.js.php:636
 msgid "Color Scheme:"
 msgstr "颜色方案"
 
-#: ../wp_code_highlight.js.php:397
+#: ../wp_code_highlight.js.php:651
 msgid "Highlight.js Option - Tab replace:"
 msgstr "Highlight.js 选项 - Tab 替换:"
 
-#: ../wp_code_highlight.js.php:400
+#: ../wp_code_highlight.js.php:654
 msgid "Highlight.js Option - Class prefix:"
 msgstr "Highlight.js 选项 - css类前缀:"
 
-#: ../wp_code_highlight.js.php:403
+#: ../wp_code_highlight.js.php:657
 msgid "Highlight.js Option - Use BR:"
 msgstr "Highlight.js 选项 - 使用BR标签作为换行符（用于高亮非pre标签时）:"
 
-#: ../wp_code_highlight.js.php:406
+#: ../wp_code_highlight.js.php:660
 msgid "Highlight.js Option - Languages:"
 msgstr "Highlight.js 选项 - 自动检测的语言:"
 
-#: ../wp_code_highlight.js.php:412
+#: ../wp_code_highlight.js.php:666
 msgid "You can add some additional CSS rules for better display:"
 msgstr "在这里添加额外的CSS规则"
 
-#: ../wp_code_highlight.js.php:418
+#: ../wp_code_highlight.js.php:672
 msgid "SyntaxHighlighter Compatiable:"
 msgstr "SyntaxHighlighter 兼容模式:"
 
-#: ../wp_code_highlight.js.php:420
+#: ../wp_code_highlight.js.php:674
 msgid "Prettify Compatible:"
 msgstr "Prettify 兼容模式:"
 
-#: ../wp_code_highlight.js.php:426
+#: ../wp_code_highlight.js.php:680
+msgid "Enable [code]code content ...[/code] support:"
+msgstr "开启 [code]代码内容...[/code] 的BBCode支持:"
+
+#: ../wp_code_highlight.js.php:685
 msgid "Save"
 msgstr "保存"
 
-#: ../wp_code_highlight.js.php:433
+#: ../wp_code_highlight.js.php:692
 msgid "Author"
 msgstr "作者"
 
-#: ../wp_code_highlight.js.php:434
+#: ../wp_code_highlight.js.php:693
 msgid "OWenT"
-msgstr ""
+msgstr "OWenT"
 
-#: ../wp_code_highlight.js.php:438
+#: ../wp_code_highlight.js.php:697
 msgid "Plugin Info"
 msgstr "插件信息"
 
-#: ../wp_code_highlight.js.php:439
+#: ../wp_code_highlight.js.php:698
 msgid ""
-"This is a wordpress plugin for <a href=\"http://highlightjs.org/\">highlight."
-"js</a> library. <a href=\"http://highlightjs.org/\">Highlight.js</a> "
-"highlights syntax in code examples on web pages. It&acute;s very easy to use "
-"because it works automatically: finds blocks of code, detects a language, "
-"highlights it."
+"<p>This is a wordpress plugin for <a href=\"http://highlightjs.org/"
+"\">highlight.js</a> library.\n"
+"                        <a href=\"http://highlightjs.org/\">Highlight.js</a> "
+"highlights syntax in code examples on web pages.\n"
+"                        It&acute;s very easy to use because it works "
+"automatically: finds blocks of code, detects a language, highlights it.</p>\n"
+"                        <p>And it&acute;s very easy to work with <a href="
+"\"https://stackedit.io/\" target=\"_blank\">stackedit</a> or other markdown "
+"editors</p>\n"
+"                        "
 msgstr ""
+"<p>这是一个用于嵌入<a href=\"http://highlightjs.org/\">highlight.js</a>库到"
+"wordpress的插件.\n"
+"                        <a href=\"http://highlightjs.org/\">Highlight.js</a> "
+"用于高亮Web页面中的代码。\n"
+"                        同时因为它查找代码、检测语言和高亮等一系列操作都是全"
+"自动的，所以非常易于使用</p>\n"
+"                        <p>另外它也可以很容易与 <a href=\"https://stackedit."
+"io/\" target=\"_blank\">stackedit</a> 或其他markdown编辑器搭配使用</p>\n"
+"                        "
 
-#: ../wp_code_highlight.js.php:443
+#: ../wp_code_highlight.js.php:706
 msgid "Plugin Usage"
 msgstr "使用方法"
 
-#: ../wp_code_highlight.js.php:444
+#: ../wp_code_highlight.js.php:707
 msgid ""
 "<p>For code highlighting you should use one of the following ways.</p>\n"
 "                        \n"
@@ -127,7 +157,35 @@ msgid ""
 "class=\"html\"&gt; highlight the code with certain language &lt;/code&gt;"
 "&lt;/pre&gt;</code></pre></p>"
 msgstr ""
+"<p>你可以使用以下方法之一来开启代码高亮。</p>\n"
+"                        \n"
+"                        <p><strong>第一种方法</strong> 是使用 bb-codes:</p>\n"
+"                        \n"
+"                        <p><pre><code>[code] 自动判定代码语言 [/code]</"
+"code></pre></p>\n"
+"                        <p><pre><code>[code lang=\"cpp\"] 指定高亮代码的语言 "
+"[/code]</code></pre></p>\n"
+"                        \n"
+"                        <p><strong>第二种方法</strong> 是使用html标签:</p>\n"
+"                        \n"
+"                        <p><pre><code class=\"html\">&lt;pre&gt;&lt;code&gt; "
+"自动判定代码语言 &lt;/code&gt;&lt;/pre&gt;</code></pre></p>\n"
+"                        <p><pre><code class=\"html\">&lt;pre&gt;&lt;code "
+"class=\"html\"&gt; 指定高亮代码的语言 &lt;/code&gt;&lt;/pre&gt;</code></"
+"pre></p>"
 
-#: ../wp_code_highlight.js.php:457 ../wp_code_highlight.js.php:463
+#: ../wp_code_highlight.js.php:720 ../wp_code_highlight.js.php:726
 msgid "Thanks To"
 msgstr "鸣谢"
+
+#~ msgid ""
+#~ "This is a wordpress plugin for <a href=\"http://highlightjs.org/"
+#~ "\">highlight.js</a> library. <a href=\"http://highlightjs.org/"
+#~ "\">Highlight.js</a> highlights syntax in code examples on web pages. "
+#~ "It&acute;s very easy to use because it works automatically: finds blocks "
+#~ "of code, detects a language, highlights it."
+#~ msgstr ""
+#~ "这是一个用于嵌入<a href=\"http://highlightjs.org/\">highlight.js</a>库的"
+#~ "wordpress插件. <a href=\"http://highlightjs.org/\">Highlight.js</a> 可以用"
+#~ "于高亮web页中的代码。并且由于它对代码的查找、检测语言和高亮操作都是全自动"
+#~ "的，所以非常容易使用。"
