@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Code Highlight.js\n"
 "POT-Creation-Date: 2015-04-09 15:09+0800\n"
-"PO-Revision-Date: 2015-04-09 15:12+0800\n"
+"PO-Revision-Date: 2015-04-24 23:05+0800\n"
 "Last-Translator: OWenT <owent@owent.net>\n"
 "Language-Team: OWenT <owent@owent.net>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.7.6\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2,c\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
@@ -81,12 +81,16 @@ msgid "You can add some additional CSS rules for better display:"
 msgstr "在这里添加额外的CSS规则"
 
 #: ../wp_code_highlight.js.php:672
-msgid "SyntaxHighlighter Compatiable:"
-msgstr "SyntaxHighlighter 兼容模式:"
+msgid "SyntaxHighlighter Compatiable"
+msgstr "SyntaxHighlighter 兼容模式"
 
 #: ../wp_code_highlight.js.php:674
-msgid "Prettify Compatible:"
-msgstr "Prettify 兼容模式:"
+msgid "Prettify Compatible"
+msgstr "Prettify 兼容模式"
+
+#: ../wp_code_highlight.js.php:715
+msgid "Crayon Syntax Highlighter Compatiable"
+msgstr "Crayon Syntax Highlighter 兼容模式"
 
 #: ../wp_code_highlight.js.php:680
 msgid "Enable [code]code content ...[/code] support:"
