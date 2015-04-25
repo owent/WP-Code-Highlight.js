@@ -258,7 +258,7 @@ function hljs_append_init_codes() {
     </script>
 <?php
 }
-add_action('wp_footer', 'hljs_append_init_codes', 100);
+add_action('wp_print_footer_scripts', 'hljs_append_init_codes');
 
 /**
  * Initialize Localization Functions
