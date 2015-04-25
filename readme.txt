@@ -3,7 +3,7 @@ Donate link: http://owent.net/
 Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
 Requires at least: 3.0
 Tested up to: 4.2.0
-Stable tag: 0.3.2
+Stable tag: 0.3.3
 
 This is a wordpress plugin for highlight.js library.
 And you can easily migrate from SynaxHighlight or Google Prettify without change
@@ -56,6 +56,10 @@ Install custom
 Just have fun.
 
 == Changelog ==
+
+= 0.3.3 =
+1. add [Crayon Syntax Highlighter Compatible] option
+2. thanks to [David](https://github.com/David-CodingSerf)
 
 = 0.3.2 =
 1. tested under wp 4.2
