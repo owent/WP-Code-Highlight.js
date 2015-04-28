@@ -2,8 +2,8 @@
 Donate link: http://owent.net/
 Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
 Requires at least: 3.0
-Tested up to: 4.2.0
-Stable tag: 0.3.3
+Tested up to: 4.2.1
+Stable tag: 0.3.4
 
 This is a wordpress plugin for highlight.js library.
 And you can easily migrate from SynaxHighlight or Google Prettify without change
@@ -54,6 +54,16 @@ Install custom
 5. Enable SyntaxHighlighter compatible mode and Prettify compatible mode if you need it.
 
 Just have fun.
+
+== Screenshots ==
+
+1. Highlight.js Demo
+2. Setting1: Select CDN or local
+3. Setting2: Custom Languages
+4. Setting3: Highlighting styles
+5. Setting4: Compatiable Mode
+6. Sample: Simple
+7. Sample: Syntax Highlighter Compatiable Mode
 
 == Changelog ==
 
