@@ -5,7 +5,7 @@
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
  * Version: 0.3.4
  * Author: OWenT
- * Author URI: http://owent.net/
+ * Author URI: https://owent.net/
  * License: 3-clause BSD
 */
 
@@ -708,7 +708,7 @@ function hljs_settings_page() {
         <!-- check box : compatible options -->
         <p class="section">
           <input type="checkbox" name="hljs_syntaxhighlighter_compatible" id="hljs_syntaxhighlighter_compatible" value="1" <?php if(hljs_get_option('syntaxhighlighter_compatible')) echo ' checked="checked"'; ?> />
-          <label for="hljs_syntaxhighlighter_compatible"><?php echo __('SyntaxHighlighter Compatiable', 'wp-code-highlight.js') ?></label><br />
+          <label for="hljs_syntaxhighlighter_compatible"><?php echo __('Syntax Highlighter Compatiable', 'wp-code-highlight.js') ?></label><br />
           
           <input type="checkbox" name="hljs_prettify_compatible" id="hljs_prettify_compatible" value="1" <?php if(hljs_get_option('prettify_compatible')) echo ' checked="checked"'; ?> />
           <label for="hljs_prettify_compatible"><?php echo __('Prettify Compatible', 'wp-code-highlight.js') ?></label><br />
@@ -760,23 +760,22 @@ function hljs_settings_page() {
                         <p><pre><code class="html">&lt;pre&gt;&lt;code class="html"&gt; highlight the code with certain language &lt;/code&gt;&lt;/pre&gt;</code></pre></p>', 'wp-code-highlight.js'); ?></td>
                 </tr>
                 <tr>
-                    <td width="120px" align="center"><?php echo __('Thanks To', 'wp-code-highlight.js'); ?></td>
-                    <td><p>
-                        <a href="http://softwaremaniacs.org/">Ivan Sagalaev</a> (for his <a href="http://highlightjs.org/">highlight.js</a>)
-                    </p></td>
-                </tr>
-                <tr>
-                    <td width="120px" align="center"><?php echo __('Thanks To', 'wp-code-highlight.js'); ?></td>
-                    <td><p>
-                        <a href="http://kalnitsky.org">Igor Kalnitsky</a> (for his <a href="https://wordpress.org/plugins/wp-highlightjs/">wp-highlight.js</a> plugin)
-                    </p></td>
+                    <td width="120px" align="center"><?php echo __('Donate', 'wp-code-highlight.js'); ?></td>
+                    <td><?php echo __('If you interested my work, welcome to visit <a href="https://github.com/owt5008137/WP-Code-Highlight.js/#Donate" target="_blank">https://github.com/owt5008137/WP-Code-Highlight.js/#Donate</a> to donate me for a cup of coffee.', 'wp-code-highlight.js'); ?></td>
                 </tr>
                 <tr>
                     <td width="120px" align="center"><?php echo __('Thanks To', 'wp-code-highlight.js'); ?></td>
                     <td><ul>
+                            <li><a href="http://softwaremaniacs.org/">Ivan Sagalaev</a> (for his <a href="http://highlightjs.org/">highlight.js</a>)</li>
+                            <li><a href="http://kalnitsky.org">Igor Kalnitsky</a> (for his <a href="https://wordpress.org/plugins/wp-highlightjs/">wp-highlight.js</a> plugin)</li>
+                    </ul></td>
+                </tr>
+                <tr>
+                    <td width="120px" align="center"><?php echo __('Thanks To', 'wp-code-highlight.js'); ?></td>
+                    <td><h3><?php echo __('Contributor List', 'wp-code-highlight.js'); ?>:</h3><br /><ul>
                             <li><a href="http://geraint.co">Geraint Palmer</a></li>
                             <li><a href="http://www.codingserf.com">David</a></li>
-                        </ul></td>
+                    </ul></td>
                 </tr>
            </table>
     </div>
