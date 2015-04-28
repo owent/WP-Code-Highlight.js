@@ -74,7 +74,7 @@ Scan these QR-Code to donate me a coffee?
 
 Platform |  WeChat | Alipay
 ---------|---------|--------
-QR-Code  | ![WeChat](donate/wechat.png) | ![Alipay](donate/alipay.png)
+QR-Code  | ![WeChat](donate/wechat.png =205x205) | ![Alipay](donate/alipay.png =205x205)
 
 Notes
 ------

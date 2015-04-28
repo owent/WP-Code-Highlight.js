@@ -1,5 +1,5 @@
 === WP Code Highlight.js ===
-Donate link: https://github.com/owt5008137/WP-Code-Highlight.js/#Donate
+Donate link: https://github.com/owt5008137/WP-Code-Highlight.js/#donate
 Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
 Requires at least: 3.0
 Tested up to: 4.2.1

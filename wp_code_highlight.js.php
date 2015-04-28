@@ -761,7 +761,7 @@ function hljs_settings_page() {
                 </tr>
                 <tr>
                     <td width="120px" align="center"><?php echo __('Donate', 'wp-code-highlight.js'); ?></td>
-                    <td><?php echo __('If you interested my work, welcome to visit <a href="https://github.com/owt5008137/WP-Code-Highlight.js/#Donate" target="_blank">https://github.com/owt5008137/WP-Code-Highlight.js/#Donate</a> to donate me for a cup of coffee.', 'wp-code-highlight.js'); ?></td>
+                    <td><?php echo __('If you interested my work, welcome to visit <a href="https://github.com/owt5008137/WP-Code-Highlight.js/#donate" target="_blank">https://github.com/owt5008137/WP-Code-Highlight.js/#donate</a> to donate me for a cup of coffee.', 'wp-code-highlight.js'); ?></td>
                 </tr>
                 <tr>
                     <td width="120px" align="center"><?php echo __('Thanks To', 'wp-code-highlight.js'); ?></td>
