@@ -70,7 +70,7 @@ See [readme.txt](readme.txt) for more detail
 
 Donate
 ------
-Scan these QR-Code to donate me a coffee?
+Scan these QR-Code to donate me a cup of coffee?
 
 Platform |  WeChat | Alipay
 ---------|---------|--------

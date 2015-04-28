@@ -676,10 +676,10 @@ function hljs_settings_page() {
           <select name="hljs_theme" id="hljs_theme">
              <?php hljs_get_style_list(hljs_get_option('theme')); ?>
           </select>
-          <div>You can get a quick look of all style and all language at <a href="https://highlightjs.org/static/demo/">https://highlightjs.org/static/demo/</a>
+            <div><?php echo __('You can get a quick look of all style and all language at <a href="https://highlightjs.org/static/demo/" target="_blank">https://highlightjs.org/static/demo/</a>', 'wp-code-highlight.js'); ?>
           </div>
           <div>
-            Notice: some cdn support only older highligh.js and some style is unusable, see <a href="https://highlightjs.org/" target="_blank">https://highlightjs.org/</a> for detail
+            <strong><?php echo __('Notice', 'wp-code-highlight.js'); ?><strong/>: <?php echo __('some cdn support only older version of highligh.js, and some language or style is unusable, see <a href="https://highlightjs.org/" target="_blank">https://highlightjs.org/</a> for detail', 'wp-code-highlight.js'); ?>
           </div>
 
         </div>

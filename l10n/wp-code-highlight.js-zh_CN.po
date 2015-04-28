@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Code Highlight.js\n"
-"POT-Creation-Date: 2015-04-28 12:08+0800\n"
-"PO-Revision-Date: 2015-04-28 12:08+0800\n"
+"POT-Creation-Date: 2015-04-28 12:31+0800\n"
+"PO-Revision-Date: 2015-04-28 12:32+0800\n"
 "Last-Translator: OWenT <owent@owent.net>\n"
 "Language-Team: OWenT <owent@owent.net>\n"
 "Language: zh_CN\n"
@@ -59,6 +59,30 @@ msgstr "包"
 #: ../wp_code_highlight.js.php:674
 msgid "Color Scheme:"
 msgstr "颜色方案"
+
+#: ../wp_code_highlight.js.php:679
+msgid ""
+"You can get a quick look of all style and all language at <a href=\"https://"
+"highlightjs.org/static/demo/\" target=\"_blank\">https://highlightjs.org/"
+"static/demo/</a>"
+msgstr ""
+"你可以点击<a href=\"https://highlightjs.org/static/demo/\" target=\"_blank"
+"\">https://highlightjs.org/static/demo/</a>来查看highlight.js支持得所有语言和"
+"所有颜色方案的效果。"
+
+#: ../wp_code_highlight.js.php:682
+msgid "Notice"
+msgstr "注意"
+
+#: ../wp_code_highlight.js.php:682
+msgid ""
+"some cdn support only older version of highligh.js, and some language or "
+"style is unusable, see <a href=\"https://highlightjs.org/\" target=\"_blank"
+"\">https://highlightjs.org/</a> for detail"
+msgstr ""
+"有一些CDN只支持老版本的highligh.js, 这些老版本的highligh.js可能不支持最新版本"
+"里的一些颜色方案或者高亮语言, 你可以点击<a href=\"https://highlightjs.org/\" "
+"target=\"_blank\">https://highlightjs.org/</a> 来查看详情"
 
 #: ../wp_code_highlight.js.php:689
 msgid "Highlight.js Option - Tab replace:"
@@ -200,6 +224,15 @@ msgstr "鸣谢"
 #: ../wp_code_highlight.js.php:775
 msgid "Contributor List"
 msgstr "贡献者列表"
+
+#~ msgid ""
+#~ "some cdn support only older highligh.js and some style is unusable, see "
+#~ "<a href=\"https://highlightjs.org/\" target=\"_blank\">https://"
+#~ "highlightjs.org/</a> for detail"
+#~ msgstr ""
+#~ "some cdn support only older highligh.js and some style is unusable, see "
+#~ "<a href=\"https://highlightjs.org/\" target=\"_blank\">https://"
+#~ "highlightjs.org/</a> for detail"
 
 #~ msgid ""
 #~ "If you interested my work, welcome to visit <a href=\"https://github.com/"
