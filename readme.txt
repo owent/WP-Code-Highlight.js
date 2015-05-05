@@ -67,6 +67,10 @@ Just have fun.
 
 == Changelog ==
 
+= 0.3.4 =
+1. replace baidu cdn with url support https
+2. update baidu cdn because it accept highlight.js 8.5 now
+
 = 0.3.3 =
 1. add [Crayon Syntax Highlighter Compatible] option
 2. thanks to [David](https://github.com/David-CodingSerf)

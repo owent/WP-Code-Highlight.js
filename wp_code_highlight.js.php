@@ -60,18 +60,19 @@ function hljs_cdn_list() {
             'desc' => 'Public CDN: Yandex(lastest version: 8.2)',
             'css' => '.min', 
             'js' => '.min'
-        ), 
+        ),
+        'Baidu' => array(
+            //'cdn' => 'http://apps.bdimg.com/libs/highlight.js/' . hljs_get_lib_version(),
+            'cdn' => '//openapi.baidu.comopenapi.baidu.com/libs/highlight.js/' . hljs_get_lib_version(),
+            // 'cdn' => '//openapi.baidu.comopenapi.baidu.com/libs/highlight.js/8.4',
+            'desc' => 'Public CDN: Baidu',
+            'css' => '.min', 
+            'js' => '.min'
+        ),
         'BootCSS' => array(
             'cdn' => 'http://cdn.bootcss.com/highlight.js/' . hljs_get_lib_version(), 
             // 'cdn' => 'http://cdn.bootcss.com/highlight.js/8.3', 
             'desc' => 'Public CDN: BootCSS(http only)',
-            'css' => '.min', 
-            'js' => '.min'
-        ),
-        'Baidu' => array(
-            //'cdn' => 'http://apps.bdimg.com/libs/highlight.js/' . hljs_get_lib_version(),
-            'cdn' => 'http://apps.bdimg.com/libs/highlight.js/8.4',
-            'desc' => 'Public CDN: Baidui(http only, lastest version: 8.4)',
             'css' => '.min', 
             'js' => '.min'
         ), 
