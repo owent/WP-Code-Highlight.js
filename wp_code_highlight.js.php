@@ -3,7 +3,7 @@
  * Plugin Name: WP Code Highlight.js
  * Plugin URI: https://github.com/owt5008137/WP-Code-Highlight.js 
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
- * Version: 0.3.4
+ * Version: 0.3.5
  * Author: OWenT
  * Author URI: https://owent.net/
  * License: 3-clause BSD
@@ -16,7 +16,7 @@ $PLUGIN_DIR =  plugins_url() . '/' . dirname(plugin_basename(__FILE__));
  * Get version of this plugins
  */
 function hljs_get_version() {
-    return '0.3.4';
+    return '0.3.5';
 }
 
 /**
@@ -35,60 +35,68 @@ function hljs_cdn_list() {
             'cdn' => 'local',
             'desc' => __('local', 'wp-code-highlight.js'),
             'css' => '', 
-            'js' => ''
+            'js' => '',
+            'readme' => '',
         ),
         'CdnJs' => array(
             'cdn' => '//cdnjs.cloudflare.com/ajax/libs/highlight.js/' . hljs_get_lib_version(),
             'desc' => 'Public CDN: cdnjs (highlightjs.org recommend)',
             'css' => '.min', 
-            'js' => '.min'
+            'js' => '.min',
+            'readme' => 'https://cdnjs.com/libraries/highlight.js'
         ), 
         'jsDelivr' => array(
             'cdn' => '//cdn.jsdelivr.net/highlight.js/' . hljs_get_lib_version(), 
             'desc' => 'Public CDN: jsDelivr (highlightjs.org recommend)',
             'css' => '.min', 
-            'js' => '.min'
+            'js' => '.min',
+            'readme' => 'http://www.jsdelivr.com/#!highlight.js'
         ),
         'MaxCDN' => array(
             'cdn' => '//oss.maxcdn.com/highlight.js/' . hljs_get_lib_version(), 
             'desc' => 'Public CDN: MaxCDN',
             'css' => '.min', 
-            'js' => '.min'
+            'js' => '.min',
+            'readme' => 'http://osscdn.com/#/highlight.js'
         ),
         'Yandex' => array(
             'cdn' => '//yandex.st/highlightjs/' . hljs_get_lib_version(), 
             'desc' => 'Public CDN: Yandex(lastest version: 8.2)',
             'css' => '.min', 
-            'js' => '.min'
+            'js' => '.min',
+            'readme' => 'https://tech.yandex.ru/jslibs/#highlight'
         ),
         'Baidu' => array(
             //'cdn' => 'http://apps.bdimg.com/libs/highlight.js/' . hljs_get_lib_version(),
-            'cdn' => '//openapi.baidu.comopenapi.baidu.com/libs/highlight.js/' . hljs_get_lib_version(),
-            // 'cdn' => '//openapi.baidu.comopenapi.baidu.com/libs/highlight.js/8.4',
+            'cdn' => '//openapi.baidu.com/libs/highlight.js/' . hljs_get_lib_version(),
+            // 'cdn' => '//openapi.baidu.com/libs/highlight.js/8.5',
             'desc' => 'Public CDN: Baidu',
             'css' => '.min', 
-            'js' => '.min'
+            'js' => '.min',
+            'readme' => 'http://cdn.code.baidu.com/#highlight.js'
         ),
         'BootCSS' => array(
             'cdn' => 'http://cdn.bootcss.com/highlight.js/' . hljs_get_lib_version(), 
-            // 'cdn' => 'http://cdn.bootcss.com/highlight.js/8.3', 
+            // 'cdn' => 'http://cdn.bootcss.com/highlight.js/8.5', 
             'desc' => 'Public CDN: BootCSS(http only)',
             'css' => '.min', 
-            'js' => '.min'
+            'js' => '.min',
+            'readme' => 'http://www.bootcdn.cn/highlight.js/'
         ), 
         'Qihoo360' => array(
             'cdn' => 'http://libs.useso.com/js/highlight.js/8.0',// . hljs_get_lib_version(), 
             'desc' => 'Public CDN: QiHoo 360(http only, lastest version: 8.0)',
             'css' => '.min', 
-            'js' => '.min'
+            'js' => '.min',
+            'readme' => 'http://libs.useso.com/js.php?path=highlight.js'
         ), 
         'Qiniu' => array(
             'cdn' => 'http://cdn.staticfile.org/highlight.js/8.3',// . hljs_get_lib_version(), 
             'desc' => 'Public CDN: Qiniu(http only, lastest version: 8.3)',
             'css' => '.min', 
-            'js' => '.min'
+            'js' => '.min',
+            'readme' => 'http://www.staticfile.org'
         )
-
    );
 }
 
@@ -176,6 +184,15 @@ function hljs_include() {
     } else {
         wp_enqueue_script( 'hljs', $hljs_cdn_info['cdn'] . '/highlight' . $hljs_cdn_info['js'] . '.js', array('jquery'), hljs_get_version(), true );
         wp_enqueue_style( 'hljstheme', $hljs_cdn_info['cdn'] . '/styles/' . $hljs_code_option['theme'] . $hljs_cdn_info['css'] . '.css', array(), hljs_get_version() );
+
+        // additional languages
+        $custom_addition_langs = hljs_get_option('custom_lang');
+        if(!empty($custom_addition_langs)) {
+            foreach(hljs_get_option('custom_lang') as $lang) {
+                 wp_enqueue_script( 'hljs_lang_' . $lang, $hljs_cdn_info['cdn'] . '/languages/' . $lang . $hljs_cdn_info['js'] . '.js', array('hljs'), hljs_get_version(), true );
+            }
+        }
+        
     }
 }
 add_action('wp_head', 'hljs_include');
@@ -280,7 +297,7 @@ function hljs_get_location_list($current_location) {
          ?><option value="<?php echo $key; ?>" <?php
         if($key == $current_location)
             echo ' selected="selected"';
-        ?>><?php echo empty($val['desc'])? $key: $val['desc']; ?></option><?php
+        ?> readme_url="<?php echo $val['readme']; ?>" ><?php echo empty($val['desc'])? $key: $val['desc']; ?></option><?php
     }
 }
 
@@ -403,10 +420,11 @@ function hljs_settings_page() {
             foreach($_POST as $key => $val) {
                 $suffix = substr($key, -3);
                 if (('.js' == $suffix || '_js' == $suffix )&& intval($val) == 1) {
-                    $file_name = substr($key, 0, strlen($key) - 3) . '.min.js';
+                    $language_name =  substr($key, 0, strlen($key) - 3);
+                    $file_name = $language_name . '.min.js';
                     $full_path = $plugin_root_dir . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . $file_name;
                     if (file_exists($full_path)) {
-                        array_push($upload_options['custom_lang'], $key);
+                        array_push($upload_options['custom_lang'], $language_name);
                         $fc = file_get_contents($full_path);
                         file_put_contents($custom_pack_file, $fc . PHP_EOL, FILE_APPEND);
                     } else {
@@ -444,7 +462,8 @@ function hljs_settings_page() {
             textarea {width: 400px; height: 100px; }
 
             #hljs_theme { width: 200px;  margin: 10px 0px 0px;}
-            #submit { min-width: 40px; margin-top: 20px; } 
+            #submit { min-width: 40px; margin-top: 20px; }
+            #hljs_location_readme { color: Gray; font-style: italic; }
 
             table.hljs_copyright { font-size: 8px; margin-top: 50px;}
             table.hljs_copyright tr {margin-bottom: 10px;}
@@ -457,7 +476,7 @@ function hljs_settings_page() {
           <label for="hljs_location"><?php echo __('CDN', 'wp-code-highlight.js'); ?></label><br/>
           <select name="hljs_location" id="hljs_location">
              <?php hljs_get_location_list(hljs_get_option('location')); ?>
-          </select>
+          </select> <span id="hljs_location_readme"></span>
           <div>
             Current Highlight.js Version: <?php echo hljs_get_lib_version(); ?>
           </div>
@@ -470,7 +489,7 @@ function hljs_settings_page() {
              <?php hljs_get_package_list(hljs_get_option('package')); ?>
           </select>
           <div>
-              <h3>Support List:</h3>
+              <h3>Support List:</h3> <a href="javascript:void();" id="hljs_support_list_btn"><?php echo __('[Show/Hide]', 'wp-code-highlight.js'); ?></a>
               <div class="language_support_list" id="language_support_list">
                 <p><b>Common</b></p><ul id="language_support_list_common">
                       <li><label><input name="apache.js" checked type="checkbox" value="0" class="hljs_lang common"> Apache</label></li>
@@ -619,11 +638,11 @@ function hljs_settings_page() {
 
                 var show_package_language = (function(){
                     var hljs_package_name = $("#hljs_package").val();
-                    if ("custom" == hljs_package_name) {
+                    if ("custom" == hljs_package_name || $("#hljs_location").val() != "local") {
                         $("#language_support_list_other input").prop("disabled", false);
                         $("#language_support_list_other input").prop("checked", false);
 
-                        // 自定义语言选项
+                        // custom languages
                         var selected_langs = "<?php
                             $custom_lang = hljs_get_option('custom_lang');
                             if(!empty($custom_lang)) {
@@ -632,12 +651,12 @@ function hljs_settings_page() {
                         ?>".split(/[ \t\r\n]/);
                         $.each(selected_langs, function(k, v) {
                             if (v) {
-                                $('#language_support_list_other input[name="' + v.replace(/_js$/, ".js")　+ '"]').prop("checked", true);
+                                $('#language_support_list_other input[name="' + v.replace(/_js$/, "")　+ '.js"]').prop("checked", true);
                             }
                         });
 
                     } else {
-                        // 向前兼容，勾选默认的语言选项
+                        // select default languages
                         $("#language_support_list_other input").prop("disabled", true);
 
                         if ("all" == hljs_package_name) {
@@ -654,17 +673,31 @@ function hljs_settings_page() {
 
                 var show_package_fn = (function(){
                     if ($("#hljs_location").val() != "local") {
-                        $("#hljs_local_package").hide();
-                        return;
+                        $("#hljs_package").prop('disabled', true);
+                    } else {
+                        $("#hljs_package").prop('disabled', false);
                     }
 
-                    $("#hljs_local_package").show();
                     show_package_language();
                 });
 
                 show_package_fn();
-                $("#hljs_location").change(function(){ show_package_fn(); });
+                $("#hljs_location").change(function(){ 
+                    $("#hljs_location_readme").empty();
+                    $.each($("option", this), function(k, v) {
+                        if ($(v).prop('selected') && $(v).attr("readme_url")) {
+                            var text = "<?php echo __('click', 'wp-code-highlight.js'); ?>" + 
+                                " <a href=\"" + $(v).attr("readme_url") + "\" target=\"_blank\">" +$(v).attr("readme_url") + "</a> " +
+                                "<?php echo __('for detail', 'wp-code-highlight.js'); ?>";
+                            $("#hljs_location_readme").html(text);
+                        }
+                    });
+                    show_package_fn();
+                });
                 $("#hljs_package").change(function(){ show_package_language(); });
+                $("#hljs_support_list_btn").click(function() {
+                    $("#language_support_list").slideToggle();
+                });
             });
         })(jQuery, window);
 

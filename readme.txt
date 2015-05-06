@@ -3,7 +3,7 @@ Donate link: https://github.com/owt5008137/WP-Code-Highlight.js/#donate
 Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
 Requires at least: 3.0
 Tested up to: 4.2.1
-Stable tag: 0.3.4
+Stable tag: 0.3.5
 
 This is a wordpress plugin for highlight.js library.
 And you can easily migrate from SynaxHighlight or Google Prettify without change
@@ -66,6 +66,11 @@ Just have fun.
 7. Sample: Syntax Highlighter Compatiable Mode
 
 == Changelog ==
+
+= 0.3.5 =
+1. fix baidu cdn urls
+2. allow to load custom language scripts from CDN
+3. add CDN reference url of highlight.js to readme
 
 = 0.3.4 =
 1. replace baidu cdn with url support https
