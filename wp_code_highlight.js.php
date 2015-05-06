@@ -40,62 +40,62 @@ function hljs_cdn_list() {
         ),
         'CdnJs' => array(
             'cdn' => '//cdnjs.cloudflare.com/ajax/libs/highlight.js/' . hljs_get_lib_version(),
-            'desc' => 'Public CDN: cdnjs (highlightjs.org recommend)',
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': cdnjs (' . __('highlightjs.org recommend', 'wp-code-highlight.js') . ')',
             'css' => '.min', 
             'js' => '.min',
             'readme' => 'https://cdnjs.com/libraries/highlight.js'
         ), 
         'jsDelivr' => array(
             'cdn' => '//cdn.jsdelivr.net/highlight.js/' . hljs_get_lib_version(), 
-            'desc' => 'Public CDN: jsDelivr (highlightjs.org recommend)',
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': jsDelivr (' . __('highlightjs.org recommend', 'wp-code-highlight.js') . ')',
             'css' => '.min', 
             'js' => '.min',
             'readme' => 'http://www.jsdelivr.com/#!highlight.js'
         ),
         'MaxCDN' => array(
             'cdn' => '//oss.maxcdn.com/highlight.js/' . hljs_get_lib_version(), 
-            'desc' => 'Public CDN: MaxCDN',
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': MaxCDN',
             'css' => '.min', 
             'js' => '.min',
             'readme' => 'http://osscdn.com/#/highlight.js'
-        ),
-        'Yandex' => array(
-            'cdn' => '//yandex.st/highlightjs/' . hljs_get_lib_version(), 
-            'desc' => 'Public CDN: Yandex(lastest version: 8.2)',
-            'css' => '.min', 
-            'js' => '.min',
-            'readme' => 'https://tech.yandex.ru/jslibs/#highlight'
         ),
         'Baidu' => array(
             //'cdn' => 'http://apps.bdimg.com/libs/highlight.js/' . hljs_get_lib_version(),
             'cdn' => '//openapi.baidu.com/libs/highlight.js/' . hljs_get_lib_version(),
             // 'cdn' => '//openapi.baidu.com/libs/highlight.js/8.5',
-            'desc' => 'Public CDN: Baidu',
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': ' . __('Baidu', 'wp-code-highlight.js'),
             'css' => '.min', 
             'js' => '.min',
             'readme' => 'http://cdn.code.baidu.com/#highlight.js'
         ),
+        'Yandex' => array(
+            'cdn' => '//yandex.st/highlightjs/' . hljs_get_lib_version(), 
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': Yandex(' . __('lastest version', 'wp-code-highlight.js') . ': 8.2)',
+            'css' => '.min', 
+            'js' => '.min',
+            'readme' => 'https://tech.yandex.ru/jslibs/#highlight'
+        ),
         'BootCSS' => array(
             'cdn' => 'http://cdn.bootcss.com/highlight.js/' . hljs_get_lib_version(), 
             // 'cdn' => 'http://cdn.bootcss.com/highlight.js/8.5', 
-            'desc' => 'Public CDN: BootCSS(http only)',
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': BootCSS(' . __('http only', 'wp-code-highlight.js') . ')',
             'css' => '.min', 
             'js' => '.min',
             'readme' => 'http://www.bootcdn.cn/highlight.js/'
         ), 
-        'Qihoo360' => array(
-            'cdn' => 'http://libs.useso.com/js/highlight.js/8.0',// . hljs_get_lib_version(), 
-            'desc' => 'Public CDN: QiHoo 360(http only, lastest version: 8.0)',
-            'css' => '.min', 
-            'js' => '.min',
-            'readme' => 'http://libs.useso.com/js.php?path=highlight.js'
-        ), 
         'Qiniu' => array(
             'cdn' => 'http://cdn.staticfile.org/highlight.js/8.3',// . hljs_get_lib_version(), 
-            'desc' => 'Public CDN: Qiniu(http only, lastest version: 8.3)',
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': ' . __('Qiniu', 'wp-code-highlight.js') . '(' . __('http only', 'wp-code-highlight.js') . ', ' . __('lastest version', 'wp-code-highlight.js') . ': 8.3)',
             'css' => '.min', 
             'js' => '.min',
             'readme' => 'http://www.staticfile.org'
+        ),
+        'Qihoo360' => array(
+            'cdn' => 'http://libs.useso.com/js/highlight.js/8.0',// . hljs_get_lib_version(), 
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': ' . __('Qihoo 360', 'wp-code-highlight.js') . '(' . __('http only', 'wp-code-highlight.js') . ', ' . __('lastest version', 'wp-code-highlight.js') . ': 8.0)',
+            'css' => '.min', 
+            'js' => '.min',
+            'readme' => 'http://libs.useso.com/js.php?path=highlight.js'
         )
    );
 }

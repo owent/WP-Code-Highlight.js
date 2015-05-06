@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Code Highlight.js\n"
-"POT-Creation-Date: 2015-05-06 14:27+0800\n"
-"PO-Revision-Date: 2015-05-06 14:28+0800\n"
+"POT-Creation-Date: 2015-05-06 15:17+0800\n"
+"PO-Revision-Date: 2015-05-06 15:18+0800\n"
 "Last-Translator: OWenT <owent@owent.net>\n"
 "Language-Team: OWenT <owent@owent.net>\n"
 "Language: zh_CN\n"
@@ -19,6 +19,39 @@ msgstr ""
 #: ../wp_code_highlight.js.php:36
 msgid "local"
 msgstr "本地"
+
+#: ../wp_code_highlight.js.php:43 ../wp_code_highlight.js.php:50
+#: ../wp_code_highlight.js.php:57 ../wp_code_highlight.js.php:66
+#: ../wp_code_highlight.js.php:73 ../wp_code_highlight.js.php:81
+#: ../wp_code_highlight.js.php:88 ../wp_code_highlight.js.php:95
+msgid "Public CDN"
+msgstr "公共CDN"
+
+#: ../wp_code_highlight.js.php:43 ../wp_code_highlight.js.php:50
+msgid "highlightjs.org recommend"
+msgstr "highlightjs.org官方推荐"
+
+#: ../wp_code_highlight.js.php:66
+msgid "Baidu"
+msgstr "百度"
+
+#: ../wp_code_highlight.js.php:73 ../wp_code_highlight.js.php:88
+#: ../wp_code_highlight.js.php:95
+msgid "lastest version"
+msgstr "支持的最新版本"
+
+#: ../wp_code_highlight.js.php:81 ../wp_code_highlight.js.php:88
+#: ../wp_code_highlight.js.php:95
+msgid "http only"
+msgstr "仅支持HTTP访问"
+
+#: ../wp_code_highlight.js.php:88
+msgid "Qiniu"
+msgstr "七牛"
+
+#: ../wp_code_highlight.js.php:95
+msgid "Qihoo 360"
+msgstr "奇虎360"
 
 #: ../wp_code_highlight.js.php:354
 msgid "WP Code Highlight.js Settings"
