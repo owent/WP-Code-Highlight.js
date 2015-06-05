@@ -3,7 +3,7 @@
  * Plugin Name: WP Code Highlight.js
  * Plugin URI: https://github.com/owt5008137/WP-Code-Highlight.js 
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
- * Version: 0.3.5
+ * Version: 0.3.6
  * Author: OWenT
  * Author URI: https://owent.net/
  * License: 3-clause BSD
@@ -16,14 +16,14 @@ $PLUGIN_DIR =  plugins_url() . '/' . dirname(plugin_basename(__FILE__));
  * Get version of this plugins
  */
 function hljs_get_version() {
-    return '0.3.5';
+    return '0.3.6';
 }
 
 /**
  * Get version of Highlight.js 
  */
 function hljs_get_lib_version() {
-    return '8.5';
+    return '8.6';
 }
 
 /**
@@ -61,15 +61,16 @@ function hljs_cdn_list() {
         ),
         'Baidu' => array(
             //'cdn' => 'http://apps.bdimg.com/libs/highlight.js/' . hljs_get_lib_version(),
-            'cdn' => '//openapi.baidu.com/libs/highlight.js/' . hljs_get_lib_version(),
-            // 'cdn' => '//openapi.baidu.com/libs/highlight.js/8.5',
+            // 'cdn' => '//openapi.baidu.com/libs/highlight.js/' . hljs_get_lib_version(),
+            'cdn' => '//openapi.baidu.com/libs/highlight.js/8.5',
             'desc' => __('Public CDN', 'wp-code-highlight.js') . ': ' . __('Baidu', 'wp-code-highlight.js'),
             'css' => '.min', 
             'js' => '.min',
             'readme' => 'http://cdn.code.baidu.com/#highlight.js'
         ),
         'Yandex' => array(
-            'cdn' => '//yandex.st/highlightjs/' . hljs_get_lib_version(), 
+            //'cdn' => '//yandex.st/highlightjs/' . hljs_get_lib_version(), 
+            'cdn' => '//yandex.st/highlightjs/8.2', 
             'desc' => __('Public CDN', 'wp-code-highlight.js') . ': Yandex(' . __('lastest version', 'wp-code-highlight.js') . ': 8.2)',
             'css' => '.min', 
             'js' => '.min',
@@ -517,6 +518,7 @@ function hljs_settings_page() {
                 <p><b>Other</b>
                 </p><ul id="language_support_list_other">
                       <li><label><input name="1c.js" type="checkbox" value="1"> 1C</label></li>
+                      <li><label><input name="armasm.js" type="checkbox" value="1"> ARM Assembly</label></li>
                       <li><label><input name="avrasm.js" type="checkbox" value="1"> AVR Assembler</label></li>
                       <li><label><input name="actionscript.js" type="checkbox" value="1" class="hljs_lang ext"> ActionScript</label></li>
                       <li><label><input name="applescript.js" type="checkbox" value="1" class="hljs_lang ext"> AppleScript</label></li>
@@ -525,11 +527,14 @@ function hljs_settings_page() {
                       <li><label><input name="autohotkey.js" type="checkbox" value="1"> AutoHotkey</label></li>
                       <li><label><input name="axapta.js" type="checkbox" value="1"> Axapta</label></li>
                       <li><label><input name="brainfuck.js" type="checkbox" value="1"> Brainfuck</label></li>
+                      <li><label><input name="cal.js" type="checkbox" value="1">C/AL</label></li>
                       <li><label><input name="cmake.js" type="checkbox" value="1" class="hljs_lang ext"> CMake</label></li>
                       <li><label><input name="capnproto.js" type="checkbox" value="1" class="hljs_lang ext"> Cap’n Proto</label></li>
+                      <li><label><input name="ceylon.js" type="checkbox" value="1"> Ceylon</label></li>
                       <li><label><input name="clojure.js" type="checkbox" value="1"> Clojure</label></li>
                       <li><label><input name="clojure-repl.js" type="checkbox" value="1"> Clojure REPL</label></li>
                       <li><label><input name="d.js" type="checkbox" value="1" class="hljs_lang ext"> D</label></li>
+                      <li><label><input name="dns.js" type="checkbox" value="1"> DNS Zone file</label></li>
                       <li><label><input name="dos.js" type="checkbox" value="1" class="hljs_lang ext"> DOS .bat</label></li>
                       <li><label><input name="dart.js" type="checkbox" value="1"> Dart</label></li>
                       <li><label><input name="delphi.js" type="checkbox" value="1"> Delphi</label></li>
@@ -553,6 +558,7 @@ function hljs_settings_page() {
                       <li><label><input name="handlebars.js" type="checkbox" value="1"> Handlebars</label></li>
                       <li><label><input name="haskell.js" type="checkbox" value="1"> Haskell</label></li>
                       <li><label><input name="haxe.js" type="checkbox" value="1"> Haxe</label></li>
+                      <li><label><input name="inform7.js" type="checkbox" value="1"> Inform 7</label></li>
                       <li><label><input name="x86asm.js" type="checkbox" value="1"> Intel x86 Assembly</label></li>
                       <li><label><input name="julia.js" type="checkbox" value="1"> Julia</label></li>
                       <li><label><input name="kotlin.js" type="checkbox" value="1"> Kotlin</label></li>
@@ -572,6 +578,7 @@ function hljs_settings_page() {
                       <li><label><input name="nimrod.js" type="checkbox" value="1"> Nimrod</label></li>
                       <li><label><input name="nix.js" type="checkbox" value="1"> Nix</label></li>
                       <li><label><input name="ocaml.js" type="checkbox" value="1"> OCaml</label></li>
+                      <li><label><input name="openscad.js" type="checkbox" value="1"> OpenSCAD</label></li>
                       <li><label><input name="ruleslanguage.js" type="checkbox" value="1"> Oracle Rules Language</label></li>
                       <li><label><input name="oxygene.js" type="checkbox" value="1"> Oxygene</label></li>
                       <li><label><input name="parser3.js" type="checkbox" value="1"> Parser3</label></li>
@@ -598,6 +605,7 @@ function hljs_settings_page() {
                       <li><label><input name="stata.js" type="checkbox" value="1"> Stata</label></li>
                       <li><label><input name="stylus.js" type="checkbox" value="1"> Stylus</label></li>
                       <li><label><input name="swift.js" type="checkbox" value="1"> Swift</label></li>
+                      <li><label><input name="tp.js" type="checkbox" value="1"> TP</label></li>
                       <li><label><input name="tcl.js" type="checkbox" value="1"> Tcl</label></li>
                       <li><label><input name="tex.js" type="checkbox" value="1" class="hljs_lang ext"> TeX</label></li>
                       <li><label><input name="thrift.js" type="checkbox" value="1"> Thrift</label></li>
