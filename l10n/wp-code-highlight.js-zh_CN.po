@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Code Highlight.js\n"
-"POT-Creation-Date: 2015-05-06 15:17+0800\n"
-"PO-Revision-Date: 2015-05-06 15:18+0800\n"
+"POT-Creation-Date: 2015-06-10 14:39+0800\n"
+"PO-Revision-Date: 2015-06-10 14:40+0800\n"
 "Last-Translator: OWenT <owent@owent.net>\n"
 "Language-Team: OWenT <owent@owent.net>\n"
 "Language: zh_CN\n"
@@ -22,8 +22,8 @@ msgstr "本地"
 
 #: ../wp_code_highlight.js.php:43 ../wp_code_highlight.js.php:50
 #: ../wp_code_highlight.js.php:57 ../wp_code_highlight.js.php:66
-#: ../wp_code_highlight.js.php:73 ../wp_code_highlight.js.php:81
-#: ../wp_code_highlight.js.php:88 ../wp_code_highlight.js.php:95
+#: ../wp_code_highlight.js.php:74 ../wp_code_highlight.js.php:82
+#: ../wp_code_highlight.js.php:89 ../wp_code_highlight.js.php:96
 msgid "Public CDN"
 msgstr "公共CDN"
 
@@ -35,77 +35,81 @@ msgstr "highlightjs.org官方推荐"
 msgid "Baidu"
 msgstr "百度"
 
-#: ../wp_code_highlight.js.php:73 ../wp_code_highlight.js.php:88
-#: ../wp_code_highlight.js.php:95
+#: ../wp_code_highlight.js.php:74 ../wp_code_highlight.js.php:89
+#: ../wp_code_highlight.js.php:96
 msgid "lastest version"
 msgstr "支持的最新版本"
 
-#: ../wp_code_highlight.js.php:81 ../wp_code_highlight.js.php:88
-#: ../wp_code_highlight.js.php:95
+#: ../wp_code_highlight.js.php:82 ../wp_code_highlight.js.php:89
+#: ../wp_code_highlight.js.php:96
 msgid "http only"
 msgstr "仅支持HTTP访问"
 
-#: ../wp_code_highlight.js.php:88
+#: ../wp_code_highlight.js.php:89
 msgid "Qiniu"
 msgstr "七牛"
 
-#: ../wp_code_highlight.js.php:95
+#: ../wp_code_highlight.js.php:96
 msgid "Qihoo 360"
 msgstr "奇虎360"
 
-#: ../wp_code_highlight.js.php:354
+#: ../wp_code_highlight.js.php:355
 msgid "WP Code Highlight.js Settings"
 msgstr "WP Code Highlight.js 设置"
 
-#: ../wp_code_highlight.js.php:354
+#: ../wp_code_highlight.js.php:355
 msgid "WP Code Highlight.js"
 msgstr "WP Code Highlight.js"
 
-#: ../wp_code_highlight.js.php:364
+#: ../wp_code_highlight.js.php:365
 msgid "Settings"
 msgstr "设置"
 
-#: ../wp_code_highlight.js.php:432
+#: ../wp_code_highlight.js.php:406 ../wp_code_highlight.js.php:464
 msgid "Language file"
 msgstr "语言文件"
 
-#: ../wp_code_highlight.js.php:434
+#: ../wp_code_highlight.js.php:408 ../wp_code_highlight.js.php:466
 msgid "not found"
 msgstr "未找到"
 
-#: ../wp_code_highlight.js.php:435
+#: ../wp_code_highlight.js.php:409 ../wp_code_highlight.js.php:467
 msgid "ignored"
 msgstr "忽略"
 
-#: ../wp_code_highlight.js.php:442
+#: ../wp_code_highlight.js.php:413
+msgid "Generate custom highlight language package done."
+msgstr "生成highlight.js自定义高亮语言包完成"
+
+#: ../wp_code_highlight.js.php:474
 msgid "All configurations successfully saved..."
 msgstr "配置保存成功"
 
-#: ../wp_code_highlight.js.php:476
+#: ../wp_code_highlight.js.php:509
 msgid "CDN"
 msgstr "内容分发来源"
 
-#: ../wp_code_highlight.js.php:487
+#: ../wp_code_highlight.js.php:520
 msgid "Package"
 msgstr "包"
 
-#: ../wp_code_highlight.js.php:492
+#: ../wp_code_highlight.js.php:525
 msgid "[Show/Hide]"
 msgstr "[显示/隐藏]"
 
-#: ../wp_code_highlight.js.php:689
+#: ../wp_code_highlight.js.php:729
 msgid "click"
 msgstr "点击"
 
-#: ../wp_code_highlight.js.php:691
+#: ../wp_code_highlight.js.php:731
 msgid "for detail"
 msgstr "来查看详细信息"
 
-#: ../wp_code_highlight.js.php:708
+#: ../wp_code_highlight.js.php:748
 msgid "Color Scheme:"
 msgstr "颜色方案"
 
-#: ../wp_code_highlight.js.php:713
+#: ../wp_code_highlight.js.php:753
 msgid ""
 "You can get a quick look of all style and all language at <a href=\"https://"
 "highlightjs.org/static/demo/\" target=\"_blank\">https://highlightjs.org/"
@@ -115,11 +119,11 @@ msgstr ""
 "\">https://highlightjs.org/static/demo/</a>来查看highlight.js支持得所有语言和"
 "所有颜色方案的效果。"
 
-#: ../wp_code_highlight.js.php:716
+#: ../wp_code_highlight.js.php:756
 msgid "Notice"
 msgstr "注意"
 
-#: ../wp_code_highlight.js.php:716
+#: ../wp_code_highlight.js.php:756
 msgid ""
 "some cdn support only older version of highligh.js, and some language or "
 "style is unusable, see <a href=\"https://highlightjs.org/\" target=\"_blank"
@@ -129,59 +133,59 @@ msgstr ""
 "里的一些颜色方案或者高亮语言, 你可以点击<a href=\"https://highlightjs.org/\" "
 "target=\"_blank\">https://highlightjs.org/</a> 来查看详情"
 
-#: ../wp_code_highlight.js.php:723
+#: ../wp_code_highlight.js.php:763
 msgid "Highlight.js Option - Tab replace:"
 msgstr "Highlight.js 选项 - Tab 替换:"
 
-#: ../wp_code_highlight.js.php:726
+#: ../wp_code_highlight.js.php:766
 msgid "Highlight.js Option - Class prefix:"
 msgstr "Highlight.js 选项 - css类前缀:"
 
-#: ../wp_code_highlight.js.php:729
+#: ../wp_code_highlight.js.php:769
 msgid "Highlight.js Option - Use BR:"
 msgstr "Highlight.js 选项 - 使用BR标签作为换行符（用于高亮非pre标签时）:"
 
-#: ../wp_code_highlight.js.php:732
+#: ../wp_code_highlight.js.php:772
 msgid "Highlight.js Option - Languages:"
 msgstr "Highlight.js 选项 - 自动检测的语言:"
 
-#: ../wp_code_highlight.js.php:738
+#: ../wp_code_highlight.js.php:778
 msgid "You can add some additional CSS rules for better display:"
 msgstr "在这里添加额外的CSS规则"
 
-#: ../wp_code_highlight.js.php:745
+#: ../wp_code_highlight.js.php:785
 msgid "Syntax Highlighter Compatiable"
 msgstr "Syntax Highlighter 兼容模式"
 
-#: ../wp_code_highlight.js.php:748
+#: ../wp_code_highlight.js.php:788
 msgid "Prettify Compatible"
 msgstr "Prettify 兼容模式"
 
-#: ../wp_code_highlight.js.php:751
+#: ../wp_code_highlight.js.php:791
 msgid "Crayon Syntax Highlighter Compatiable"
 msgstr "Crayon Syntax Highlighter 兼容模式"
 
-#: ../wp_code_highlight.js.php:757
+#: ../wp_code_highlight.js.php:797
 msgid "Enable [code]code content ...[/code] support:"
 msgstr "开启 [code]代码内容...[/code] 的BBCode支持:"
 
-#: ../wp_code_highlight.js.php:762
+#: ../wp_code_highlight.js.php:802
 msgid "Save"
 msgstr "保存"
 
-#: ../wp_code_highlight.js.php:769
+#: ../wp_code_highlight.js.php:809
 msgid "Author"
 msgstr "作者"
 
-#: ../wp_code_highlight.js.php:770
+#: ../wp_code_highlight.js.php:810
 msgid "OWenT"
 msgstr "OWenT"
 
-#: ../wp_code_highlight.js.php:774
+#: ../wp_code_highlight.js.php:814
 msgid "Plugin Info"
 msgstr "插件信息"
 
-#: ../wp_code_highlight.js.php:775
+#: ../wp_code_highlight.js.php:815
 msgid ""
 "<p>This is a wordpress plugin for <a href=\"http://highlightjs.org/"
 "\">highlight.js</a> library.\n"
@@ -204,11 +208,11 @@ msgstr ""
 "io/\" target=\"_blank\">stackedit</a> 或其他markdown编辑器搭配使用</p>\n"
 "                        "
 
-#: ../wp_code_highlight.js.php:783
+#: ../wp_code_highlight.js.php:823
 msgid "Plugin Usage"
 msgstr "使用方法"
 
-#: ../wp_code_highlight.js.php:784
+#: ../wp_code_highlight.js.php:824
 msgid ""
 "<p>For code highlighting you should use one of the following ways.</p>\n"
 "                        \n"
@@ -247,11 +251,11 @@ msgstr ""
 "class=\"html\"&gt; 指定高亮代码的语言 &lt;/code&gt;&lt;/pre&gt;</code></"
 "pre></p>"
 
-#: ../wp_code_highlight.js.php:797
+#: ../wp_code_highlight.js.php:837
 msgid "Donate"
 msgstr "捐赠"
 
-#: ../wp_code_highlight.js.php:798
+#: ../wp_code_highlight.js.php:838
 msgid ""
 "If you interested my work, welcome to visit <a href=\"https://github.com/"
 "owt5008137/WP-Code-Highlight.js/#donate\" target=\"_blank\">https://github."
@@ -262,11 +266,11 @@ msgstr ""
 "Code-Highlight.js/#donate\" target=\"_blank\">https://github.com/owt5008137/"
 "WP-Code-Highlight.js/#donate</a> 并向我捐赠一杯咖啡。"
 
-#: ../wp_code_highlight.js.php:801 ../wp_code_highlight.js.php:808
+#: ../wp_code_highlight.js.php:841 ../wp_code_highlight.js.php:848
 msgid "Thanks To"
 msgstr "鸣谢"
 
-#: ../wp_code_highlight.js.php:809
+#: ../wp_code_highlight.js.php:849
 msgid "Contributor List"
 msgstr "贡献者列表"
 

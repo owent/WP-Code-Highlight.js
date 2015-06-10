@@ -3,7 +3,7 @@
  * Plugin Name: WP Code Highlight.js
  * Plugin URI: https://github.com/owt5008137/WP-Code-Highlight.js 
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
- * Version: 0.3.6
+ * Version: 0.3.7
  * Author: OWenT
  * Author URI: https://owent.net/
  * License: 3-clause BSD
@@ -16,7 +16,7 @@ $PLUGIN_DIR =  plugins_url() . '/' . dirname(plugin_basename(__FILE__));
  * Get version of this plugins
  */
 function hljs_get_version() {
-    return '0.3.6';
+    return '0.3.7';
 }
 
 /**
@@ -61,8 +61,8 @@ function hljs_cdn_list() {
         ),
         'Baidu' => array(
             //'cdn' => 'http://apps.bdimg.com/libs/highlight.js/' . hljs_get_lib_version(),
-            // 'cdn' => '//openapi.baidu.com/libs/highlight.js/' . hljs_get_lib_version(),
-            'cdn' => '//openapi.baidu.com/libs/highlight.js/8.5',
+            'cdn' => '//openapi.baidu.com/libs/highlight.js/' . hljs_get_lib_version(),
+            // 'cdn' => '//openapi.baidu.com/libs/highlight.js/8.5',
             'desc' => __('Public CDN', 'wp-code-highlight.js') . ': ' . __('Baidu', 'wp-code-highlight.js'),
             'css' => '.min', 
             'js' => '.min',
@@ -384,6 +384,41 @@ if (hljs_get_lib_option('shortcode')) {
     add_shortcode('code', 'hljs_code_handler');
 }
 
+function hljs_generate_custom_pack() {
+    // generate custom language pack
+    $opt_loc = hljs_get_option('location');
+    $opt_packs = hljs_get_option('package');
+    $opt_langs = hljs_get_option('custom_lang');
+
+    if ('local' == $opt_loc && 'custom' == $opt_packs) {
+        $plugin_root_dir = plugin_dir_path( __FILE__ );
+        $custom_pack_file = $plugin_root_dir . DIRECTORY_SEPARATOR . 'highlight.custom.pack.js';
+
+        file_put_contents($custom_pack_file, '');
+        foreach($opt_langs as $language_name) {
+            $file_name = $language_name . '.min.js';
+            $full_path = $plugin_root_dir . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . $file_name;
+            if (file_exists($full_path)) {
+                $fc = file_get_contents($full_path);
+                file_put_contents($custom_pack_file, $fc . PHP_EOL, FILE_APPEND);
+            } else {
+                echo '<p class="warn">' .
+                    __('Language file', 'wp-code-highlight.js') .
+                    ' ' . $file_name . ' ' .
+                    __('not found', 'wp-code-highlight.js') . ', ' .
+                    __('ignored', 'wp-code-highlight.js') . '</p>';
+            }
+        }
+
+        echo '<p class="info">' . __('Generate custom highlight language package done.', 'wp-code-highlight.js') . '</p>';
+    }
+
+}
+
+function hljs_on_update_complete($plugin, $data) {
+    hljs_generate_custom_pack();
+}
+add_action('upgrader_process_complete', 'hljs_on_update_complete', 10, 2);
 
 /**
  * Highlight.js Settings Page
@@ -415,9 +450,7 @@ function hljs_settings_page() {
         if ('local' == $upload_options['location'] && 'custom' == $upload_options['package']) {
             $upload_options['custom_lang'] = array();
             $plugin_root_dir = plugin_dir_path( __FILE__ );
-            $custom_pack_file = $plugin_root_dir . DIRECTORY_SEPARATOR . 'highlight.custom.pack.js';
 
-            file_put_contents($custom_pack_file, '');
             foreach($_POST as $key => $val) {
                 $suffix = substr($key, -3);
                 if (('.js' == $suffix || '_js' == $suffix )&& intval($val) == 1) {
@@ -426,8 +459,6 @@ function hljs_settings_page() {
                     $full_path = $plugin_root_dir . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . $file_name;
                     if (file_exists($full_path)) {
                         array_push($upload_options['custom_lang'], $language_name);
-                        $fc = file_get_contents($full_path);
-                        file_put_contents($custom_pack_file, $fc . PHP_EOL, FILE_APPEND);
                     } else {
                         echo '<p class="warn">' .
                             __('Language file', 'wp-code-highlight.js') .
@@ -441,6 +472,7 @@ function hljs_settings_page() {
 
         update_option('hljs_code_option', $upload_options);
         echo '<p class="info">' . __('All configurations successfully saved...', 'wp-code-highlight.js') . '</p>';
+        hljs_generate_custom_pack();
     }
 
     ?>
