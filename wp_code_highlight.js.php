@@ -417,7 +417,10 @@ function hljs_generate_custom_pack() {
 
 function hljs_on_update_complete($plugin, $data) {
     if (!empty($data) && !empty($data['type']) && 'plugin' == $data['type'] && 'update' == $data['action']) {
-        hljs_generate_custom_pack();
+        $my_plugin_data = get_plugin_data(__FILE__);
+        if (in_array($my_plugin_data['Name'], $data['packages'])) {
+            hljs_generate_custom_pack();
+        }
     }
 }
 add_action('upgrader_process_complete', 'hljs_on_update_complete', 10, 2);
