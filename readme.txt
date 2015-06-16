@@ -1,9 +1,9 @@
 === WP Code Highlight.js ===
-Donate link: http://owent.net/
+Donate link: https://github.com/owt5008137/WP-Code-Highlight.js/#donate
 Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
 Requires at least: 3.0
-Tested up to: 4.2.0
-Stable tag: 0.3.3
+Tested up to: 4.2.2
+Stable tag: 0.4.0
 
 This is a wordpress plugin for highlight.js library.
 And you can easily migrate from SynaxHighlight or Google Prettify without change
@@ -42,7 +42,7 @@ Install from wordpress
 1. Open plugin installing page
 2. Search  WP Code Highlight.js
 3. Install it
-4. Use `<pre><code>` and `</code></pre>` to wrapper your code.(see [highlightjs](https://github.com/isagalaev/highlight.js) for detail)
+4. Use `&lt;pre&gt;&lt;code&gt;` and `&lt;/code&gt;&lt;/pre&gt;` to wrapper your code.(see [highlightjs](https://github.com/isagalaev/highlight.js) for detail)
 5. Enable SyntaxHighlighter compatible mode and Prettify compatible mode if you need it.
 
 Install custom
@@ -50,12 +50,45 @@ Install custom
 1. Download release package
 2. Unzip and rename folder name into wp-code-highlight.js
 3. Move this folder into *[your wordpress path]/wp-content/plugins/* folder
-4. Use `<pre><code>` and `</code></pre>` to wrapper your code.(see [highlightjs](https://github.com/isagalaev/highlight.js) for detail)
+4. Use `&lt;pre&gt;&lt;code&gt;` and `&lt;/code&gt;&lt;/pre&gt;` to wrapper your code.(see [highlightjs](https://github.com/isagalaev/highlight.js) for detail)
 5. Enable SyntaxHighlighter compatible mode and Prettify compatible mode if you need it.
 
 Just have fun.
 
+== Screenshots ==
+
+1. Highlight.js Demo
+2. Setting1: Select CDN or local
+3. Setting2: Custom Languages
+4. Setting3: Highlighting styles
+5. Setting4: Compatiable Mode
+6. Sample: Simple
+7. Sample: Syntax Highlighter Compatiable Mode
+
 == Changelog ==
+
+= 0.4.0 =
+1. rebuild custom language packages only upgrade this plugin.
+
+= 0.3.8 =
+1. fix installation readme
+2. optimize upgrade hook
+
+= 0.3.7 =
+1. update highlight.js in Baidu CDN into 8.6
+2. hook upgrade action and auto update custom package when upgraded
+
+= 0.3.6 =
+1. update highlight.js into 8.6
+
+= 0.3.5 =
+1. fix baidu cdn urls
+2. allow to load custom language scripts from CDN
+3. add CDN reference url of highlight.js to readme
+
+= 0.3.4 =
+1. replace baidu cdn with url support https
+2. update baidu cdn because it accept highlight.js 8.5 now
 
 = 0.3.3 =
 1. add [Crayon Syntax Highlighter Compatible] option

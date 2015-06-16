@@ -58,14 +58,23 @@ Also thanks to [Highlight.js][4]'s author [Ivan Sagalaev](http://softwaremaniacs
 
 And thanks to all  contributors and users. You make this plugin better.
 > [@geraint](https://github.com/geraintp)
+> [@David-CodingSerf](https://github.com/David-CodingSerf)
 
 FAQ
 ------
-Any questions please mailto [owent@owent.net](mailto:owent@owent.net) or [owt5008137@live.com](mailto:owt5008137@live.com)
+Any questions please mailto [admin@owent.net](mailto:admin@owent.net) or [owt5008137@live.com](mailto:owt5008137@live.com)
 
 Report Problems: https://github.com/owt5008137/WP-Code-Highlight.js/issues
 
 See [readme.txt](readme.txt) for more detail
+
+Donate
+------
+Scan these QR-Code to donate me a cup of coffee?
+
+Platform |  WeChat | Alipay
+---------|---------|--------
+QR-Code  | ![WeChat](donate/wechat.png) | ![Alipay](donate/alipay.png)
 
 Notes
 ------
