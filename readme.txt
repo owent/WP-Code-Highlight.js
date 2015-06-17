@@ -3,7 +3,7 @@ Donate link: https://github.com/owt5008137/WP-Code-Highlight.js/#donate
 Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
 Requires at least: 3.0
 Tested up to: 4.2.2
-Stable tag: 0.4.0
+Stable tag: 0.4.1
 
 This is a wordpress plugin for highlight.js library.
 And you can easily migrate from SynaxHighlight or Google Prettify without change
@@ -42,7 +42,7 @@ Install from wordpress
 1. Open plugin installing page
 2. Search  WP Code Highlight.js
 3. Install it
-4. Use `&lt;pre&gt;&lt;code&gt;` and `&lt;/code&gt;&lt;/pre&gt;` to wrapper your code.(see [highlightjs](https://github.com/isagalaev/highlight.js) for detail)
+4. Use &lt;pre&gt;&lt;code&gt; and &lt;/code&gt;&lt;/pre&gt; to wrapper your code.(see [highlightjs](https://github.com/isagalaev/highlight.js) for detail)
 5. Enable SyntaxHighlighter compatible mode and Prettify compatible mode if you need it.
 
 Install custom
@@ -50,7 +50,7 @@ Install custom
 1. Download release package
 2. Unzip and rename folder name into wp-code-highlight.js
 3. Move this folder into *[your wordpress path]/wp-content/plugins/* folder
-4. Use `&lt;pre&gt;&lt;code&gt;` and `&lt;/code&gt;&lt;/pre&gt;` to wrapper your code.(see [highlightjs](https://github.com/isagalaev/highlight.js) for detail)
+4. Use &lt;pre&gt;&lt;code&gt; and &lt;/code&gt;&lt;/pre&gt; to wrapper your code.(see [highlightjs](https://github.com/isagalaev/highlight.js) for detail)
 5. Enable SyntaxHighlighter compatible mode and Prettify compatible mode if you need it.
 
 Just have fun.
@@ -66,6 +66,10 @@ Just have fun.
 7. Sample: Syntax Highlighter Compatiable Mode
 
 == Changelog ==
+
+= 0.4.1 =
+1. add hljs css class when generate code label in compatiable mode
+2. fix html symbol in readme
 
 = 0.4.0 =
 1. rebuild custom language packages only upgrade this plugin.
