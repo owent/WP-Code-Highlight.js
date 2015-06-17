@@ -238,7 +238,7 @@ function hljs_append_init_codes() {
 
                 var code_content = $(block).removeClass("brush:").removeClass("ruler:").removeClass("first-line:").removeClass("highlight:")
                     .removeClass("brush:" + reg_mat[1] + ";").removeClass(reg_mat[1] + ";").removeClass("true;").removeClass("false;").html();
-                $(block).empty().append($("<code></code>").html(code_content)).addClass('language-' + reg_mat[1]);
+                $(block).empty().append($("<code class='hljs'></code>").html(code_content)).addClass('language-' + reg_mat[1]);
                 hljs.highlightBlock(block);
             });
 <?php }
@@ -252,7 +252,7 @@ function hljs_append_init_codes() {
             }
 
             var code_content = jblock.html();
-            jblock.replaceWith($("<pre></pre>").append($("<code></code>").html(code_content)));
+            jblock.replaceWith($("<pre></pre>").append($("<code class='hljs'></code>").html(code_content)));
             hljs.highlightBlock(jblock.get(0));
         });
 <?php } 
@@ -262,7 +262,7 @@ function hljs_append_init_codes() {
             var class_desc = $(block).attr("class") || "";
             var reg_mat = class_desc.match(/lang\s*:\s*([\w\d]+)/i);
 
-            var $code = $("<code></code>").html($(block).removeAttr('class').html());
+            var $code = $("<code class='hljs'></code>").html($(block).removeAttr('class').html());
             $(block).empty().append($code.addClass(reg_mat[1]));
             hljs.highlightBlock($code[0]);
         });
