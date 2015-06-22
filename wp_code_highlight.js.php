@@ -3,7 +3,7 @@
  * Plugin Name: WP Code Highlight.js
  * Plugin URI: https://github.com/owt5008137/WP-Code-Highlight.js 
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
- * Version: 0.4.1
+ * Version: 0.4.2
  * Author: OWenT
  * Author URI: https://owent.net/
  * License: 3-clause BSD
@@ -16,7 +16,7 @@ $PLUGIN_DIR =  plugins_url() . '/' . dirname(plugin_basename(__FILE__));
  * Get version of this plugins
  */
 function hljs_get_version() {
-    return '0.4.1';
+    return '0.4.2';
 }
 
 /**
@@ -327,24 +327,13 @@ function hljs_get_package_list($current_package) {
 function hljs_get_style_list($current_theme) {
     $styleDir = plugin_dir_path( __FILE__ ) . 'styles';
 
-    if ($dir = opendir($styleDir))
-    {
-        while($file = readdir($dir))
-        {
-            if (($file == '.') or ($file == '..'))
-                continue;
-
-            if ('.css' != substr($file, strlen($file) - 4))
-                continue;
-
-            $theme_name = substr($file, 0, strlen($file) - 4);
-            ?><option value="<?php echo $theme_name; ?>" <?php
-            if($theme_name == $current_theme)
-                echo ' selected="selected"';
-            ?>><?php echo $theme_name; ?></option><?php
-        }
+    foreach(glob(styleDir . DIRECTORY_SEPARATOR . '*.css') as $file) {
+        $theme_name = substr($file, 0, strlen($file) - 4);
+        ?><option value="<?php echo $theme_name; ?>" <?php
+        if($theme_name == $current_theme)
+            echo ' selected="selected"';
+        ?>><?php echo $theme_name; ?></option><?php
     }
-    closedir($dir);
 }
 
 /**
