@@ -23,7 +23,7 @@ function hljs_get_version() {
  * Get version of Highlight.js 
  */
 function hljs_get_lib_version() {
-    return '8.6';
+    return '8.7';
 }
 
 /**
@@ -59,11 +59,19 @@ function hljs_cdn_list() {
             'js' => '.min',
             'readme' => 'http://osscdn.com/#/highlight.js'
         ),
+        'BootCSS' => array(
+            'cdn' => '//cdn.bootcss.com/highlight.js/' . hljs_get_lib_version(), 
+            // 'cdn' => '//cdn.bootcss.com/highlight.js/8.5', 
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': BootCSS',
+            'css' => '.min', 
+            'js' => '.min',
+            'readme' => 'http://www.bootcdn.cn/highlight.js/'
+        ), 
         'Baidu' => array(
             //'cdn' => 'http://apps.bdimg.com/libs/highlight.js/' . hljs_get_lib_version(),
-            'cdn' => '//openapi.baidu.com/libs/highlight.js/' . hljs_get_lib_version(),
-            // 'cdn' => '//openapi.baidu.com/libs/highlight.js/8.5',
-            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': ' . __('Baidu', 'wp-code-highlight.js'),
+            // 'cdn' => '//openapi.baidu.com/libs/highlight.js/' . hljs_get_lib_version(),
+            'cdn' => '//openapi.baidu.com/libs/highlight.js/8.6',
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': ' . __('Baidu', 'wp-code-highlight.js'). __('lastest version', 'wp-code-highlight.js') . ': 8.6)',
             'css' => '.min', 
             'js' => '.min',
             'readme' => 'http://cdn.code.baidu.com/#highlight.js'
@@ -76,14 +84,6 @@ function hljs_cdn_list() {
             'js' => '.min',
             'readme' => 'https://tech.yandex.ru/jslibs/#highlight'
         ),
-        'BootCSS' => array(
-            'cdn' => 'http://cdn.bootcss.com/highlight.js/' . hljs_get_lib_version(), 
-            // 'cdn' => 'http://cdn.bootcss.com/highlight.js/8.5', 
-            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': BootCSS(' . __('http only', 'wp-code-highlight.js') . ')',
-            'css' => '.min', 
-            'js' => '.min',
-            'readme' => 'http://www.bootcdn.cn/highlight.js/'
-        ), 
         'Qiniu' => array(
             'cdn' => 'http://cdn.staticfile.org/highlight.js/8.3',// . hljs_get_lib_version(), 
             'desc' => __('Public CDN', 'wp-code-highlight.js') . ': ' . __('Qiniu', 'wp-code-highlight.js') . '(' . __('http only', 'wp-code-highlight.js') . ', ' . __('lastest version', 'wp-code-highlight.js') . ': 8.3)',
@@ -145,6 +145,18 @@ function hljs_get_option($item) {
     if (empty($res) || !isset($res[$item]))
         return null;
     return $res[$item];
+}
+
+/**
+ * Set option of this plugin
+ */
+function hljs_set_option($item, $val) {
+    $res = get_option('hljs_code_option');
+    if (empty($res))
+        $res = array();
+    $res[$item] = $val;
+    update_option('hljs_code_option', $res);
+    return $val;
 }
 
 /**
@@ -307,9 +319,8 @@ function hljs_get_location_list($current_location) {
  */
 function hljs_get_package_list($current_package) {
     $pkgs = array(
-        'common' => 'Common(about 36KB)',
-        'ex' => 'Ext.(about 63KB)',
-        'all' => 'All(about 294KB)',
+        'common' => 'Common(about 42KB)',
+        'all' => 'All(about 393KB)',
         'custom' => 'Custom',
     );
 
@@ -422,7 +433,18 @@ function hljs_on_update_complete($plugin, $data) {
             }
         }
         if ($rebuild_flag) {
-            hljs_generate_custom_pack();
+            $upload_options = get_option('hljs_code_option');
+            if (!empty($upload_options)) {
+                $opt_packs = $upload_options['package'];
+                // ex mode already deleted, so convert to custom mode
+                if ('ex' == $opt_packs) {
+                    $upload_options['package'] = 'custom';
+                    $upload_options['custom_lang'] = array('actionscript', 'applescript', 'cmake', 'capnproto', 'd', 'dos', 'erlang', 'fsharp', 'go', 'less', 'lisp', 'lua', 'matlab', 'protobuf', 'profile', 'scala', 'tex', 'typescript');
+                    update_option('hljs_code_option', $upload_options);
+                }
+            
+                hljs_generate_custom_pack();
+            }
         }
     }
 }
@@ -557,109 +579,114 @@ function hljs_settings_page() {
                       <li><label><input name="sql.js" checked type="checkbox" value="0" class="hljs_lang common"> SQL</label></li></ul>
                 <p><b>Other</b>
                 </p><ul id="language_support_list_other">
-                      <li><label><input name="1c.js" type="checkbox" value="1"> 1C</label></li>
-                      <li><label><input name="armasm.js" type="checkbox" value="1"> ARM Assembly</label></li>
-                      <li><label><input name="avrasm.js" type="checkbox" value="1"> AVR Assembler</label></li>
-                      <li><label><input name="actionscript.js" type="checkbox" value="1" class="hljs_lang ext"> ActionScript</label></li>
-                      <li><label><input name="applescript.js" type="checkbox" value="1" class="hljs_lang ext"> AppleScript</label></li>
-                      <li><label><input name="asciidoc.js" type="checkbox" value="1"> AsciiDoc</label></li>
-                      <li><label><input name="aspectj.js" type="checkbox" value="1"> AspectJ</label></li>
-                      <li><label><input name="autohotkey.js" type="checkbox" value="1"> AutoHotkey</label></li>
-                      <li><label><input name="axapta.js" type="checkbox" value="1"> Axapta</label></li>
-                      <li><label><input name="brainfuck.js" type="checkbox" value="1"> Brainfuck</label></li>
-                      <li><label><input name="cal.js" type="checkbox" value="1">C/AL</label></li>
-                      <li><label><input name="cmake.js" type="checkbox" value="1" class="hljs_lang ext"> CMake</label></li>
-                      <li><label><input name="capnproto.js" type="checkbox" value="1" class="hljs_lang ext"> Cap’n Proto</label></li>
-                      <li><label><input name="ceylon.js" type="checkbox" value="1"> Ceylon</label></li>
-                      <li><label><input name="clojure.js" type="checkbox" value="1"> Clojure</label></li>
-                      <li><label><input name="clojure-repl.js" type="checkbox" value="1"> Clojure REPL</label></li>
-                      <li><label><input name="d.js" type="checkbox" value="1" class="hljs_lang ext"> D</label></li>
-                      <li><label><input name="dns.js" type="checkbox" value="1"> DNS Zone file</label></li>
-                      <li><label><input name="dos.js" type="checkbox" value="1" class="hljs_lang ext"> DOS .bat</label></li>
-                      <li><label><input name="dart.js" type="checkbox" value="1"> Dart</label></li>
-                      <li><label><input name="delphi.js" type="checkbox" value="1"> Delphi</label></li>
-                      <li><label><input name="django.js" type="checkbox" value="1"> Django</label></li>
-                      <li><label><input name="dockerfile.js" type="checkbox" value="1"> Dockerfile</label></li>
-                      <li><label><input name="dust.js" type="checkbox" value="1"> Dust</label></li>
-                      <li><label><input name="erb.js" type="checkbox" value="1"> ERB (Embedded Ruby)</label></li>
-                      <li><label><input name="elixir.js" type="checkbox" value="1"> Elixir</label></li>
-                      <li><label><input name="erlang.js" type="checkbox" value="1" class="hljs_lang ext"> Erlang</label></li>
-                      <li><label><input name="erlang-repl.js" type="checkbox" value="1"> Erlang REPL</label></li>
-                      <li><label><input name="fsharp.js" type="checkbox" value="1" class="hljs_lang ext"> F#</label></li>
-                      <li><label><input name="fix.js" type="checkbox" value="1"> FIX</label></li>
-                      <li><label><input name="fortran.js" type="checkbox" value="1"> Fortran</label></li>
-                      <li><label><input name="gcode.js" type="checkbox" value="1"> G-code (ISO 6983)</label></li>
-                      <li><label><input name="glsl.js" type="checkbox" value="1"> GLSL</label></li>
-                      <li><label><input name="gherkin.js" type="checkbox" value="1"> Gherkin</label></li>
-                      <li><label><input name="go.js" type="checkbox" value="1" class="hljs_lang ext"> Go</label></li>
-                      <li><label><input name="gradle.js" type="checkbox" value="1"> Gradle</label></li>
-                      <li><label><input name="groovy.js" type="checkbox" value="1"> Groovy</label></li>
-                      <li><label><input name="haml.js" type="checkbox" value="1"> Haml</label></li>
-                      <li><label><input name="handlebars.js" type="checkbox" value="1"> Handlebars</label></li>
-                      <li><label><input name="haskell.js" type="checkbox" value="1"> Haskell</label></li>
-                      <li><label><input name="haxe.js" type="checkbox" value="1"> Haxe</label></li>
-                      <li><label><input name="inform7.js" type="checkbox" value="1"> Inform 7</label></li>
-                      <li><label><input name="x86asm.js" type="checkbox" value="1"> Intel x86 Assembly</label></li>
-                      <li><label><input name="julia.js" type="checkbox" value="1"> Julia</label></li>
-                      <li><label><input name="kotlin.js" type="checkbox" value="1"> Kotlin</label></li>
-                      <li><label><input name="lasso.js" type="checkbox" value="1"> Lasso</label></li>
-                      <li><label><input name="less.js" type="checkbox" value="1" class="hljs_lang ext"> Less</label></li>
-                      <li><label><input name="lisp.js" type="checkbox" value="1" class="hljs_lang ext"> Lisp</label></li>
-                      <li><label><input name="livecodeserver.js" type="checkbox" value="1"> LiveCode</label></li>
-                      <li><label><input name="livescript.js" type="checkbox" value="1"> LiveScript</label></li>
-                      <li><label><input name="lua.js" type="checkbox" value="1" class="hljs_lang ext"> Lua</label></li>
-                      <li><label><input name="mel.js" type="checkbox" value="1"> MEL</label></li>
-                      <li><label><input name="mathematica.js" type="checkbox" value="1"> Mathematica</label></li>
-                      <li><label><input name="matlab.js" type="checkbox" value="1" class="hljs_lang ext"> Matlab</label></li>
-                      <li><label><input name="mercury.js" type="checkbox" value="1"> Mercury</label></li>
-                      <li><label><input name="mizar.js" type="checkbox" value="1"> Mizar</label></li>
-                      <li><label><input name="monkey.js" type="checkbox" value="1"> Monkey</label></li>
-                      <li><label><input name="nsis.js" type="checkbox" value="1"> NSIS</label></li>
-                      <li><label><input name="nimrod.js" type="checkbox" value="1"> Nimrod</label></li>
-                      <li><label><input name="nix.js" type="checkbox" value="1"> Nix</label></li>
-                      <li><label><input name="ocaml.js" type="checkbox" value="1"> OCaml</label></li>
-                      <li><label><input name="openscad.js" type="checkbox" value="1"> OpenSCAD</label></li>
-                      <li><label><input name="ruleslanguage.js" type="checkbox" value="1"> Oracle Rules Language</label></li>
-                      <li><label><input name="oxygene.js" type="checkbox" value="1"> Oxygene</label></li>
-                      <li><label><input name="parser3.js" type="checkbox" value="1"> Parser3</label></li>
-                      <li><label><input name="powershell.js" type="checkbox" value="1"> PowerShell</label></li>
-                      <li><label><input name="processing.js" type="checkbox" value="1"> Processing</label></li>
-                      <li><label><input name="prolog.js" type="checkbox" value="1"> Prolog</label></li>
-                      <li><label><input name="protobuf.js" type="checkbox" value="1" class="hljs_lang ext"> Protocol Buffers</label></li>
-                      <li><label><input name="puppet.js" type="checkbox" value="1"> Puppet</label></li>
-                      <li><label><input name="profile.js" type="checkbox" value="1" class="hljs_lang ext"> Python profile</label></li>
-                      <li><label><input name="q.js" type="checkbox" value="1"> Q</label></li>
-                      <li><label><input name="r.js" type="checkbox" value="1"> R</label></li>
-                      <li><label><input name="rib.js" type="checkbox" value="1"> RenderMan RIB</label></li>
-                      <li><label><input name="rsl.js" type="checkbox"> RenderMan RSL</label></li>
-                      <li><label><input name="roboconf.js" type="checkbox" value="1"> Roboconf</label></li>
-                      <li><label><input name="rust.js" type="checkbox" value="1"> Rust</label></li>
-                      <li><label><input name="scss.js" type="checkbox" value="1"> SCSS</label></li>
-                      <li><label><input name="sml.js" type="checkbox" value="1"> SML</label></li>
-                      <li><label><input name="step21.js" type="checkbox" value="1"> STEP Part 21 (ISO 10303-21)</label></li>
-                      <li><label><input name="scala.js" type="checkbox" value="1" class="hljs_lang ext"> Scala</label></li>
-                      <li><label><input name="scheme.js" type="checkbox" value="1"> Scheme</label></li>
-                      <li><label><input name="scilab.js" type="checkbox" value="1"> Scilab</label></li>
-                      <li><label><input name="smali.js" type="checkbox" value="1"> Smali</label></li>
-                      <li><label><input name="smalltalk.js" type="checkbox" value="1"> Smalltalk</label></li>
-                      <li><label><input name="stata.js" type="checkbox" value="1"> Stata</label></li>
-                      <li><label><input name="stylus.js" type="checkbox" value="1"> Stylus</label></li>
-                      <li><label><input name="swift.js" type="checkbox" value="1"> Swift</label></li>
-                      <li><label><input name="tp.js" type="checkbox" value="1"> TP</label></li>
-                      <li><label><input name="tcl.js" type="checkbox" value="1"> Tcl</label></li>
-                      <li><label><input name="tex.js" type="checkbox" value="1" class="hljs_lang ext"> TeX</label></li>
-                      <li><label><input name="thrift.js" type="checkbox" value="1"> Thrift</label></li>
-                      <li><label><input name="twig.js" type="checkbox" value="1"> Twig</label></li>
-                      <li><label><input name="typescript.js" type="checkbox" value="1" class="hljs_lang ext"> TypeScript</label></li>
-                      <li><label><input name="vbnet.js" type="checkbox" value="1"> VB.NET</label></li>
-                      <li><label><input name="vbscript.js" type="checkbox" value="1"> VBScript</label></li>
-                      <li><label><input name="vbscript-html.js" type="checkbox" value="1"> VBScript in HTML</label></li>
-                      <li><label><input name="vhdl.js" type="checkbox" value="1"> VHDL</label></li>
-                      <li><label><input name="vala.js" type="checkbox" value="1"> Vala</label></li>
-                      <li><label><input name="verilog.js" type="checkbox" value="1"> Verilog</label></li>
-                      <li><label><input name="vim.js" type="checkbox" value="1"> Vim Script</label></li>
-                      <li><label><input name="xl.js" type="checkbox" value="1"> XL</label></li>
-                      <li><label><input name="pf.js" type="checkbox" value="1"> pf</label></li></ul>
+                    <li><label><input name="1c.js" type="checkbox" value="1" class="hljs_lang"> 1C</label></li>
+                    <li><label><input name="armasm.js" type="checkbox" value="1" class="hljs_lang"> ARM Assembly</label></li>
+                    <li><label><input name="avrasm.js" type="checkbox" value="1" class="hljs_lang"> AVR Assembler</label></li>
+                    <li><label><input name="actionscript.js" type="checkbox" value="1" class="hljs_lang"> ActionScript</label></li>
+                    <li><label><input name="applescript.js" type="checkbox" value="1" class="hljs_lang"> AppleScript</label></li>
+                    <li><label><input name="asciidoc.js" type="checkbox" value="1" class="hljs_lang"> AsciiDoc</label></li>
+                    <li><label><input name="aspectj.js" type="checkbox" value="1" class="hljs_lang"> AspectJ</label></li>
+                    <li><label><input name="autohotkey.js" type="checkbox" value="1" class="hljs_lang"> AutoHotkey</label></li>
+                    <li><label><input name="autoit.js" type="checkbox" value="1" class="hljs_lang"> AutoIt</label></li>
+                    <li><label><input name="axapta.js" type="checkbox" value="1" class="hljs_lang"> Axapta</label></li>
+                    <li><label><input name="brainfuck.js" type="checkbox" value="1" class="hljs_lang"> Brainfuck</label></li>
+                    <li><label><input name="cal.js" type="checkbox" value="1" class="hljs_lang"> C/AL</label></li>
+                    <li><label><input name="cmake.js" type="checkbox" value="1" class="hljs_lang"> CMake</label></li>
+                    <li><label><input name="capnproto.js" type="checkbox" value="1" class="hljs_lang"> Cap’n Proto</label></li>
+                    <li><label><input name="ceylon.js" type="checkbox" value="1" class="hljs_lang"> Ceylon</label></li>
+                    <li><label><input name="clojure.js" type="checkbox" value="1" class="hljs_lang"> Clojure</label></li>
+                    <li><label><input name="clojure-repl.js" type="checkbox" value="1" class="hljs_lang"> Clojure REPL</label></li>
+                    <li><label><input name="d.js" type="checkbox" value="1" class="hljs_lang"> D</label></li>
+                    <li><label><input name="dns.js" type="checkbox" value="1" class="hljs_lang"> DNS Zone file</label></li>
+                    <li><label><input name="dos.js" type="checkbox" value="1" class="hljs_lang"> DOS .bat</label></li>
+                    <li><label><input name="dart.js" type="checkbox" value="1" class="hljs_lang"> Dart</label></li>
+                    <li><label><input name="delphi.js" type="checkbox" value="1" class="hljs_lang"> Delphi</label></li>
+                    <li><label><input name="django.js" type="checkbox" value="1" class="hljs_lang"> Django</label></li>
+                    <li><label><input name="dockerfile.js" type="checkbox" value="1" class="hljs_lang"> Dockerfile</label></li>
+                    <li><label><input name="dust.js" type="checkbox" value="1" class="hljs_lang"> Dust</label></li>
+                    <li><label><input name="erb.js" type="checkbox" value="1" class="hljs_lang"> ERB (Embedded Ruby)</label></li>
+                    <li><label><input name="elixir.js" type="checkbox" value="1" class="hljs_lang"> Elixir</label></li>
+                    <li><label><input name="elm.js" type="checkbox" value="1" class="hljs_lang"> Elm</label></li>
+                    <li><label><input name="erlang.js" type="checkbox" value="1" class="hljs_lang"> Erlang</label></li>
+                    <li><label><input name="erlang-repl.js" type="checkbox" value="1" class="hljs_lang"> Erlang REPL</label></li>
+                    <li><label><input name="fsharp.js" type="checkbox" value="1" class="hljs_lang"> F#</label></li>
+                    <li><label><input name="fix.js" type="checkbox" value="1" class="hljs_lang"> FIX</label></li>
+                    <li><label><input name="fortran.js" type="checkbox" value="1" class="hljs_lang"> Fortran</label></li>
+                    <li><label><input name="gcode.js" type="checkbox" value="1" class="hljs_lang"> G-code (ISO 6983)</label></li>
+                    <li><label><input name="glsl.js" type="checkbox" value="1" class="hljs_lang"> GLSL</label></li>
+                    <li><label><input name="gherkin.js" type="checkbox" value="1" class="hljs_lang"> Gherkin</label></li>
+                    <li><label><input name="go.js" type="checkbox" value="1" class="hljs_lang"> Go</label></li>
+                    <li><label><input name="gradle.js" type="checkbox" value="1" class="hljs_lang"> Gradle</label></li>
+                    <li><label><input name="groovy.js" type="checkbox" value="1" class="hljs_lang"> Groovy</label></li>
+                    <li><label><input name="haml.js" type="checkbox" value="1" class="hljs_lang"> Haml</label></li>
+                    <li><label><input name="handlebars.js" type="checkbox" value="1" class="hljs_lang"> Handlebars</label></li>
+                    <li><label><input name="haskell.js" type="checkbox" value="1" class="hljs_lang"> Haskell</label></li>
+                    <li><label><input name="haxe.js" type="checkbox" value="1" class="hljs_lang"> Haxe</label></li>
+                    <li><label><input name="inform7.js" type="checkbox" value="1" class="hljs_lang"> Inform 7</label></li>
+                    <li><label><input name="x86asm.js" type="checkbox" value="1" class="hljs_lang"> Intel x86 Assembly</label></li>
+                    <li><label><input name="julia.js" type="checkbox" value="1" class="hljs_lang"> Julia</label></li>
+                    <li><label><input name="kotlin.js" type="checkbox" value="1" class="hljs_lang"> Kotlin</label></li>
+                    <li><label><input name="lasso.js" type="checkbox" value="1" class="hljs_lang"> Lasso</label></li>
+                    <li><label><input name="less.js" type="checkbox" value="1" class="hljs_lang"> Less</label></li>
+                    <li><label><input name="lisp.js" type="checkbox" value="1" class="hljs_lang"> Lisp</label></li>
+                    <li><label><input name="livecodeserver.js" type="checkbox" value="1" class="hljs_lang"> LiveCode</label></li>
+                    <li><label><input name="livescript.js" type="checkbox" value="1" class="hljs_lang"> LiveScript</label></li>
+                    <li><label><input name="lua.js" type="checkbox" value="1" class="hljs_lang"> Lua</label></li>
+                    <li><label><input name="mel.js" type="checkbox" value="1" class="hljs_lang"> MEL</label></li>
+                    <li><label><input name="mathematica.js" type="checkbox" value="1" class="hljs_lang"> Mathematica</label></li>
+                    <li><label><input name="matlab.js" type="checkbox" value="1" class="hljs_lang"> Matlab</label></li>
+                    <li><label><input name="mercury.js" type="checkbox" value="1" class="hljs_lang"> Mercury</label></li>
+                    <li><label><input name="mizar.js" type="checkbox" value="1" class="hljs_lang"> Mizar</label></li>
+                    <li><label><input name="mojolicious.js" type="checkbox" value="1" class="hljs_lang"> Mojolicious</label></li>
+                    <li><label><input name="monkey.js" type="checkbox" value="1" class="hljs_lang"> Monkey</label></li>
+                    <li><label><input name="nsis.js" type="checkbox" value="1" class="hljs_lang"> NSIS</label></li>
+                    <li><label><input name="nimrod.js" type="checkbox" value="1" class="hljs_lang"> Nimrod</label></li>
+                    <li><label><input name="nix.js" type="checkbox" value="1" class="hljs_lang"> Nix</label></li>
+                    <li><label><input name="ocaml.js" type="checkbox" value="1" class="hljs_lang"> OCaml</label></li>
+                    <li><label><input name="openscad.js" type="checkbox" value="1" class="hljs_lang"> OpenSCAD</label></li>
+                    <li><label><input name="ruleslanguage.js" type="checkbox" value="1" class="hljs_lang"> Oracle Rules Language</label></li>
+                    <li><label><input name="oxygene.js" type="checkbox" value="1" class="hljs_lang"> Oxygene</label></li>
+                    <li><label><input name="parser3.js" type="checkbox" value="1" class="hljs_lang"> Parser3</label></li>
+                    <li><label><input name="powershell.js" type="checkbox" value="1" class="hljs_lang"> PowerShell</label></li>
+                    <li><label><input name="processing.js" type="checkbox" value="1" class="hljs_lang"> Processing</label></li>
+                    <li><label><input name="prolog.js" type="checkbox" value="1" class="hljs_lang"> Prolog</label></li>
+                    <li><label><input name="protobuf.js" type="checkbox" value="1" class="hljs_lang"> Protocol Buffers</label></li>
+                    <li><label><input name="puppet.js" type="checkbox" value="1" class="hljs_lang"> Puppet</label></li>
+                    <li><label><input name="profile.js" type="checkbox" value="1" class="hljs_lang"> Python profile</label></li>
+                    <li><label><input name="q.js" type="checkbox" value="1" class="hljs_lang"> Q</label></li>
+                    <li><label><input name="r.js" type="checkbox" value="1" class="hljs_lang"> R</label></li>
+                    <li><label><input name="rib.js" type="checkbox" value="1" class="hljs_lang"> RenderMan RIB</label></li>
+                    <li><label><input name="rsl.js" type="checkbox" value="1" class="hljs_lang"> RenderMan RSL</label></li>
+                    <li><label><input name="roboconf.js" type="checkbox" value="1" class="hljs_lang"> Roboconf</label></li>
+                    <li><label><input name="rust.js" type="checkbox" value="1" class="hljs_lang"> Rust</label></li>
+                    <li><label><input name="scss.js" type="checkbox" value="1" class="hljs_lang"> SCSS</label></li>
+                    <li><label><input name="sml.js" type="checkbox" value="1" class="hljs_lang"> SML</label></li>
+                    <li><label><input name="step21.js" type="checkbox" value="1" class="hljs_lang"> STEP Part 21 (ISO 10303-21)</label></li>
+                    <li><label><input name="scala.js" type="checkbox" value="1" class="hljs_lang"> Scala</label></li>
+                    <li><label><input name="scheme.js" type="checkbox" value="1" class="hljs_lang"> Scheme</label></li>
+                    <li><label><input name="scilab.js" type="checkbox" value="1" class="hljs_lang"> Scilab</label></li>
+                    <li><label><input name="smali.js" type="checkbox" value="1" class="hljs_lang"> Smali</label></li>
+                    <li><label><input name="smalltalk.js" type="checkbox" value="1" class="hljs_lang"> Smalltalk</label></li>
+                    <li><label><input name="stata.js" type="checkbox" value="1" class="hljs_lang"> Stata</label></li>
+                    <li><label><input name="stylus.js" type="checkbox" value="1" class="hljs_lang"> Stylus</label></li>
+                    <li><label><input name="swift.js" type="checkbox" value="1" class="hljs_lang"> Swift</label></li>
+                    <li><label><input name="tp.js" type="checkbox" value="1" class="hljs_lang"> TP</label></li>
+                    <li><label><input name="tcl.js" type="checkbox" value="1" class="hljs_lang"> Tcl</label></li>
+                    <li><label><input name="tex.js" type="checkbox" value="1" class="hljs_lang"> TeX</label></li>
+                    <li><label><input name="thrift.js" type="checkbox" value="1" class="hljs_lang"> Thrift</label></li>
+                    <li><label><input name="twig.js" type="checkbox" value="1" class="hljs_lang"> Twig</label></li>
+                    <li><label><input name="typescript.js" type="checkbox" value="1" class="hljs_lang"> TypeScript</label></li>
+                    <li><label><input name="vbnet.js" type="checkbox" value="1" class="hljs_lang"> VB.NET</label></li>
+                    <li><label><input name="vbscript.js" type="checkbox" value="1" class="hljs_lang"> VBScript</label></li>
+                    <li><label><input name="vbscript-html.js" type="checkbox" value="1" class="hljs_lang"> VBScript in HTML</label></li>
+                    <li><label><input name="vhdl.js" type="checkbox" value="1" class="hljs_lang"> VHDL</label></li>
+                    <li><label><input name="vala.js" type="checkbox" value="1" class="hljs_lang"> Vala</label></li>
+                    <li><label><input name="verilog.js" type="checkbox" value="1" class="hljs_lang"> Verilog</label></li>
+                    <li><label><input name="vim.js" type="checkbox" value="1" class="hljs_lang"> Vim Script</label></li>
+                    <li><label><input name="xl.js" type="checkbox" value="1" class="hljs_lang"> XL</label></li>
+                    <li><label><input name="xquery.js" type="checkbox" value="1" class="hljs_lang"> XQuery</label></li>
+                    <li><label><input name="zephir.js" type="checkbox" value="1" class="hljs_lang"> Zephir</label></li>
+                    <li><label><input name="pf.js" type="checkbox" value="1" class="hljs_lang"> pf</label></li>
                   </div>
               <div style="clear: both;"></div>
               </div>
@@ -711,10 +738,6 @@ function hljs_settings_page() {
                             $("#language_support_list_other input").prop("checked", true);
                         } else {
                             $("#language_support_list_other input").prop("checked", false);
-
-                            if ("ex" == hljs_package_name) {
-                                $("#language_support_list_other input.ext").prop("checked", true);
-                            }
                         }
                     }
                });

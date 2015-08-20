@@ -11,7 +11,7 @@ for file in $*; do
         DIR_PATH=${REMOVE_PREFIX%/*};
         if [ ! -e "$REMOVE_PREFIX" ] || [ "$(ls -l $REMOVE_PREFIX | awk '{print $5}')" == "0" ]; then
             mkdir -p "$DIR_PATH";
-            wget -c "$line" -O "$REMOVE_PREFIX";
+            wget -c --no-check-certificate "$line" -O "$REMOVE_PREFIX";
             
             if [ "$(ls -l $REMOVE_PREFIX | awk '{print $5}')" == "0" ]; then
                 let DOWN_FAILED=$DOWN_FAILED+1;
