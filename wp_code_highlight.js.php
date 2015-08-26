@@ -3,7 +3,7 @@
  * Plugin Name: WP Code Highlight.js
  * Plugin URI: https://github.com/owt5008137/WP-Code-Highlight.js 
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
- * Version: 0.5.0
+ * Version: 0.5.1
  * Author: OWenT
  * Author URI: https://owent.net/
  * License: 3-clause BSD
@@ -407,7 +407,7 @@ function hljs_code_handler($atts, $content) {
         $language = "class=\"${atts['lang']}\"";
     return "<pre class=\"hljs\"><code $language>" . ltrim($content, '\n') . '</code></pre>';
 }
-if (hljs_get_lib_option('shortcode')) {
+if (hljs_get_option('shortcode')) {
     add_shortcode('code', 'hljs_code_handler');
 }
 
