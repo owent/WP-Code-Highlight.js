@@ -3,7 +3,7 @@ Donate link: https://github.com/owt5008137/WP-Code-Highlight.js/#donate
 Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
 Requires at least: 3.0
 Tested up to: 4.4.0
-Stable tag: 0.5.6
+Stable tag: 0.5.7
 
 This is a wordpress plugin for highlight.js library.
 And you can easily migrate from SynaxHighlight or Google Prettify without change
@@ -67,7 +67,7 @@ Just have fun.
 
 == Changelog ==
 
-= 0.5.6
+= 0.5.7
 1. fix auto rename bug([Issue #12](https://github.com/owt5008137/WP-Code-Highlight.js/issues/12)). thanks to [shiya](http://www.shiyaluo.com)
 
 = 0.5.5 =
