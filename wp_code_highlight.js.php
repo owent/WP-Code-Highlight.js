@@ -441,9 +441,9 @@ function hljs_generate_custom_pack() {
 
     // rename style to default when filename is changed by highlight.js
     $style_name = hljs_get_option('theme');
-    if (false == file_exists($plugin_root_dir . '/styles/' . $hljs_code_option['theme'] . '.css')) {
+    if (false == file_exists($plugin_root_dir . 'styles/' . $style_name . '.css')) {
         hljs_set_option('theme', 'default');
-        echo '<p class="warn">' . __('style name ' . $style_name . ' of is unavailable, maybe highlight.js has changed the name. Theme change to default now', 'wp-code-highlight.js') . '</p>';
+        echo '<p class="warn">' . __('Style named ' . $style_name . ' is unavailable, maybe highlight.js has changed the name. Theme changed to default now', 'wp-code-highlight.js') . '</p>';
     }
 }
 
