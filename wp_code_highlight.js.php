@@ -281,9 +281,15 @@ function hljs_append_init_codes() {
                 return;
             }
 
-            var code_content = jblock.html();
-            jblock.replaceWith($("<pre></pre>").append($("<code class='hljs'></code>").html(code_content)));
-            hljs.highlightBlock(jblock.get(0));
+            if (jblock.prop("tagName") === "PRE") {
+              jblock.wrapInner("<code class='hljs'></code>");
+              hljs.highlightBlock(jblock.children().get(0));
+            }
+            else {
+              var code_content = jblock.html();
+              jblock.replaceWith($("<pre></pre>").append($("<code class='hljs'></code>").html(code_content)));
+              hljs.highlightBlock(jblock.get(0));
+            }
         });
 <?php } 
     //crayon compatible
