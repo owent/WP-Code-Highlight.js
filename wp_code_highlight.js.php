@@ -3,7 +3,7 @@
  * Plugin Name: WP Code Highlight.js
  * Plugin URI: https://github.com/owt5008137/WP-Code-Highlight.js 
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
- * Version: 0.5.8
+ * Version: 0.5.9
  * Author: OWenT
  * Author URI: https://owent.net/
  * License: 3-clause BSD
@@ -16,7 +16,7 @@ $PLUGIN_DIR =  plugins_url() . '/' . dirname(plugin_basename(__FILE__));
  * Get version of this plugins
  */
 function hljs_get_version() {
-    return '0.5.8';
+    return '0.5.9';
 }
 
 /**
@@ -68,8 +68,8 @@ function hljs_cdn_list() {
         ), 
         'Baidu' => array(
             //'cdn' => 'http://apps.bdimg.com/libs/highlight.js/' . hljs_get_lib_version(),
-            //'cdn' => '//openapi.baidu.com/libs/highlight.js/' . hljs_get_lib_version(),
-            'cdn' => '//openapi.baidu.com/libs/highlight.js/9.0.0',
+            'cdn' => '//openapi.baidu.com/libs/highlight.js/' . hljs_get_lib_version(),
+            //'cdn' => '//openapi.baidu.com/libs/highlight.js/9.0.0',
             'desc' => __('Public CDN', 'wp-code-highlight.js') . ': ' . __('Baidu', 'wp-code-highlight.js'). __('lastest version', 'wp-code-highlight.js') . ': 9.0.0)',
             'css' => '.min', 
             'js' => '.min',
@@ -284,8 +284,7 @@ function hljs_append_init_codes() {
             if (jblock.prop("tagName") === "PRE") {
               jblock.wrapInner("<code class='hljs'></code>");
               hljs.highlightBlock(jblock.children().get(0));
-            }
-            else {
+            } else {
               var code_content = jblock.html();
               jblock.replaceWith($("<pre></pre>").append($("<code class='hljs'></code>").html(code_content)));
               hljs.highlightBlock(jblock.get(0));
@@ -920,6 +919,7 @@ function hljs_settings_page() {
                             <li><a href="http://geraint.co">Geraint Palmer</a></li>
                             <li><a href="http://www.codingserf.com">David</a></li>
                             <li><a href="http://www.shiyaluo.com">shiya</a></li>
+                            <li><a href="https://github.com/Beej126">Beej126</a></li>
                     </ul></td>
                 </tr>
            </table>
