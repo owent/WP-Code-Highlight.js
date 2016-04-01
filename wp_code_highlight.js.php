@@ -409,7 +409,7 @@ function hljs_code_handler($atts, $content) {
     $language = '';
     if (!empty($atts['lang']))
         $language = "class=\"${atts['lang']}\"";
-    return "<pre class=\"hljs\"><code $language>" . ltrim($content, '\n') . '</code></pre>';
+    return "<pre class=\"hljs\"><code $language>" . do_shortcode(ltrim($content, '\n')) . '</code></pre>';
 }
 if (hljs_get_option('shortcode')) {
     add_shortcode('code', 'hljs_code_handler');
