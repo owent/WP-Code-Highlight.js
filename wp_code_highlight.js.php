@@ -403,13 +403,26 @@ add_filter('plugin_action_links', 'hljs_add_settings_link', 10, 2);
 /**
  * Add BB-Tag for highlighting.
  *
- *   Usage: [CODE lang=cpp]...[/CODE]
+ *   Usage: [CODE lang=cpp bbcode=enable]...[/CODE]
  */
-function hljs_code_handler($atts, $content) {
+function hljs_code_handler($attrs, $content) {
     $language = '';
-    if (!empty($atts['lang']))
-        $language = "class=\"${atts['lang']}\"";
-    return "<pre class=\"hljs\"><code $language>" . ltrim($content, '\n') . '</code></pre>';
+    if (!empty($attrs['lang']))
+        $language = "class=\"${attrs['lang']}\"";
+
+    $enable_inner_bbcode = false;
+    if(isset($attrs['bbcode'])) {
+        $enable_inner_bbcode = true;
+        if('disable' === $attrs['bbcode'] || 0 === $attrs['bbcode']) {
+            $enable_inner_bbcode = false;
+        }
+    }
+
+    if($enable_inner_bbcode) {
+        return "<pre class=\"hljs\"><code $language>" . do_shortcode(ltrim($content, '\n')) . '</code></pre>';
+    } else {
+        return "<pre class=\"hljs\"><code $language>" . ltrim($content, '\n') . '</code></pre>';
+    }
 }
 if (hljs_get_option('shortcode')) {
     add_shortcode('code', 'hljs_code_handler');
@@ -903,6 +916,7 @@ function hljs_settings_page() {
                         <p><pre><code>[code lang="cpp"] highlight the code with certain language [/code]</code></pre></p>
                             <p><strong>The second way</strong> is to use html-tags:</p>
                             <p><pre><code class="html">&lt;pre&gt;&lt;code&gt; this language will be automatically determined &lt;/code&gt;&lt;/pre&gt;</code></pre></p>
+                            <p><pre><code class="html">&lt;pre&gt;&lt;code bbcode=enable&gt; this language will be [b]automatically determined[\b] and inner bbcode is available &lt;/code&gt;&lt;/pre&gt;</code></pre></p>
                         <p><pre><code class="html">&lt;pre&gt;&lt;code class="html"&gt; highlight the code with certain language &lt;/code&gt;&lt;/pre&gt;</code></pre></p>', 'wp-code-highlight.js'); ?></td>
                 </tr>
                 <tr>
