@@ -3,7 +3,7 @@
  * Plugin Name: WP Code Highlight.js
  * Plugin URI: https://github.com/owt5008137/WP-Code-Highlight.js
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
- * Version: 0.5.10
+ * Version: 0.5.11
  * Author: OWenT
  * Author URI: https://owent.net/
  * License: 3-clause BSD
@@ -16,14 +16,14 @@ $PLUGIN_DIR =  plugins_url() . '/' . dirname(plugin_basename(__FILE__));
  * Get version of this plugins
  */
 function hljs_get_version() {
-    return '0.5.10';
+    return '0.5.11';
 }
 
 /**
  * Get version of Highlight.js
  */
 function hljs_get_lib_version() {
-    return '9.2.0';
+    return '9.3.0';
 }
 
 /**
@@ -60,8 +60,9 @@ function hljs_cdn_list() {
             'readme' => 'http://osscdn.com/#/highlight.js'
         ),
         'BootCSS' => array(
-            'cdn' => '//cdn.bootcss.com/highlight.js/' . hljs_get_lib_version(),
-            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': BootCSS',
+            // 'cdn' => '//cdn.bootcss.com/highlight.js/' . hljs_get_lib_version(),
+            'cdn' => '//cdn.bootcss.com/highlight.js/9.2.0',
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': BootCSS' . __('lastest version', 'wp-code-highlight.js') . ': 9.2.0',
             'css' => '.min',
             'js' => '.min',
             'readme' => 'http://www.bootcdn.cn/highlight.js/'
@@ -70,7 +71,7 @@ function hljs_cdn_list() {
             //'cdn' => 'http://apps.bdimg.com/libs/highlight.js/' . hljs_get_lib_version(),
             //'cdn' => '//openapi.baidu.com/libs/highlight.js/' . hljs_get_lib_version(),
             'cdn' => '//openapi.baidu.com/libs/highlight.js/9.1.0',
-            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': ' . __('Baidu', 'wp-code-highlight.js'). __('lastest version', 'wp-code-highlight.js') . ': 9.1.0)',
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': ' . __('Baidu', 'wp-code-highlight.js') . __('lastest version', 'wp-code-highlight.js') . ': 9.1.0)',
             'css' => '.min',
             'js' => '.min',
             'readme' => 'http://cdn.code.baidu.com/#highlight.js'
@@ -84,8 +85,8 @@ function hljs_cdn_list() {
             'readme' => 'https://tech.yandex.ru/jslibs/#highlight'
         ),
         'Qiniu' => array(
-            'cdn' => 'http://cdn.staticfile.org/highlight.js/8.3',// . hljs_get_lib_version(),
-            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': ' . __('Qiniu', 'wp-code-highlight.js') . '(' . __('http only', 'wp-code-highlight.js') . ', ' . __('lastest version', 'wp-code-highlight.js') . ': 8.3)',
+            'cdn' => 'http://cdn.staticfile.org/highlight.js/9.0.0',// . hljs_get_lib_version(),
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': ' . __('Qiniu', 'wp-code-highlight.js') . '(' . __('http only', 'wp-code-highlight.js') . ', ' . __('lastest version', 'wp-code-highlight.js') . ': 9.0.0)',
             'css' => '.min',
             'js' => '.min',
             'readme' => 'http://www.staticfile.org'
@@ -687,6 +688,7 @@ function hljs_settings_page() {
                   </li><li><label><input name="mizar.js" type="checkbox" value="1" class="hljs_lang"> Mizar</label>
                   </li><li><label><input name="mojolicious.js" type="checkbox" value="1" class="hljs_lang"> Mojolicious</label>
                   </li><li><label><input name="monkey.js" type="checkbox" value="1" class="hljs_lang"> Monkey</label>
+                  </li><li><label><input name="moonscript.js" type="checkbox" value="1" class="hljs_lang"> MoonScript</label>
                   </li><li><label><input name="nsis.js" type="checkbox" value="1" class="hljs_lang"> NSIS</label>
                   </li><li><label><input name="nimrod.js" type="checkbox" value="1" class="hljs_lang"> Nimrod</label>
                   </li><li><label><input name="nix.js" type="checkbox" value="1" class="hljs_lang"> Nix</label>
@@ -722,6 +724,7 @@ function hljs_settings_page() {
                   </li><li><label><input name="stylus.js" type="checkbox" value="1" class="hljs_lang"> Stylus</label>
                   </li><li><label><input name="swift.js" type="checkbox" value="1" class="hljs_lang"> Swift</label>
                   </li><li><label><input name="tp.js" type="checkbox" value="1" class="hljs_lang"> TP</label>
+                  </li><li><label><input name="taggerscript.js" type="checkbox" value="1" class="hljs_lang"> Tagger Script</label>
                   </li><li><label><input name="tcl.js" type="checkbox" value="1" class="hljs_lang"> Tcl</label>
                   </li><li><label><input name="tex.js" type="checkbox" value="1" class="hljs_lang"> TeX</label>
                   </li><li><label><input name="thrift.js" type="checkbox" value="1" class="hljs_lang"> Thrift</label>
