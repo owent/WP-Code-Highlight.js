@@ -2,8 +2,8 @@
 Donate link: https://github.com/owt5008137/WP-Code-Highlight.js/#donate
 Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
 Requires at least: 3.0
-Tested up to: 4.5.0
-Stable tag: 0.5.11
+Tested up to: 4.5.2
+Stable tag: 0.5.12
 
 This is a wordpress plugin for highlight.js library.
 And you can easily migrate from SynaxHighlight or Google Prettify without change
@@ -66,6 +66,11 @@ Just have fun.
 7. Sample: Syntax Highlighter Compatiable Mode
 
 == Changelog ==
+
+= 0.5.12
+1. tested in wordpress 4.5.2
+2. update highlight.js version to 9.4.0
+3. clear some old CDN
 
 = 0.5.11
 1. add bbcode option to enable or disable bbcode inside [code][/code]
