@@ -16,7 +16,7 @@ $PLUGIN_DIR =  plugins_url() . '/' . dirname(plugin_basename(__FILE__));
  * Get version of this plugins
  */
 function hljs_get_version() {
-    return '0.5.12';
+    return '0.5.13';
 }
 
 /**
@@ -62,7 +62,7 @@ function hljs_cdn_list() {
         'BootCSS' => array(
             'cdn' => '//cdn.bootcss.com/highlight.js/' . hljs_get_lib_version(),
             // 'cdn' => '//cdn.bootcss.com/highlight.js/9.2.0',
-            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': BootCSS' . __('lastest version', 'wp-code-highlight.js') . ': 9.2.0',
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': BootCSS',
             'css' => '.min',
             'js' => '.min',
             'readme' => 'http://www.bootcdn.cn/highlight.js/'
