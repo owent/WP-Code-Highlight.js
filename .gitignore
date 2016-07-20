@@ -11,3 +11,7 @@ wp-content/cache/
 wp-content/backups/
 sitemap.xml.gz
 wp-config.php
+
+
+# highlight.js versions
+/cdn/9.*
