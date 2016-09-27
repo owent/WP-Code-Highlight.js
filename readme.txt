@@ -2,7 +2,7 @@
 Donate link: https://github.com/owt5008137/WP-Code-Highlight.js/#donate
 Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
 Requires at least: 3.0
-Tested up to: 4.5.3
+Tested up to: 4.6.1
 Stable tag: 0.5.14
 
 This is a wordpress plugin for highlight.js library.
@@ -24,16 +24,17 @@ On the other hand.This plugin allow you to switch syntax highlighter from
 other libraries. For now, we support SyntaxHighlighter and Prettify.
 
 = Features: =
-* works with comments
-* high performance
-* nice colorshemes
-* load from cdn or local
-* choose language packages
+* Works with comments
+* High performance
+* Nice colorshemes
+* Load from cdn or local
+* Custom language packages
 * SyntaxHighlighter compatible mode
 * Prettify compatible mode
-* Work well with [pandoc](http://johnmacfarlane.net/pandoc/) and [stackeditor](https://stackedit.io/editor) and other similar markdown editors
+* Work well with [pandoc](http://johnmacfarlane.net/pandoc/), [stackeditor](https://stackedit.io/editor) or other markdown editors
 
 Author: [OWenT](http://owent.net/)
+Open Source: [https://github.com/owt5008137/WP-Code-Highlight.js](https://github.com/owt5008137/WP-Code-Highlight.js)
 
 == Installation ==
 
@@ -66,6 +67,9 @@ Just have fun.
 7. Sample: Syntax Highlighter Compatiable Mode
 
 == Changelog ==
+
+= 0.5.15
+1. update highlight.js version to 9.7.0
 
 = 0.5.14
 1. update highlight.js version to 9.5.0

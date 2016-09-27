@@ -3,29 +3,25 @@
  * Plugin Name: WP Code Highlight.js
  * Plugin URI: https://github.com/owt5008137/WP-Code-Highlight.js
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
- * Version: 0.5.14
+ * Version: 0.5.15
  * Author: OWenT
  * Author URI: https://owent.net/
  * License: 3-clause BSD
 */
 
-
 $PLUGIN_DIR =  plugins_url() . '/' . dirname(plugin_basename(__FILE__));
-
 /**
  * Get version of this plugins
  */
 function hljs_get_version() {
-    return '0.5.14';
+    return '0.5.15';
 }
-
 /**
  * Get version of Highlight.js
  */
 function hljs_get_lib_version() {
-    return '9.5.0';
+    return '9.7.0';
 }
-
 /**
  * list cdn list
  */
@@ -45,20 +41,6 @@ function hljs_cdn_list() {
             'js' => '.min',
             'readme' => 'https://cdnjs.com/libraries/highlight.js'
         ),
-        'jsDelivr' => array(
-            'cdn' => '//cdn.jsdelivr.net/highlight.js/' . hljs_get_lib_version(),
-            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': jsDelivr (' . __('highlightjs.org recommend', 'wp-code-highlight.js') . ')',
-            'css' => '.min',
-            'js' => '.min',
-            'readme' => 'http://www.jsdelivr.com/#!highlight.js'
-        ),
-        'MaxCDN' => array(
-            'cdn' => '//oss.maxcdn.com/highlight.js/' . hljs_get_lib_version(),
-            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': MaxCDN',
-            'css' => '.min',
-            'js' => '.min',
-            'readme' => 'http://osscdn.com/#/highlight.js'
-        ),
         'BootCSS' => array(
             'cdn' => '//cdn.bootcss.com/highlight.js/' . hljs_get_lib_version(),
             // 'cdn' => '//cdn.bootcss.com/highlight.js/9.2.0',
@@ -66,6 +48,22 @@ function hljs_cdn_list() {
             'css' => '.min',
             'js' => '.min',
             'readme' => 'http://www.bootcdn.cn/highlight.js/'
+        ),
+        'jsDelivr' => array(
+            // 'cdn' => '//cdn.jsdelivr.net/highlight.js/' . hljs_get_lib_version(),
+            'cdn' => '//cdn.jsdelivr.net/highlight.js/9.6.0',
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': jsDelivr (' . __('highlightjs.org recommend', 'wp-code-highlight.js') . ') ' . __('lastest version', 'wp-code-highlight.js') . ': 9.6.0)',
+            'css' => '.min',
+            'js' => '.min',
+            'readme' => 'http://www.jsdelivr.com/#!highlight.js'
+        ),
+        'MaxCDN' => array(
+            // 'cdn' => '//oss.maxcdn.com/highlight.js/' . hljs_get_lib_version(),
+            'cdn' => '//oss.maxcdn.com/highlight.js/9.6.0',
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': MaxCDN ' . __('lastest version', 'wp-code-highlight.js') . ': 9.6.0)',
+            'css' => '.min',
+            'js' => '.min',
+            'readme' => 'http://osscdn.com/#/highlight.js'
         ),
         'Baidu' => array(
             //'cdn' => 'http://apps.bdimg.com/libs/highlight.js/' . hljs_get_lib_version(),
@@ -78,7 +76,6 @@ function hljs_cdn_list() {
         )
    );
 }
-
 /**
  * Plugin Installation:
  *   - create configuration keys
@@ -104,7 +101,6 @@ function hljs_install() {
 }
 register_activation_hook(__FILE__, 'hljs_install');
 
-
 /**
  * Plugin Deinstallation
  *   - delete configuration keys
@@ -113,7 +109,6 @@ function hljs_deinstall() {
     delete_option('hljs_code_option');
 }
 register_deactivation_hook(__FILE__, 'hljs_deinstall');
-
 
 /**
  * Get option of this plugin
@@ -124,7 +119,6 @@ function hljs_get_option($item) {
         return null;
     return $res[$item];
 }
-
 /**
  * Set option of this plugin
  */
@@ -136,7 +130,6 @@ function hljs_set_option($item, $val) {
     update_option('hljs_code_option', $res);
     return $val;
 }
-
 /**
  * Get option of highlight.js
  */
@@ -146,7 +139,6 @@ function hljs_get_lib_option($item) {
         return '';
     return $res[$item];
 }
-
 function hljs_remove_ex_mode() {
     $upload_options = get_option('hljs_code_option');
     if (!empty($upload_options)) {
@@ -157,11 +149,9 @@ function hljs_remove_ex_mode() {
             $upload_options['custom_lang'] = array('actionscript', 'applescript', 'cmake', 'capnproto', 'd', 'dos', 'erlang', 'fsharp', 'go', 'less', 'lisp', 'lua', 'matlab', 'protobuf', 'profile', 'scala', 'tex', 'typescript');
             update_option('hljs_code_option', $upload_options);
         }
-
         hljs_generate_custom_pack();
     }
 }
-
 /**
  * Attach Highlight.js to the current page
  *   - attach highlight.pack.js
@@ -176,25 +166,21 @@ function hljs_include() {
     $hljs_cdn_info = $hljs_cdn_list['local'];
     if (!empty($hljs_cdn_list[$hljs_location]))
         $hljs_cdn_info = $hljs_cdn_list[$hljs_location];
-
     // inject js & css file
     if ( 'local' == $hljs_cdn_info['cdn'] ) {
         if ('ex' == $hljs_package) {
             hljs_remove_ex_mode();
         }
-
         $dep_libs = array('jquery');
         if ('custom' == $hljs_package) {
             wp_enqueue_script( 'hljs_preload', $PLUGIN_DIR . '/highlight.common.pack.js', $dep_libs, hljs_get_version(), true );
             $dep_libs = array('hljs_preload');
         }
-
         wp_enqueue_script( 'hljs', $PLUGIN_DIR . '/highlight.' . $hljs_package .'.pack.js', $dep_libs, hljs_get_version(), true );
         wp_enqueue_style( 'hljstheme', $PLUGIN_DIR . '/styles/' . $hljs_code_option['theme'] . '.css', array(), hljs_get_version() );
     } else {
         wp_enqueue_script( 'hljs', $hljs_cdn_info['cdn'] . '/highlight' . $hljs_cdn_info['js'] . '.js', array('jquery'), hljs_get_version(), true );
         wp_enqueue_style( 'hljstheme', $hljs_cdn_info['cdn'] . '/styles/' . $hljs_code_option['theme'] . $hljs_cdn_info['css'] . '.css', array(), hljs_get_version() );
-
         // additional languages
         $custom_addition_langs = hljs_get_option('custom_lang');
         if(!empty($custom_addition_langs)) {
@@ -202,17 +188,14 @@ function hljs_include() {
                  wp_enqueue_script( 'hljs_lang_' . $lang, $hljs_cdn_info['cdn'] . '/languages/' . $lang . $hljs_cdn_info['js'] . '.js', array('hljs'), hljs_get_version(), true );
             }
         }
-
     }
 }
 add_action('wp_head', 'hljs_include');
-
 /**
  * Attach init code to the current page
  */
 function hljs_append_init_codes() {
     $hljs_code_option = get_option('hljs_code_option');
-
     // inject init script
     foreach ($hljs_code_option['hljs_option'] as $key => $val) {
         if (!empty($val)) {
@@ -227,9 +210,7 @@ function hljs_append_init_codes() {
         var init_fn = (function() {
             if (init_fn_flag)
                 return;
-
             init_fn_flag = true;
-
  <?php if (count($hljs_lib_config) > 0) { ?>
             hljs.configure(<?php echo json_encode($hljs_lib_config); ?>);
 <?php } ?>
@@ -244,14 +225,12 @@ function hljs_append_init_codes() {
                 var reg_mat = class_desc.match(/brush\s*:\s*([\w\d]+)/i);
                 if(!reg_mat || reg_mat.length < 2)
                     return;
-
                 var code_content = $(block).removeClass("brush:").removeClass("ruler:").removeClass("first-line:").removeClass("highlight:")
                     .removeClass("brush:" + reg_mat[1] + ";").removeClass(reg_mat[1] + ";").removeClass("true;").removeClass("false;").html();
                 $(block).empty().append($("<code class='hljs'></code>").html(code_content)).addClass('language-' + reg_mat[1]);
                 hljs.highlightBlock(block);
             });
 <?php }
-
     if (hljs_get_option('prettify_compatible')) { ?>
         $('pre.prettyprint:not(.prettyprinted), code.prettyprint:not(.prettyprinted), xmp.prettyprint:not(.prettyprinted)').each(function(i, block){
             var jblock = $(block).removeClass("prettyprint");
@@ -259,7 +238,6 @@ function hljs_append_init_codes() {
                 hljs.highlightBlock(jblock.parent().get(0));
                 return;
             }
-
             if (jblock.prop("tagName") === "PRE") {
               jblock.wrapInner("<code class='hljs'></code>");
               hljs.highlightBlock(jblock.children().get(0));
@@ -275,16 +253,12 @@ function hljs_append_init_codes() {
         $('pre:not(:has(code))').each(function(i, block){
             var class_desc = $(block).attr("class") || "";
             var reg_mat = class_desc.match(/lang\s*:\s*([\w\d]+)/i);
-
             var $code = $("<code class='hljs'></code>").html($(block).removeAttr('class').html());
             $(block).empty().append($code.addClass(reg_mat[1]));
             hljs.highlightBlock($code[0]);
         });
-
 <?php } ?>
-
         });
-
         $(document).ready(init_fn);
         $(window).on("load", init_fn);
     })(jQuery, window);
@@ -292,7 +266,6 @@ function hljs_append_init_codes() {
 <?php
 }
 add_action('wp_print_footer_scripts', 'hljs_append_init_codes');
-
 /**
  * Initialize Localization Functions
  */
@@ -302,7 +275,6 @@ function init_hljs_textdomain() {
     }
 }
 add_action('init', 'init_hljs_textdomain');
-
 /**
  * Print CDN location addrs
  */
@@ -315,7 +287,6 @@ function hljs_get_location_list($current_location) {
         ?> readme_url="<?php echo $val['readme']; ?>" ><?php echo empty($val['desc'])? $key: $val['desc']; ?></option><?php
     }
 }
-
 /**
  * Print package version
  */
@@ -325,7 +296,6 @@ function hljs_get_package_list($current_package) {
         'all' => 'All(about 393KB)',
         'custom' => 'Custom',
     );
-
     foreach($pkgs as $key => $val) {
         ?><option value="<?php echo $key; ?>" <?php
         if($key == $current_package)
@@ -333,21 +303,17 @@ function hljs_get_package_list($current_package) {
         ?>><?php echo $val; ?></option><?php
     }
 }
-
 /**
  * Print Combobox With Styles
  */
 function hljs_get_style_list($current_theme) {
     $styleDir = plugin_dir_path( __FILE__ ) . 'styles';
-
     if ($dir = scandir($styleDir)) {
         foreach($dir as $file) {
             if (($file == '.') or ($file == '..'))
                 continue;
-
             if ('.css' != substr($file, strlen($file) - 4))
                 continue;
-
             $theme_name = substr($file, 0, strlen($file) - 4);
             ?><option value="<?php echo $theme_name; ?>" <?php
             if($theme_name == $current_theme)
@@ -356,7 +322,6 @@ function hljs_get_style_list($current_theme) {
         }
     }
 }
-
 /**
  * Add Settings Page to Admin Menu
  */
@@ -365,7 +330,6 @@ function hljs_admin_page() {
         add_options_page(__('WP Code Highlight.js Settings'), __('WP Code Highlight.js'), 'manage_options', 'wp-code-highlight.js', 'hljs_settings_page');
 }
 add_action('admin_menu', 'hljs_admin_page');
-
 
 /**
  * Add Settings link to plugin page
@@ -378,7 +342,6 @@ function hljs_add_settings_link($links, $file) {
 }
 add_filter('plugin_action_links', 'hljs_add_settings_link', 10, 2);
 
-
 /**
  * Add BB-Tag for highlighting.
  *
@@ -388,7 +351,6 @@ function hljs_code_handler($attrs, $content) {
     $language = '';
     if (!empty($attrs['lang']))
         $language = "class=\"${attrs['lang']}\"";
-
     $enable_inner_bbcode = false;
     if(isset($attrs['bbcode'])) {
         $enable_inner_bbcode = true;
@@ -396,7 +358,6 @@ function hljs_code_handler($attrs, $content) {
             $enable_inner_bbcode = false;
         }
     }
-
     if($enable_inner_bbcode) {
         return "<pre class=\"hljs\"><code $language>" . do_shortcode(ltrim($content, '\n')) . '</code></pre>';
     } else {
@@ -406,17 +367,14 @@ function hljs_code_handler($attrs, $content) {
 if (hljs_get_option('shortcode')) {
     add_shortcode('code', 'hljs_code_handler');
 }
-
 function hljs_generate_custom_pack() {
     // generate custom language pack
     $opt_loc = hljs_get_option('location');
     $opt_packs = hljs_get_option('package');
     $opt_langs = hljs_get_option('custom_lang');
     $plugin_root_dir = plugin_dir_path( __FILE__ );
-
     if ('local' == $opt_loc && 'custom' == $opt_packs) {
         $custom_pack_file = $plugin_root_dir . DIRECTORY_SEPARATOR . 'highlight.custom.pack.js';
-
         file_put_contents($custom_pack_file, '');
         foreach($opt_langs as $language_name) {
             $file_name = $language_name . '.min.js';
@@ -432,7 +390,6 @@ function hljs_generate_custom_pack() {
                     __('ignored', 'wp-code-highlight.js') . '</p>';
             }
         }
-
         echo '<p class="info">' . __('Generate custom highlight language package done.', 'wp-code-highlight.js') . '</p>';
     } else {
         // check if CDN available
@@ -450,7 +407,6 @@ function hljs_generate_custom_pack() {
             echo '<p class="info">' . __('Use default CDN ', 'wp-code-highlight.js') . $default_cdn . '</p>';
         }
     }
-
     // rename style to default when filename is changed by highlight.js
     $style_name = hljs_get_option('theme');
     if (false == file_exists($plugin_root_dir . DIRECTORY_SEPARATOR . 'styles' . DIRECTORY_SEPARATOR . $style_name . '.css')) {
@@ -458,7 +414,6 @@ function hljs_generate_custom_pack() {
         echo '<p class="warn">' . __('Style named ' . $style_name . ' is unavailable, maybe highlight.js has changed the name. Theme changed to default now', 'wp-code-highlight.js') . '</p>';
     }
 }
-
 function hljs_on_update_complete($plugin, $data) {
     if (!empty($data) && !empty($data['type']) && 'plugin' == $data['type'] && 'update' == $data['action']) {
         $this_file_name = basename(__FILE__);
@@ -474,13 +429,11 @@ function hljs_on_update_complete($plugin, $data) {
     }
 }
 add_action('upgrader_process_complete', 'hljs_on_update_complete', 10, 2);
-
 /**
  * Highlight.js Settings Page
  */
 function hljs_settings_page() {
     global $PLUGIN_DIR;
-
     if (isset( $_POST['cmd'] ) && $_POST['cmd'] == 'hljs_save')
     {
         $upload_options = array(
@@ -500,12 +453,10 @@ function hljs_settings_page() {
             'shortcode' => (isset($_POST['hljs_enable_shortcode']) && $_POST['hljs_enable_shortcode'])? true: false,
             'custom_lang' => hljs_get_option('custom_lang')
         );
-
         // generate custom language pack
         if ('local' == $upload_options['location'] && 'custom' == $upload_options['package']) {
             $upload_options['custom_lang'] = array();
             $plugin_root_dir = plugin_dir_path( __FILE__ );
-
             foreach($_POST as $key => $val) {
                 $suffix = substr($key, -3);
                 if (('.js' == $suffix || '_js' == $suffix )&& intval($val) == 1) {
@@ -524,41 +475,29 @@ function hljs_settings_page() {
                 }
             }
         }
-
         update_option('hljs_code_option', $upload_options);
         echo '<p class="info">' . __('All configurations successfully saved...', 'wp-code-highlight.js') . '</p>';
         hljs_generate_custom_pack();
     }
-
     ?>
-
     <!-- html code of settings page -->
-
     <div class="wrap">
-
       <form id="hljs" method="post" action="<?php echo $_SERVER['REQUEST_URI'];?>">
-
         <script type="text/javascript" src="<?php echo ($PLUGIN_DIR . '/highlight.common.pack.js'); ?>"></script>
         <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
         <link rel="stylesheet" href="<?php echo ($PLUGIN_DIR . '/styles/default.css'); ?>" />
-
         <style>
             .info { padding: 15px; background: #EDEDED; border: 1px solid #333333; font: 14px #333333 Verdana; margin: 30px 10px 0px 0px; }
-
             .section { padding: 10px; margin: 30px 0 0px; background: #FAFAFA; border: 1px solid #DDDDDD; display: block; }
             input[type="text"] { width: 400px; margin: 10px 0px 0px;}
             textarea {width: 400px; height: 100px; }
-
             #hljs_theme { width: 200px;  margin: 10px 0px 0px;}
             #submit { min-width: 40px; margin-top: 20px; }
             #hljs_location_readme { color: Gray; font-style: italic; }
-
             table.hljs_copyright { font-size: 8px; margin-top: 50px;}
             table.hljs_copyright tr {margin-bottom: 10px;}
             table.hljs_copyright tr td {padding: 5px; font: 12px Sans-Serif; border: 1px solid #DDDDDD;}
-
         </style>
-
         <!-- combo box with location -->
         <div class="section">
           <label for="hljs_location"><?php echo __('CDN', 'wp-code-highlight.js'); ?></label><br/>
@@ -569,7 +508,6 @@ function hljs_settings_page() {
             Current Highlight.js Version: <?php echo hljs_get_lib_version(); ?>
           </div>
         </div>
-
         <!-- combo box with local source package -->
         <div class="section" id="hljs_local_package">
           <label for="hljs_package"><?php echo __('Package', 'wp-code-highlight.js'); ?></label><br/>
@@ -582,29 +520,28 @@ function hljs_settings_page() {
                 <p><b>Common</b></p>
                 <ul id="language_support_list_common">
                   <!-- copy from view-source:https://highlightjs.org/download/ -->
-                  <li><label><input name="apache.js" checked="" type="checkbox"> Apache</label>
-                  </li><li><label><input name="bash.js" checked="" type="checkbox"> Bash</label>
-                  </li><li><label><input name="cs.js" checked="" type="checkbox"> C#</label>
-                  </li><li><label><input name="cpp.js" checked="" type="checkbox"> C++</label>
-                  </li><li><label><input name="css.js" checked="" type="checkbox"> CSS</label>
-                  </li><li><label><input name="coffeescript.js" checked="" type="checkbox"> CoffeeScript</label>
-                  </li><li><label><input name="diff.js" checked="" type="checkbox"> Diff</label>
-                  </li><li><label><input name="xml.js" checked="" type="checkbox"> HTML, XML</label>
-                  </li><li><label><input name="http.js" checked="" type="checkbox"> HTTP</label>
-                  </li><li><label><input name="ini.js" checked="" type="checkbox"> Ini</label>
-                  </li><li><label><input name="json.js" checked="" type="checkbox"> JSON</label>
-                  </li><li><label><input name="java.js" checked="" type="checkbox"> Java</label>
-                  </li><li><label><input name="javascript.js" checked="" type="checkbox"> JavaScript</label>
-                  </li><li><label><input name="makefile.js" checked="" type="checkbox"> Makefile</label>
-                  </li><li><label><input name="markdown.js" checked="" type="checkbox"> Markdown</label>
-                  </li><li><label><input name="nginx.js" checked="" type="checkbox"> Nginx</label>
-                  </li><li><label><input name="objectivec.js" checked="" type="checkbox"> Objective-C</label>
-                  </li><li><label><input name="php.js" checked="" type="checkbox"> PHP</label>
-                  </li><li><label><input name="perl.js" checked="" type="checkbox"> Perl</label>
-                  </li><li><label><input name="python.js" checked="" type="checkbox"> Python</label>
-                  </li><li><label><input name="ruby.js" checked="" type="checkbox"> Ruby</label>
-                  </li><li><label><input name="sql.js" checked="" type="checkbox"> SQL</label>
-                  </li>
+                    <li><label><input name="apache.js" checked="" type="checkbox"> Apache</label>
+                    </li><li><label><input name="bash.js" checked="" type="checkbox"> Bash</label>
+                    </li><li><label><input name="cs.js" checked="" type="checkbox"> C#</label>
+                    </li><li><label><input name="cpp.js" checked="" type="checkbox"> C++</label>
+                    </li><li><label><input name="css.js" checked="" type="checkbox"> CSS</label>
+                    </li><li><label><input name="coffeescript.js" checked="" type="checkbox"> CoffeeScript</label>
+                    </li><li><label><input name="diff.js" checked="" type="checkbox"> Diff</label>
+                    </li><li><label><input name="xml.js" checked="" type="checkbox"> HTML, XML</label>
+                    </li><li><label><input name="http.js" checked="" type="checkbox"> HTTP</label>
+                    </li><li><label><input name="ini.js" checked="" type="checkbox"> Ini</label>
+                    </li><li><label><input name="json.js" checked="" type="checkbox"> JSON</label>
+                    </li><li><label><input name="java.js" checked="" type="checkbox"> Java</label>
+                    </li><li><label><input name="javascript.js" checked="" type="checkbox"> JavaScript</label>
+                    </li><li><label><input name="makefile.js" checked="" type="checkbox"> Makefile</label>
+                    </li><li><label><input name="markdown.js" checked="" type="checkbox"> Markdown</label>
+                    </li><li><label><input name="nginx.js" checked="" type="checkbox"> Nginx</label>
+                    </li><li><label><input name="objectivec.js" checked="" type="checkbox"> Objective-C</label>
+                    </li><li><label><input name="php.js" checked="" type="checkbox"> PHP</label>
+                    </li><li><label><input name="perl.js" checked="" type="checkbox"> Perl</label>
+                    </li><li><label><input name="python.js" checked="" type="checkbox"> Python</label>
+                    </li><li><label><input name="ruby.js" checked="" type="checkbox"> Ruby</label>
+                    </li><li><label><input name="sql.js" checked="" type="checkbox"> SQL</label></li>
                 </ul>
                 <p><b>Other</b></p>
                 <ul id="language_support_list_other">
@@ -619,8 +556,10 @@ function hljs_settings_page() {
                     </li><li><label><input name="arduino.js" type="checkbox"> Arduino</label>
                     </li><li><label><input name="asciidoc.js" type="checkbox"> AsciiDoc</label>
                     </li><li><label><input name="aspectj.js" type="checkbox"> AspectJ</label>
+                    </li><li><label><input name="abnf.js" type="checkbox"> Augmented Backus-Naur Form</label>
                     </li><li><label><input name="autohotkey.js" type="checkbox"> AutoHotkey</label>
                     </li><li><label><input name="autoit.js" type="checkbox"> AutoIt</label>
+                    </li><li><label><input name="awk.js" type="checkbox"> Awk</label>
                     </li><li><label><input name="axapta.js" type="checkbox"> Axapta</label>
                     </li><li><label><input name="bnf.js" type="checkbox"> Backus–Naur Form</label>
                     </li><li><label><input name="basic.js" type="checkbox"> Basic</label>
@@ -650,6 +589,7 @@ function hljs_settings_page() {
                     </li><li><label><input name="erlang.js" type="checkbox"> Erlang</label>
                     </li><li><label><input name="erlang-repl.js" type="checkbox"> Erlang REPL</label>
                     </li><li><label><input name="excel.js" type="checkbox"> Excel</label>
+                    </li><li><label><input name="ebnf.js" type="checkbox"> Extended Backus-Naur Form</label>
                     </li><li><label><input name="fsharp.js" type="checkbox"> F#</label>
                     </li><li><label><input name="fix.js" type="checkbox"> FIX</label>
                     </li><li><label><input name="fortran.js" type="checkbox"> Fortran</label>
@@ -726,6 +666,7 @@ function hljs_settings_page() {
                     </li><li><label><input name="stan.js" type="checkbox"> Stan</label>
                     </li><li><label><input name="stata.js" type="checkbox"> Stata</label>
                     </li><li><label><input name="stylus.js" type="checkbox"> Stylus</label>
+                    </li><li><label><input name="subunit.js" type="checkbox"> SubUnit</label>
                     </li><li><label><input name="swift.js" type="checkbox"> Swift</label>
                     </li><li><label><input name="tp.js" type="checkbox"> TP</label>
                     </li><li><label><input name="taggerscript.js" type="checkbox"> Tagger Script</label>
@@ -748,8 +689,7 @@ function hljs_settings_page() {
                     </li><li><label><input name="zephir.js" type="checkbox"> Zephir</label>
                     </li><li><label><input name="crmsh.js" type="checkbox"> crmsh</label>
                     </li><li><label><input name="dsconfig.js" type="checkbox"> dsconfig</label>
-                    </li><li><label><input name="pf.js" type="checkbox"> pf</label>
-                    </li>
+                    </li><li><label><input name="pf.js" type="checkbox"> pf</label></li>
                 </ul>
                 <div style="clear: both;"></div>
               </div>
@@ -763,7 +703,6 @@ function hljs_settings_page() {
                     margin: '1em 0px',
                     padding: '0px'
                 });
-
                 $("#language_support_list ul li").css({
                     margin: '0.2em 0px',
                     padding: '0px',
@@ -771,20 +710,17 @@ function hljs_settings_page() {
                     float: 'left',
                     width: '24.5%'
                 });
-
                 $("#language_support_list_common input").prop("disabled", true);
                 $("#language_support_list_common input").prop("checked", true);
                 $("#language_support_list_common input").val(0);
                 $("#language_support_list_common input").addClass("hljs_lang common");
                 $("#language_support_list_other input").val(1);
                 $("#language_support_list_other input").addClass("hljs_lang");
-
                 var show_package_language = (function(){
                     var hljs_package_name = $("#hljs_package").val();
                     if ("custom" == hljs_package_name || $("#hljs_location").val() != "local") {
                         $("#language_support_list_other input").prop("disabled", false);
                         $("#language_support_list_other input").prop("checked", false);
-
                         // custom languages
                         var selected_langs = "<?php
                             $custom_lang = hljs_get_option('custom_lang');
@@ -797,11 +733,9 @@ function hljs_settings_page() {
                                 $('#language_support_list_other input[name="' + v.replace(/_js$/, "")　+ '.js"]').prop("checked", true);
                             }
                         });
-
                     } else {
                         // select default languages
                         $("#language_support_list_other input").prop("disabled", true);
-
                         if ("all" == hljs_package_name) {
                             $("#language_support_list_other input").prop("checked", true);
                         } else {
@@ -809,17 +743,14 @@ function hljs_settings_page() {
                         }
                     }
                });
-
                 var show_package_fn = (function(){
                     if ($("#hljs_location").val() != "local") {
                         $("#hljs_package").prop('disabled', true);
                     } else {
                         $("#hljs_package").prop('disabled', false);
                     }
-
                     show_package_language();
                 });
-
                 show_package_fn();
                 $("#hljs_location").change(function(){
                     $("#hljs_location_readme").empty();
@@ -839,13 +770,10 @@ function hljs_settings_page() {
                 });
             });
         })(jQuery, window);
-
         </script>
-
         <!-- combo box with styles -->
         <div class="section">
           <label for="hljs_theme"><?php echo __('Color Scheme:', 'wp-code-highlight.js'); ?></label><br/>
-
           <select name="hljs_theme" id="hljs_theme">
              <?php hljs_get_style_list(hljs_get_option('theme')); ?>
           </select>
@@ -854,61 +782,46 @@ function hljs_settings_page() {
           <div>
             <strong><?php echo __('Notice', 'wp-code-highlight.js'); ?><strong/>: <?php echo __('some cdn support only older version of highligh.js, and some language or style is unusable, see <a href="https://highlightjs.org/" target="_blank">https://highlightjs.org/</a> for detail', 'wp-code-highlight.js'); ?>
           </div>
-
         </div>
-
         <!-- text edit : tab replace -->
         <p class="section">
           <label for="hljs_option_tab_replace"><?php echo __('Highlight.js Option - Tab replace:', 'wp-code-highlight.js'); ?></label><br/>
           <input type="text" name="hljs_option_tab_replace" id="hljs_option_tab_replace" value="<?php echo hljs_get_lib_option('tabReplace'); ?>" /><br />
-
           <label for="hljs_option_class_prefix"><?php echo __('Highlight.js Option - Class prefix:', 'wp-code-highlight.js') ?></label><br/>
           <input type="text" name="hljs_option_class_prefix" id="hljs_option_class_prefix" value="<?php echo hljs_get_lib_option('classPrefix'); ?>" /><br />
-
           <label for="hljs_option_use_br"><?php echo __('Highlight.js Option - Use BR:', 'wp-code-highlight.js') ?></label>
           <input type="checkbox" name="hljs_option_use_br" id="hljs_option_use_br" value="1" <?php if(hljs_get_lib_option('useBR')) echo ' checked="checked"'; ?> /><br />
-
           <label for="hljs_option_languages"><?php echo __('Highlight.js Option - Languages:', 'wp-code-highlight.js'); ?></label><br/>
           <textarea type="text" name="hljs_option_languages" id="hljs_option_languages" value="<?php echo hljs_get_lib_option('languages'); ?>"><?php echo hljs_get_lib_option('languages'); ?></textarea><br />
        </p>
-
         <!-- text edit : additional css -->
         <p class="section">
           <label for="hljs_additional_css"><?php echo __('You can add some additional CSS rules for better display:', 'wp-code-highlight.js'); ?></label><br/>
           <textarea type="text" name="hljs_additional_css" id="hljs_additional_css"><?php echo hljs_get_option('additional_css'); ?></textarea>
         </p>
-
         <!-- check box : compatible options -->
         <p class="section">
           <input type="checkbox" name="hljs_syntaxhighlighter_compatible" id="hljs_syntaxhighlighter_compatible" value="1" <?php if(hljs_get_option('syntaxhighlighter_compatible')) echo ' checked="checked"'; ?> />
           <label for="hljs_syntaxhighlighter_compatible"><?php echo __('Syntax Highlighter Compatiable', 'wp-code-highlight.js') ?></label><br />
-
           <input type="checkbox" name="hljs_prettify_compatible" id="hljs_prettify_compatible" value="1" <?php if(hljs_get_option('prettify_compatible')) echo ' checked="checked"'; ?> />
           <label for="hljs_prettify_compatible"><?php echo __('Prettify Compatible', 'wp-code-highlight.js') ?></label><br />
-
           <input type="checkbox" name="hljs_crayonsyntaxhighlighter_compatible" id="hljs_crayonsyntaxhighlighter_compatible" value="1" <?php if(hljs_get_option('crayonsyntaxhighlighter_compatible')) echo ' checked="checked"'; ?> />
           <label for="hljs_crayonsyntaxhighlighter_compatible"><?php echo __('Crayon Syntax Highlighter Compatiable', 'wp-code-highlight.js') ?></label><br />
-
         </p>
-
         <!-- check box : shortcode options -->
         <p class="section">
           <label for="hljs_enable_shortcode"><?php echo __('Enable [code]code content ...[/code] support:', 'wp-code-highlight.js') ?></label>
           <input type="checkbox" name="hljs_enable_shortcode" id="hljs_enable_shortcode" value="1" <?php if(hljs_get_option('shortcode')) echo ' checked="checked"'; ?> />
         </p>
-
         <input type="hidden" name="cmd" value="hljs_save" />
         <input type="submit" name="submit" value="<?php echo __('Save', 'wp-code-highlight.js'); ?>" id="submit" />
-
       </form>
-
         <!-- copyright information -->
             <table border="0" class="hljs_copyright">
                 <tr>
                     <td width="120px" align="center"><?php echo __('Author', 'wp-code-highlight.js'); ?></td>
                     <td><p><a href="http://owent.net"><?php echo __('OWenT', 'wp-code-highlight.js'); ?></a> &lt;<a href="mailto:owent@owent.net">owent@owent.net</a>&gt;</p></td>
                 </tr>
-
                 <tr>
                     <td width="120px" align="center"><?php echo __('Plugin Info', 'wp-code-highlight.js'); ?></td>
                     <td><?php echo __('<p>This is a wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library.
@@ -917,7 +830,6 @@ function hljs_settings_page() {
                         <p>And it&acute;s very easy to work with <a href="https://stackedit.io/" target="_blank">stackedit</a> or other markdown editors</p>
                         ', 'wp-code-highlight.js'); ?></td>
                 </tr>
-
                 <tr>
                     <td width="120px" align="center"><?php echo __('Plugin Usage', 'wp-code-highlight.js'); ?></td>
                     <td><?php echo __('<p>For code highlighting you should use one of the following ways.</p>
@@ -951,8 +863,6 @@ function hljs_settings_page() {
                 </tr>
            </table>
     </div>
-
     <!-- /html code of settings page -->
-
 <?php
 }
