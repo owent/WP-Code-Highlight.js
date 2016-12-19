@@ -68,6 +68,10 @@ Just have fun.
 
 == Changelog ==
 
+= 0.5.16
+1. update highlight.js version to 9.9.0
+2. jsDelivr and MaxCDN use latest version (9.9.0) now
+
 = 0.5.15
 1. update highlight.js version to 9.7.0
 

@@ -3,7 +3,7 @@
  * Plugin Name: WP Code Highlight.js
  * Plugin URI: https://github.com/owt5008137/WP-Code-Highlight.js
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
- * Version: 0.5.15
+ * Version: 0.5.16
  * Author: OWenT
  * Author URI: https://owent.net/
  * License: 3-clause BSD
@@ -14,13 +14,13 @@ $PLUGIN_DIR =  plugins_url() . '/' . dirname(plugin_basename(__FILE__));
  * Get version of this plugins
  */
 function hljs_get_version() {
-    return '0.5.15';
+    return '0.5.16';
 }
 /**
  * Get version of Highlight.js
  */
 function hljs_get_lib_version() {
-    return '9.7.0';
+    return '9.9.0';
 }
 /**
  * list cdn list
@@ -50,16 +50,16 @@ function hljs_cdn_list() {
             'readme' => 'http://www.bootcdn.cn/highlight.js/'
         ),
         'jsDelivr' => array(
-            // 'cdn' => '//cdn.jsdelivr.net/highlight.js/' . hljs_get_lib_version(),
-            'cdn' => '//cdn.jsdelivr.net/highlight.js/9.6.0',
+            'cdn' => '//cdn.jsdelivr.net/highlight.js/' . hljs_get_lib_version(),
+            //'cdn' => '//cdn.jsdelivr.net/highlight.js/9.6.0',
             'desc' => __('Public CDN', 'wp-code-highlight.js') . ': jsDelivr (' . __('highlightjs.org recommend', 'wp-code-highlight.js') . ') ' . __('lastest version', 'wp-code-highlight.js') . ': 9.6.0)',
             'css' => '.min',
             'js' => '.min',
             'readme' => 'http://www.jsdelivr.com/#!highlight.js'
         ),
         'MaxCDN' => array(
-            // 'cdn' => '//oss.maxcdn.com/highlight.js/' . hljs_get_lib_version(),
-            'cdn' => '//oss.maxcdn.com/highlight.js/9.6.0',
+            'cdn' => '//oss.maxcdn.com/highlight.js/' . hljs_get_lib_version(),
+            //'cdn' => '//oss.maxcdn.com/highlight.js/9.6.0',
             'desc' => __('Public CDN', 'wp-code-highlight.js') . ': MaxCDN ' . __('lastest version', 'wp-code-highlight.js') . ': 9.6.0)',
             'css' => '.min',
             'js' => '.min',
@@ -541,7 +541,8 @@ function hljs_settings_page() {
                     </li><li><label><input name="perl.js" checked="" type="checkbox"> Perl</label>
                     </li><li><label><input name="python.js" checked="" type="checkbox"> Python</label>
                     </li><li><label><input name="ruby.js" checked="" type="checkbox"> Ruby</label>
-                    </li><li><label><input name="sql.js" checked="" type="checkbox"> SQL</label></li>
+                    </li><li><label><input name="sql.js" checked="" type="checkbox"> SQL</label>
+                    </li>
                 </ul>
                 <p><b>Other</b></p>
                 <ul id="language_support_list_other">
@@ -570,6 +571,7 @@ function hljs_settings_page() {
                     </li><li><label><input name="cos.js" type="checkbox"> Caché Object Script</label>
                     </li><li><label><input name="capnproto.js" type="checkbox"> Cap’n Proto</label>
                     </li><li><label><input name="ceylon.js" type="checkbox"> Ceylon</label>
+                    </li><li><label><input name="clean.js" type="checkbox"> Clean</label>
                     </li><li><label><input name="clojure.js" type="checkbox"> Clojure</label>
                     </li><li><label><input name="clojure-repl.js" type="checkbox"> Clojure REPL</label>
                     </li><li><label><input name="coq.js" type="checkbox"> Coq</label>
@@ -592,6 +594,7 @@ function hljs_settings_page() {
                     </li><li><label><input name="ebnf.js" type="checkbox"> Extended Backus-Naur Form</label>
                     </li><li><label><input name="fsharp.js" type="checkbox"> F#</label>
                     </li><li><label><input name="fix.js" type="checkbox"> FIX</label>
+                    </li><li><label><input name="flix.js" type="checkbox"> Flix</label>
                     </li><li><label><input name="fortran.js" type="checkbox"> Fortran</label>
                     </li><li><label><input name="gcode.js" type="checkbox"> G-code (ISO 6983)</label>
                     </li><li><label><input name="gams.js" type="checkbox"> GAMS</label>
@@ -614,6 +617,7 @@ function hljs_settings_page() {
                     </li><li><label><input name="julia.js" type="checkbox"> Julia</label>
                     </li><li><label><input name="kotlin.js" type="checkbox"> Kotlin</label>
                     </li><li><label><input name="ldif.js" type="checkbox"> LDIF</label>
+                    </li><li><label><input name="llvm.js" type="checkbox"> LLVM IR</label>
                     </li><li><label><input name="lasso.js" type="checkbox"> Lasso</label>
                     </li><li><label><input name="less.js" type="checkbox"> Less</label>
                     </li><li><label><input name="lsl.js" type="checkbox"> Linden Scripting Language</label>
@@ -689,7 +693,8 @@ function hljs_settings_page() {
                     </li><li><label><input name="zephir.js" type="checkbox"> Zephir</label>
                     </li><li><label><input name="crmsh.js" type="checkbox"> crmsh</label>
                     </li><li><label><input name="dsconfig.js" type="checkbox"> dsconfig</label>
-                    </li><li><label><input name="pf.js" type="checkbox"> pf</label></li>
+                    </li><li><label><input name="pf.js" type="checkbox"> pf</label>
+                    </li>
                 </ul>
                 <div style="clear: both;"></div>
               </div>
@@ -820,7 +825,7 @@ function hljs_settings_page() {
             <table border="0" class="hljs_copyright">
                 <tr>
                     <td width="120px" align="center"><?php echo __('Author', 'wp-code-highlight.js'); ?></td>
-                    <td><p><a href="http://owent.net"><?php echo __('OWenT', 'wp-code-highlight.js'); ?></a> &lt;<a href="mailto:owent@owent.net">owent@owent.net</a>&gt;</p></td>
+                    <td><p><a href="http://owent.net"><?php echo __('OWenT', 'wp-code-highlight.js'); ?></a> &lt;<a href="mailto:admin@owent.net">admin@owent.net</a>&gt;</p></td>
                 </tr>
                 <tr>
                     <td width="120px" align="center"><?php echo __('Plugin Info', 'wp-code-highlight.js'); ?></td>
@@ -854,7 +859,7 @@ function hljs_settings_page() {
                 </tr>
                 <tr>
                     <td width="120px" align="center"><?php echo __('Thanks To', 'wp-code-highlight.js'); ?></td>
-                    <td><h3><?php echo __('Contributor List', 'wp-code-highlight.js'); ?>:</h3><br /><ul>
+                    <td><h3><?php echo __('Contributor List', 'wp-code-highlight.js'); ?>:</h3><ul>
                             <li><a href="http://geraint.co">Geraint Palmer</a></li>
                             <li><a href="http://www.codingserf.com">David</a></li>
                             <li><a href="http://www.shiyaluo.com">shiya</a></li>
