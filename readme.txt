@@ -2,7 +2,7 @@
 Donate link: https://github.com/owt5008137/WP-Code-Highlight.js/#donate
 Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
 Requires at least: 3.0
-Tested up to: 4.6.1
+Tested up to: 4.7.0
 Stable tag: 0.5.14
 
 This is a wordpress plugin for highlight.js library.
