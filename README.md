@@ -59,7 +59,8 @@ Also thanks to [Highlight.js][4]'s author [Ivan Sagalaev](http://softwaremaniacs
 And thanks to all  contributors and users. You make this plugin better.
 > [@geraint](https://github.com/geraintp)
 > [@David-CodingSerf](https://github.com/David-CodingSerf)
-
+> [@shiya](http://www.shiyaluo.com)
+> [@Beej126](https://github.com/Beej126)
 FAQ
 ------
 Any questions please mailto [admin@owent.net](mailto:admin@owent.net) or [owt5008137@live.com](mailto:owt5008137@live.com)
