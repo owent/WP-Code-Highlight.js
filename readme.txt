@@ -1,27 +1,24 @@
 === WP Code Highlight.js ===
 Donate link: https://github.com/owt5008137/WP-Code-Highlight.js/#donate
-Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter
-Requires at least: 3.0
-Tested up to: 4.7.0
-Stable tag: 0.5.14
+Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter, prettify, pandoc, stackedit, typora
+Requires at least: 3.3
+Tested up to: 4.7.2
+Stable tag: 0.5.17
 
-This is a wordpress plugin for highlight.js library.
-And you can easily migrate from SynaxHighlight or Google Prettify without change
+This plugin allow you to use [highlight.js](https://highlightjs.org) to highlight codes on any wordpress page.
+And you can easily migrate from SynaxHighlight, Google Prettify or CrayonSyntaxHighlighter without change
 any code
 
 == Description ==
 
-This is a wordpress plugin for highlight.js library.
-Highlight.js highlights syntax in code examples on any web pages.
-It's very easy to use because it works automatically: finds
-blocks of code, detects a language, highlights it.
+[WP-Code-Highlight.js](https://github.com/owt5008137/WP-Code-Highlight.js) is a wordpress plugin for [highlight.js](https://highlightjs.org) library.
+[Highlight.js](https://highlightjs.org) highlights codes on any web pages very fastly.
 
 This plugin allow you load highlight.js from local storage or from CDN.
-If you use local highlight.js, you can also choose only partly languages
-to make javascript file smaller(the smallest size is about 31KB).
+If you use local highlight.js, you can also choose only some languages
+to make javascript file smaller(the smallest size is about 40KB).
 
-On the other hand.This plugin allow you to switch syntax highlighter from
-other libraries. For now, we support SyntaxHighlighter and Prettify.
+You can also migrate from some other syntax highlighter easily. By now, we support SyntaxHighlighter, Prettify and CrayonSyntaxHighlighter.
 
 = Features: =
 * Works with comments
@@ -31,7 +28,8 @@ other libraries. For now, we support SyntaxHighlighter and Prettify.
 * Custom language packages
 * SyntaxHighlighter compatible mode
 * Prettify compatible mode
-* Work well with [pandoc](http://johnmacfarlane.net/pandoc/), [stackeditor](https://stackedit.io/editor) or other markdown editors
+* Crayon Syntax Highlighter compatible mode
+* Work well with [pandoc](http://johnmacfarlane.net/pandoc/), [stackedit](https://stackedit.io/editor), [typora](https://typora.io) or other markdown editors
 
 Author: [OWenT](http://owent.net/)
 Open Source: [https://github.com/owt5008137/WP-Code-Highlight.js](https://github.com/owt5008137/WP-Code-Highlight.js)
