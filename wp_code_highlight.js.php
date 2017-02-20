@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: WP Code Highlight.js
- * Plugin URI: https://github.com/owt5008137/WP-Code-Highlight.js
+ * Plugin URI: https://github.com/owt5008137/wp-code-highlight-js
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
  * Version: 0.5.17
  * Author: OWenT
@@ -29,14 +29,14 @@ function hljs_cdn_list() {
     return array(
         'local' => array(
             'cdn' => 'local',
-            'desc' => __('local', 'wp-code-highlight.js'),
+            'desc' => __('local', 'wp-code-highlight-js'),
             'css' => '',
             'js' => '',
             'readme' => '',
         ),
         'CdnJs' => array(
             'cdn' => '//cdnjs.cloudflare.com/ajax/libs/highlight.js/' . hljs_get_lib_version(),
-            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': cdnjs (' . __('highlightjs.org recommend', 'wp-code-highlight.js') . ')',
+            'desc' => __('Public CDN', 'wp-code-highlight-js') . ': cdnjs (' . __('highlightjs.org recommend', 'wp-code-highlight-js') . ')',
             'css' => '.min',
             'js' => '.min',
             'readme' => 'https://cdnjs.com/libraries/highlight.js'
@@ -44,7 +44,7 @@ function hljs_cdn_list() {
         'BootCSS' => array(
             'cdn' => '//cdn.bootcss.com/highlight.js/' . hljs_get_lib_version(),
             // 'cdn' => '//cdn.bootcss.com/highlight.js/9.2.0',
-            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': BootCSS',
+            'desc' => __('Public CDN', 'wp-code-highlight-js') . ': BootCSS',
             'css' => '.min',
             'js' => '.min',
             'readme' => 'http://www.bootcdn.cn/highlight.js/'
@@ -52,7 +52,7 @@ function hljs_cdn_list() {
         'jsDelivr' => array(
             'cdn' => '//cdn.jsdelivr.net/highlight.js/' . hljs_get_lib_version(),
             //'cdn' => '//cdn.jsdelivr.net/highlight.js/9.6.0',
-            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': jsDelivr (' . __('highlightjs.org recommend', 'wp-code-highlight.js') . ') ' . __('lastest version', 'wp-code-highlight.js') . ': 9.6.0)',
+            'desc' => __('Public CDN', 'wp-code-highlight-js') . ': jsDelivr (' . __('highlightjs.org recommend', 'wp-code-highlight-js') . ') ' . __('lastest version', 'wp-code-highlight-js') . ': 9.6.0)',
             'css' => '.min',
             'js' => '.min',
             'readme' => 'http://www.jsdelivr.com/#!highlight.js'
@@ -60,7 +60,7 @@ function hljs_cdn_list() {
         'MaxCDN' => array(
             'cdn' => '//oss.maxcdn.com/highlight.js/' . hljs_get_lib_version(),
             //'cdn' => '//oss.maxcdn.com/highlight.js/9.6.0',
-            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': MaxCDN ' . __('lastest version', 'wp-code-highlight.js') . ': 9.6.0)',
+            'desc' => __('Public CDN', 'wp-code-highlight-js') . ': MaxCDN ' . __('lastest version', 'wp-code-highlight-js') . ': 9.6.0)',
             'css' => '.min',
             'js' => '.min',
             'readme' => 'http://osscdn.com/#/highlight.js'
@@ -69,7 +69,7 @@ function hljs_cdn_list() {
             //'cdn' => 'http://apps.bdimg.com/libs/highlight.js/' . hljs_get_lib_version(),
             //'cdn' => '//openapi.baidu.com/libs/highlight.js/' . hljs_get_lib_version(),
             'cdn' => '//openapi.baidu.com/libs/highlight.js/9.1.0',
-            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': ' . __('Baidu', 'wp-code-highlight.js') . __('lastest version', 'wp-code-highlight.js') . ': 9.1.0)',
+            'desc' => __('Public CDN', 'wp-code-highlight-js') . ': ' . __('Baidu', 'wp-code-highlight-js') . __('lastest version', 'wp-code-highlight-js') . ': 9.1.0)',
             'css' => '.min',
             'js' => '.min',
             'readme' => 'http://cdn.code.baidu.com/#highlight.js'
@@ -281,7 +281,7 @@ add_action('wp_print_footer_scripts', 'hljs_append_init_codes');
  */
 function init_hljs_textdomain() {
     if (function_exists('load_plugin_textdomain')) {
-        load_plugin_textdomain('wp-code-highlight.js', false, dirname(plugin_basename( __FILE__ )) . '/' . 'l10n');
+        load_plugin_textdomain('wp-code-highlight-js', false, dirname(plugin_basename( __FILE__ )) . '/' . 'l10n');
     }
 }
 add_action('init', 'init_hljs_textdomain');
@@ -394,13 +394,13 @@ function hljs_generate_custom_pack() {
                 file_put_contents($custom_pack_file, $fc . PHP_EOL, FILE_APPEND);
             } else {
                 echo '<p class="warn">' .
-                    __('Language file', 'wp-code-highlight.js') .
+                    __('Language file', 'wp-code-highlight-js') .
                     ' ' . $file_name . ' ' .
-                    __('not found', 'wp-code-highlight.js') . ', ' .
-                    __('ignored', 'wp-code-highlight.js') . '</p>';
+                    __('not found', 'wp-code-highlight-js') . ', ' .
+                    __('ignored', 'wp-code-highlight-js') . '</p>';
             }
         }
-        echo '<p class="info">' . __('Generate custom highlight language package done.', 'wp-code-highlight.js') . '</p>';
+        echo '<p class="info">' . __('Generate custom highlight language package done.', 'wp-code-highlight-js') . '</p>';
     } else {
         // check if CDN available
         $all_available_cdns = hljs_cdn_list();
@@ -413,15 +413,15 @@ function hljs_generate_custom_pack() {
                 }
             }
             hljs_set_option('location', $default_cdn);
-            echo '<p class="info">' . __('CDN ', 'wp-code-highlight.js') . $opt_loc . __(' not available now', 'wp-code-highlight.js') . '</p>';
-            echo '<p class="info">' . __('Use default CDN ', 'wp-code-highlight.js') . $default_cdn . '</p>';
+            echo '<p class="info">' . __('CDN ', 'wp-code-highlight-js') . $opt_loc . __(' not available now', 'wp-code-highlight-js') . '</p>';
+            echo '<p class="info">' . __('Use default CDN ', 'wp-code-highlight-js') . $default_cdn . '</p>';
         }
     }
     // rename style to default when filename is changed by highlight.js
     $style_name = hljs_get_option('theme');
     if (false == file_exists($plugin_root_dir . DIRECTORY_SEPARATOR . 'styles' . DIRECTORY_SEPARATOR . $style_name . '.css')) {
         hljs_set_option('theme', 'default');
-        echo '<p class="warn">' . __('Style named ' . $style_name . ' is unavailable, maybe highlight.js has changed the name. Theme changed to default now', 'wp-code-highlight.js') . '</p>';
+        echo '<p class="warn">' . __('Style named ' . $style_name . ' is unavailable, maybe highlight.js has changed the name. Theme changed to default now', 'wp-code-highlight-js') . '</p>';
     }
 }
 function hljs_on_update_complete($plugin, $data) {
@@ -477,16 +477,16 @@ function hljs_settings_page() {
                         array_push($upload_options['custom_lang'], $language_name);
                     } else {
                         echo '<p class="warn">' .
-                            __('Language file', 'wp-code-highlight.js') .
+                            __('Language file', 'wp-code-highlight-js') .
                             ' ' . $file_name . ' ' .
-                            __('not found', 'wp-code-highlight.js') . ', ' .
-                            __('ignored', 'wp-code-highlight.js') . '</p>';
+                            __('not found', 'wp-code-highlight-js') . ', ' .
+                            __('ignored', 'wp-code-highlight-js') . '</p>';
                     }
                 }
             }
         }
         update_option('hljs_code_option', $upload_options);
-        echo '<p class="info">' . __('All configurations successfully saved...', 'wp-code-highlight.js') . '</p>';
+        echo '<p class="info">' . __('All configurations successfully saved...', 'wp-code-highlight-js') . '</p>';
         hljs_generate_custom_pack();
     }
     ?>
@@ -510,7 +510,7 @@ function hljs_settings_page() {
         </style>
         <!-- combo box with location -->
         <div class="section">
-          <label for="hljs_location"><?php echo __('CDN', 'wp-code-highlight.js'); ?></label><br/>
+          <label for="hljs_location"><?php echo __('CDN', 'wp-code-highlight-js'); ?></label><br/>
           <select name="hljs_location" id="hljs_location">
              <?php hljs_get_location_list(hljs_get_option('location')); ?>
           </select> <span id="hljs_location_readme"></span>
@@ -520,12 +520,12 @@ function hljs_settings_page() {
         </div>
         <!-- combo box with local source package -->
         <div class="section" id="hljs_local_package">
-          <label for="hljs_package"><?php echo __('Package', 'wp-code-highlight.js'); ?></label><br/>
+          <label for="hljs_package"><?php echo __('Package', 'wp-code-highlight-js'); ?></label><br/>
           <select name="hljs_package" id="hljs_package">
              <?php hljs_get_package_list(hljs_get_option('package')); ?>
           </select>
           <div>
-              <h3>Support List:</h3> <a href="javascript:void();" id="hljs_support_list_btn"><?php echo __('[Show/Hide]', 'wp-code-highlight.js'); ?></a>
+              <h3>Support List:</h3> <a href="javascript:void();" id="hljs_support_list_btn"><?php   echo __('[Show/Hide]', 'wp-code-highlight-js');  ?></a> 
               <div class="language_support_list" id="language_support_list">
                 <p><b>Common</b></p>
                 <ul id="language_support_list_common">
@@ -771,9 +771,9 @@ function hljs_settings_page() {
                     $("#hljs_location_readme").empty();
                     $.each($("option", this), function(k, v) {
                         if ($(v).prop('selected') && $(v).attr("readme_url")) {
-                            var text = "<?php echo __('click', 'wp-code-highlight.js'); ?>" +
+                            var text = "<?php echo __('click', 'wp-code-highlight-js'); ?>" +
                                 " <a href=\"" + $(v).attr("readme_url") + "\" target=\"_blank\">" +$(v).attr("readme_url") + "</a> " +
-                                "<?php echo __('for detail', 'wp-code-highlight.js'); ?>";
+                                "<?php echo __('for detail', 'wp-code-highlight-js'); ?>";
                             $("#hljs_location_readme").html(text);
                         }
                     });
@@ -788,65 +788,65 @@ function hljs_settings_page() {
         </script>
         <!-- combo box with styles -->
         <div class="section">
-          <label for="hljs_theme"><?php echo __('Color Scheme:', 'wp-code-highlight.js'); ?></label><br/>
+          <label for="hljs_theme"><?php echo __('Color Scheme:', 'wp-code-highlight-js'); ?></label><br/>
           <select name="hljs_theme" id="hljs_theme">
              <?php hljs_get_style_list(hljs_get_option('theme')); ?>
           </select>
-            <div><?php echo __('You can get a quick look of all style and all language at <a href="https://highlightjs.org/static/demo/" target="_blank">https://highlightjs.org/static/demo/</a>', 'wp-code-highlight.js'); ?>
+            <div><?php echo __('You can get a quick look of all style and all language at <a href="https://highlightjs.org/static/demo/" target="_blank">https://highlightjs.org/static/demo/</a>', 'wp-code-highlight-js'); ?>
           </div>
           <div>
-            <strong><?php echo __('Notice', 'wp-code-highlight.js'); ?><strong/>: <?php echo __('some cdn support only older version of highligh.js, and some language or style is unusable, see <a href="https://highlightjs.org/" target="_blank">https://highlightjs.org/</a> for detail', 'wp-code-highlight.js'); ?>
+            <strong><?php echo __('Notice', 'wp-code-highlight-js'); ?><strong/>: <?php echo __('some cdn support only older version of highligh.js, and some language or style is unusable, see <a href="https://highlightjs.org/" target="_blank">https://highlightjs.org/</a> for detail', 'wp-code-highlight-js'); ?>
           </div>
         </div>
         <!-- text edit : tab replace -->
         <p class="section">
-          <label for="hljs_option_tab_replace"><?php echo __('Highlight.js Option - Tab replace:', 'wp-code-highlight.js'); ?></label><br/>
+          <label for="hljs_option_tab_replace"><?php echo __('Highlight.js Option - Tab replace:', 'wp-code-highlight-js'); ?></label><br/>
           <input type="text" name="hljs_option_tab_replace" id="hljs_option_tab_replace" value="<?php echo hljs_get_lib_option('tabReplace'); ?>" /><br />
-          <label for="hljs_option_class_prefix"><?php echo __('Highlight.js Option - Class prefix:', 'wp-code-highlight.js') ?></label><br/>
+          <label for="hljs_option_class_prefix"><?php echo __('Highlight.js Option - Class prefix:', 'wp-code-highlight-js') ?></label><br/>
           <input type="text" name="hljs_option_class_prefix" id="hljs_option_class_prefix" value="<?php echo hljs_get_lib_option('classPrefix'); ?>" /><br />
-          <label for="hljs_option_use_br"><?php echo __('Highlight.js Option - Use BR:', 'wp-code-highlight.js') ?></label>
+          <label for="hljs_option_use_br"><?php echo __('Highlight.js Option - Use BR:', 'wp-code-highlight-js') ?></label>
           <input type="checkbox" name="hljs_option_use_br" id="hljs_option_use_br" value="1" <?php if(hljs_get_lib_option('useBR')) echo ' checked="checked"'; ?> /><br />
-          <label for="hljs_option_languages"><?php echo __('Highlight.js Option - Languages:', 'wp-code-highlight.js'); ?></label><br/>
+          <label for="hljs_option_languages"><?php echo __('Highlight.js Option - Languages:', 'wp-code-highlight-js'); ?></label><br/>
           <textarea type="text" name="hljs_option_languages" id="hljs_option_languages" value="<?php echo hljs_get_lib_option('languages'); ?>"><?php echo hljs_get_lib_option('languages'); ?></textarea><br />
        </p>
         <!-- text edit : additional css -->
         <p class="section">
-          <label for="hljs_additional_css"><?php echo __('You can add some additional CSS rules for better display:', 'wp-code-highlight.js'); ?></label><br/>
+          <label for="hljs_additional_css"><?php echo __('You can add some additional CSS rules for better display:', 'wp-code-highlight-js'); ?></label><br/>
           <textarea type="text" name="hljs_additional_css" id="hljs_additional_css"><?php echo hljs_get_option('additional_css'); ?></textarea>
         </p>
         <!-- check box : compatible options -->
         <p class="section">
           <input type="checkbox" name="hljs_syntaxhighlighter_compatible" id="hljs_syntaxhighlighter_compatible" value="1" <?php if(hljs_get_option('syntaxhighlighter_compatible')) echo ' checked="checked"'; ?> />
-          <label for="hljs_syntaxhighlighter_compatible"><?php echo __('Syntax Highlighter Compatiable', 'wp-code-highlight.js') ?></label><br />
+          <label for="hljs_syntaxhighlighter_compatible"><?php echo __('Syntax Highlighter Compatiable', 'wp-code-highlight-js') ?></label><br />
           <input type="checkbox" name="hljs_prettify_compatible" id="hljs_prettify_compatible" value="1" <?php if(hljs_get_option('prettify_compatible')) echo ' checked="checked"'; ?> />
-          <label for="hljs_prettify_compatible"><?php echo __('Prettify Compatible', 'wp-code-highlight.js') ?></label><br />
+          <label for="hljs_prettify_compatible"><?php echo __('Prettify Compatible', 'wp-code-highlight-js') ?></label><br />
           <input type="checkbox" name="hljs_crayonsyntaxhighlighter_compatible" id="hljs_crayonsyntaxhighlighter_compatible" value="1" <?php if(hljs_get_option('crayonsyntaxhighlighter_compatible')) echo ' checked="checked"'; ?> />
-          <label for="hljs_crayonsyntaxhighlighter_compatible"><?php echo __('Crayon Syntax Highlighter Compatiable', 'wp-code-highlight.js') ?></label><br />
+          <label for="hljs_crayonsyntaxhighlighter_compatible"><?php echo __('Crayon Syntax Highlighter Compatiable', 'wp-code-highlight-js') ?></label><br />
         </p>
         <!-- check box : shortcode options -->
         <p class="section">
-          <label for="hljs_enable_shortcode"><?php echo __('Enable [code]code content ...[/code] support:', 'wp-code-highlight.js') ?></label>
+          <label for="hljs_enable_shortcode"><?php echo __('Enable [code]code content ...[/code] support:', 'wp-code-highlight-js') ?></label>
           <input type="checkbox" name="hljs_enable_shortcode" id="hljs_enable_shortcode" value="1" <?php if(hljs_get_option('shortcode')) echo ' checked="checked"'; ?> />
         </p>
         <input type="hidden" name="cmd" value="hljs_save" />
-        <input type="submit" name="submit" value="<?php echo __('Save', 'wp-code-highlight.js'); ?>" id="submit" />
+        <input type="submit" name="submit" value="<?php echo __('Save', 'wp-code-highlight-js'); ?>" id="submit" />
       </form>
         <!-- copyright information -->
             <table border="0" class="hljs_copyright">
                 <tr>
-                    <td width="120px" align="center"><?php echo __('Author', 'wp-code-highlight.js'); ?></td>
-                    <td><p><a href="http://owent.net"><?php echo __('OWenT', 'wp-code-highlight.js'); ?></a> &lt;<a href="mailto:admin@owent.net">admin@owent.net</a>&gt;</p></td>
+                    <td width="120px" align="center"><?php echo __('Author', 'wp-code-highlight-js'); ?></td>
+                    <td><p><a href="http://owent.net"><?php echo __('OWenT', 'wp-code-highlight-js'); ?></a> &lt;<a href="mailto:admin@owent.net">admin@owent.net</a>&gt;</p></td>
                 </tr>
                 <tr>
-                    <td width="120px" align="center"><?php echo __('Plugin Info', 'wp-code-highlight.js'); ?></td>
+                    <td width="120px" align="center"><?php echo __('Plugin Info', 'wp-code-highlight-js'); ?></td>
                     <td><?php echo __('<p>This is a wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library.
                         <a href="http://highlightjs.org/">Highlight.js</a> highlights syntax in code examples on web pages.
                         It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.</p>
                         <p>And it&acute;s very easy to work with <a href="https://stackedit.io/" target="_blank">stackedit</a> or other markdown editors</p>
-                        ', 'wp-code-highlight.js'); ?></td>
+                        ', 'wp-code-highlight-js'); ?></td>
                 </tr>
                 <tr>
-                    <td width="120px" align="center"><?php echo __('Plugin Usage', 'wp-code-highlight.js'); ?></td>
+                    <td width="120px" align="center"><?php echo __('Plugin Usage', 'wp-code-highlight-js'); ?></td>
                     <td><?php echo __('<p>For code highlighting you should use one of the following ways.</p>
                             <p><strong>The first way</strong> is to use bb-codes:</p>
                             <p><pre><code>[code] this language will be automatically determined [/code]</code></pre></p>
@@ -854,22 +854,22 @@ function hljs_settings_page() {
                             <p><strong>The second way</strong> is to use html-tags:</p>
                             <p><pre><code class="html">&lt;pre&gt;&lt;code&gt; this language will be automatically determined &lt;/code&gt;&lt;/pre&gt;</code></pre></p>
                             <p><pre><code class="html">&lt;pre&gt;&lt;code bbcode=enable&gt; this language will be [b]automatically determined[\b] and inner bbcode is available &lt;/code&gt;&lt;/pre&gt;</code></pre></p>
-                        <p><pre><code class="html">&lt;pre&gt;&lt;code class="html"&gt; highlight the code with certain language &lt;/code&gt;&lt;/pre&gt;</code></pre></p>', 'wp-code-highlight.js'); ?></td>
+                        <p><pre><code class="html">&lt;pre&gt;&lt;code class="html"&gt; highlight the code with certain language &lt;/code&gt;&lt;/pre&gt;</code></pre></p>', 'wp-code-highlight-js'); ?></td>
                 </tr>
                 <tr>
-                    <td width="120px" align="center"><?php echo __('Donate', 'wp-code-highlight.js'); ?></td>
-                    <td><?php echo __('If you interested my work, welcome to visit <a href="https://github.com/owt5008137/WP-Code-Highlight.js/#donate" target="_blank">https://github.com/owt5008137/WP-Code-Highlight.js/#donate</a> to donate me for a cup of coffee.', 'wp-code-highlight.js'); ?></td>
+                    <td width="120px" align="center"><?php echo __('Donate', 'wp-code-highlight-js'); ?></td>
+                    <td><?php echo __('If you interested my work, welcome to visit <a href="https://github.com/owt5008137/wp-code-highlight-js/#donate" target="_blank">https://github.com/owt5008137/wp-code-highlight-js/#donate</a> to donate me for a cup of coffee.', 'wp-code-highlight-js'); ?></td>
                 </tr>
                 <tr>
-                    <td width="120px" align="center"><?php echo __('Thanks To', 'wp-code-highlight.js'); ?></td>
+                    <td width="120px" align="center"><?php echo __('Thanks To', 'wp-code-highlight-js'); ?></td>
                     <td><ul>
                             <li><a href="http://softwaremaniacs.org/">Ivan Sagalaev</a> (for his <a href="http://highlightjs.org/">highlight.js</a>)</li>
                             <li><a href="http://kalnitsky.org">Igor Kalnitsky</a> (for his <a href="https://wordpress.org/plugins/wp-highlightjs/">wp-highlight.js</a> plugin)</li>
                     </ul></td>
                 </tr>
                 <tr>
-                    <td width="120px" align="center"><?php echo __('Thanks To', 'wp-code-highlight.js'); ?></td>
-                    <td><h3><?php echo __('Contributor List', 'wp-code-highlight.js'); ?>:</h3><ul>
+                    <td width="120px" align="center"><?php echo __('Thanks To', 'wp-code-highlight-js'); ?></td>
+                    <td><h3><?php echo __('Contributor List', 'wp-code-highlight-js'); ?>:</h3><ul>
                             <li><a href="http://geraint.co">Geraint Palmer</a></li>
                             <li><a href="http://www.codingserf.com">David</a></li>
                             <li><a href="http://www.shiyaluo.com">shiya</a></li>
