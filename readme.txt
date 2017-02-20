@@ -1,6 +1,6 @@
 === WP Code Highlight.js ===
 Donate link: https://github.com/owt5008137/WP-Code-Highlight.js/#donate
-Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter, prettify, pandoc, stackedit, typora
+Tags: source, code, highlight, sourcecode, highlighter, plugin, syntax, SyntaxHighlighter, prettify, pandoc, stackedit, typora, source, markdown
 Requires at least: 3.3
 Tested up to: 4.7.2
 Stable tag: 0.5.17
@@ -16,7 +16,7 @@ any code
 
 This plugin allow you load highlight.js from local storage or from CDN.
 If you use local highlight.js, you can also choose only some languages
-to make javascript file smaller(the smallest size is about 40KB).
+to make javascript file smaller(the smallest size is about 40+KB).
 
 You can also migrate from some other syntax highlighter easily. By now, we support SyntaxHighlighter, Prettify and CrayonSyntaxHighlighter.
 
@@ -65,6 +65,10 @@ Just have fun.
 7. Sample: Syntax Highlighter Compatiable Mode
 
 == Changelog ==
+
+= 0.5.17
+1. fix some software treat .js suffix as static file.(https://github.com/owt5008137/WP-Code-Highlight.js/pull/18)
+2. fix language miss when in prettify compatible
 
 = 0.5.16
 1. update highlight.js version to 9.9.0

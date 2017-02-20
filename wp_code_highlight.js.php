@@ -3,7 +3,7 @@
  * Plugin Name: WP Code Highlight.js
  * Plugin URI: https://github.com/owt5008137/WP-Code-Highlight.js
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
- * Version: 0.5.16
+ * Version: 0.5.17
  * Author: OWenT
  * Author URI: https://owent.net/
  * License: 3-clause BSD
@@ -14,7 +14,7 @@ $PLUGIN_DIR =  plugins_url() . '/' . dirname(plugin_basename(__FILE__));
  * Get version of this plugins
  */
 function hljs_get_version() {
-    return '0.5.16';
+    return '0.5.17';
 }
 /**
  * Get version of Highlight.js
@@ -227,7 +227,7 @@ function hljs_append_init_codes() {
                     return;
                 var code_content = $(block).removeClass("brush:").removeClass("ruler:").removeClass("first-line:").removeClass("highlight:")
                     .removeClass("brush:" + reg_mat[1] + ";").removeClass(reg_mat[1] + ";").removeClass("true;").removeClass("false;").html();
-                $(block).empty().append($("<code class='hljs'></code>").html(code_content)).addClass('language-' + reg_mat[1]);
+                $(block).empty().append($("<code class='hljs'></code>").html(code_content)).addClass(reg_mat[1]);
                 hljs.highlightBlock(block);
             });
 <?php }
@@ -238,12 +238,19 @@ function hljs_append_init_codes() {
                 hljs.highlightBlock(jblock.parent().get(0));
                 return;
             }
+
+            var class_desc = $(block).attr("class") || "";
+            var reg_mat = class_desc.match(/lang[^-]*-([\w\d]+)/i);
+            var code_content = $("<code class='hljs'></code>");
+            if (reg_mat && reg_mat.length >= 2) {
+                code_content.addClass(reg_mat[1]);
+            }
             if (jblock.prop("tagName") === "PRE") {
-              jblock.wrapInner("<code class='hljs'></code>");
+              jblock.wrapInner(code_content);
               hljs.highlightBlock(jblock.children().get(0));
             } else {
               var code_content = jblock.html();
-              jblock.replaceWith($("<pre></pre>").append($("<code class='hljs'></code>").html(code_content)));
+              jblock.replaceWith($("<pre></pre>").append(code_content.html(code_content)));
               hljs.highlightBlock(jblock.get(0));
             }
         });
@@ -253,9 +260,12 @@ function hljs_append_init_codes() {
         $('pre:not(:has(code))').each(function(i, block){
             var class_desc = $(block).attr("class") || "";
             var reg_mat = class_desc.match(/lang\s*:\s*([\w\d]+)/i);
-            var $code = $("<code class='hljs'></code>").html($(block).removeAttr('class').html());
-            $(block).empty().append($code.addClass(reg_mat[1]));
-            hljs.highlightBlock($code[0]);
+            var code_content = $("<code class='hljs'></code>").html($(block).removeAttr('class').html());
+            if (reg_mat && reg_mat.length >= 2) {
+                code_content.addClass(reg_mat[1]);
+            }
+            $(block).empty().append(code_content);
+            hljs.highlightBlock(block);
         });
 <?php } ?>
         });
@@ -292,8 +302,8 @@ function hljs_get_location_list($current_location) {
  */
 function hljs_get_package_list($current_package) {
     $pkgs = array(
-        'common' => 'Common(about 42KB)',
-        'all' => 'All(about 393KB)',
+        'common' => 'Common(about 40+KB)',
+        'all' => 'All(about 400+KB)',
         'custom' => 'Custom',
     );
     foreach($pkgs as $key => $val) {
@@ -327,7 +337,7 @@ function hljs_get_style_list($current_theme) {
  */
 function hljs_admin_page() {
     if (function_exists('add_submenu_page'))
-        add_options_page(__('WP Code Highlight.js Settings'), __('WP Code Highlight.js'), 'manage_options', 'wp-code-highlight.js', 'hljs_settings_page');
+        add_options_page(__('WP Code Highlight.js Settings'), __('WP Code Highlight.js'), 'manage_options', 'wp-code-highlight-js', 'hljs_settings_page');
 }
 add_action('admin_menu', 'hljs_admin_page');
 
@@ -336,7 +346,7 @@ add_action('admin_menu', 'hljs_admin_page');
  */
 function hljs_add_settings_link($links, $file) {
     if ($file == plugin_basename(__FILE__)) {
-      $links[] = '<a href="options-general.php?page=wp-code-highlight.js">' . __('Settings') . '</a>';
+      $links[] = '<a href="options-general.php?page=wp-code-highlight-js">' . __('Settings') . '</a>';
     }
     return $links;
 }
@@ -864,6 +874,7 @@ function hljs_settings_page() {
                             <li><a href="http://www.codingserf.com">David</a></li>
                             <li><a href="http://www.shiyaluo.com">shiya</a></li>
                             <li><a href="https://github.com/Beej126">Beej126</a></li>
+                            <li><a href="https://github.com/kylegundersen">kylegundersen</a></li>
                     </ul></td>
                 </tr>
            </table>
