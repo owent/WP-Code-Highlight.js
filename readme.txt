@@ -66,6 +66,9 @@ Just have fun.
 
 == Changelog ==
 
+= 0.5.18
+1. update highlight.js to 9.10.0
+
 = 0.5.17
 1. fix some software treat .js suffix as static file.(https://github.com/owt5008137/WP-Code-Highlight.js/pull/18)
 2. fix language miss when in prettify compatible
