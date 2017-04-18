@@ -379,28 +379,33 @@ if (hljs_get_option('shortcode')) {
 }
 function hljs_generate_custom_pack() {
     // generate custom language pack
+    $ret = TRUE;
     $opt_loc = hljs_get_option('location');
     $opt_packs = hljs_get_option('package');
     $opt_langs = hljs_get_option('custom_lang');
     $plugin_root_dir = plugin_dir_path( __FILE__ );
     if ('local' == $opt_loc && 'custom' == $opt_packs) {
         $custom_pack_file = $plugin_root_dir . DIRECTORY_SEPARATOR . 'highlight.custom.pack.js';
-        file_put_contents($custom_pack_file, '');
-        foreach($opt_langs as $language_name) {
-            $file_name = $language_name . '.min.js';
-            $full_path = $plugin_root_dir . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . $file_name;
-            if (file_exists($full_path)) {
-                $fc = file_get_contents($full_path);
-                file_put_contents($custom_pack_file, $fc . PHP_EOL, FILE_APPEND);
-            } else {
-                echo '<p class="warn">' .
-                    __('Language file', 'wp-code-highlight.js') .
-                    ' ' . $file_name . ' ' .
-                    __('not found', 'wp-code-highlight.js') . ', ' .
-                    __('ignored', 'wp-code-highlight.js') . '</p>';
+        if ( FALSE  === file_put_contents($custom_pack_file, '') ) {
+            echo '<p class="error">' . __('Write custom highlight language package to', 'wp-code-highlight.js') . ' ' . $custom_pack_file . __('failed, please grant write permission to it.', 'wp-code-highlight.js') . '</p>';
+            $ret = FALSE;
+        } else {
+            foreach($opt_langs as $language_name) {
+                $file_name = $language_name . '.min.js';
+                $full_path = $plugin_root_dir . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . $file_name;
+                if (file_exists($full_path)) {
+                    $fc = file_get_contents($full_path);
+                    file_put_contents($custom_pack_file, $fc . PHP_EOL, FILE_APPEND);
+                } else {
+                    echo '<p class="warn">' .
+                        __('Language file', 'wp-code-highlight.js') .
+                        ' ' . $file_name . ' ' .
+                        __('not found', 'wp-code-highlight.js') . ', ' .
+                        __('ignored', 'wp-code-highlight.js') . '</p>';
+                }
             }
+            echo '<p class="info">' . __('Generate custom highlight language package done.', 'wp-code-highlight.js') . '</p>';
         }
-        echo '<p class="info">' . __('Generate custom highlight language package done.', 'wp-code-highlight.js') . '</p>';
     } else {
         // check if CDN available
         $all_available_cdns = hljs_cdn_list();
@@ -423,7 +428,10 @@ function hljs_generate_custom_pack() {
         hljs_set_option('theme', 'default');
         echo '<p class="warn">' . __('Style named ' . $style_name . ' is unavailable, maybe highlight.js has changed the name. Theme changed to default now', 'wp-code-highlight.js') . '</p>';
     }
+
+    return $ret;
 }
+
 function hljs_on_update_complete($plugin, $data) {
     if (!empty($data) && !empty($data['type']) && 'plugin' == $data['type'] && 'update' == $data['action']) {
         $this_file_name = basename(__FILE__);
@@ -486,8 +494,12 @@ function hljs_settings_page() {
             }
         }
         update_option('hljs_code_option', $upload_options);
-        echo '<p class="info">' . __('All configurations successfully saved...', 'wp-code-highlight.js') . '</p>';
-        hljs_generate_custom_pack();
+        $res = hljs_generate_custom_pack();
+        if ($res === FALSE) {
+            echo '<p class="error">' . __('Save configurations failed.', 'wp-code-highlight.js') . '</p>'; 
+        } else {
+            echo '<p class="info">' . __('All configurations successfully saved.', 'wp-code-highlight.js') . '</p>'; 
+        }
     }
     ?>
     <!-- html code of settings page -->
@@ -847,14 +859,16 @@ function hljs_settings_page() {
                 </tr>
                 <tr>
                     <td width="120px" align="center"><?php echo __('Plugin Usage', 'wp-code-highlight.js'); ?></td>
-                    <td><?php echo __('<p>For code highlighting you should use one of the following ways.</p>
-                            <p><strong>The first way</strong> is to use bb-codes:</p>
+                    <td>
+                        <p><?php echo __('For code highlighting you should use one of the following ways.', 'wp-code-highlight.js'); ?></p>
+                        <p><strong><?php echo __('The first way', 'wp-code-highlight.js'); ?></strong><?php echo __(' is to use bb-codes', 'wp-code-highlight.js'); ?>:</p>
                             <p><pre><code>[code] this language will be automatically determined [/code]</code></pre></p>
                         <p><pre><code>[code lang="cpp"] highlight the code with certain language [/code]</code></pre></p>
-                            <p><strong>The second way</strong> is to use html-tags:</p>
+                            <p><strong><?php echo __('The second way', 'wp-code-highlight.js'); ?></strong><?php echo __(' is to use html-tags', 'wp-code-highlight.js'); ?>:</p>
                             <p><pre><code class="html">&lt;pre&gt;&lt;code&gt; this language will be automatically determined &lt;/code&gt;&lt;/pre&gt;</code></pre></p>
                             <p><pre><code class="html">&lt;pre&gt;&lt;code bbcode=enable&gt; this language will be [b]automatically determined[\b] and inner bbcode is available &lt;/code&gt;&lt;/pre&gt;</code></pre></p>
-                        <p><pre><code class="html">&lt;pre&gt;&lt;code class="html"&gt; highlight the code with certain language &lt;/code&gt;&lt;/pre&gt;</code></pre></p>', 'wp-code-highlight.js'); ?></td>
+                        <p><pre><code class="html">&lt;pre&gt;&lt;code class="html"&gt; highlight the code with certain language &lt;/code&gt;&lt;/pre&gt;</code></pre></p>
+                    </td>
                 </tr>
                 <tr>
                     <td width="120px" align="center"><?php echo __('Donate', 'wp-code-highlight.js'); ?></td>

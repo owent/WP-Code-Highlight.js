@@ -66,6 +66,9 @@ Just have fun.
 
 == Changelog ==
 
+= 0.6.0
+1. report warning when we has no writing access to the plugin directory
+
 = 0.5.18
 1. update highlight.js to 9.10.0
 
