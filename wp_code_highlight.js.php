@@ -91,7 +91,7 @@ function hljs_install() {
             'useBR' => false,
             'languages' => ''
         ),
-        'additional_css' => "pre.hljs {padding: 5px;}\npre.hljs code {}",
+        'additional_css' => "code.hljs { /*margin: 5px;*/ }",
         'syntaxhighlighter_compatible' => false,
         'crayonsyntaxhighlighter_compatible' => false,
         'prettify_compatible' => false,
