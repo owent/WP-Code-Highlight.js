@@ -3,7 +3,7 @@
  * Plugin Name: WP Code Highlight.js
  * Plugin URI: https://github.com/owt5008137/WP-Code-Highlight.js
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
- * Version: 0.5.18
+ * Version: 0.6.0
  * Author: OWenT
  * Author URI: https://owent.net/
  * License: 3-clause BSD
@@ -14,13 +14,13 @@ $PLUGIN_DIR =  plugins_url() . '/' . dirname(plugin_basename(__FILE__));
  * Get version of this plugins
  */
 function hljs_get_version() {
-    return '0.5.18';
+    return '0.6.0';
 }
 /**
  * Get version of Highlight.js
  */
 function hljs_get_lib_version() {
-    return '9.10.0';
+    return '9.12.0';
 }
 /**
  * list cdn list
@@ -50,17 +50,17 @@ function hljs_cdn_list() {
             'readme' => 'http://www.bootcdn.cn/highlight.js/'
         ),
         'jsDelivr' => array(
-            'cdn' => '//cdn.jsdelivr.net/highlight.js/' . hljs_get_lib_version(),
-            //'cdn' => '//cdn.jsdelivr.net/highlight.js/9.6.0',
-            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': jsDelivr (' . __('highlightjs.org recommend', 'wp-code-highlight.js') . ') ' . __('lastest version', 'wp-code-highlight.js') . ': 9.6.0)',
+            //'cdn' => '//cdn.jsdelivr.net/highlight.js/' . hljs_get_lib_version(),
+            'cdn' => '//cdn.jsdelivr.net/highlight.js/9.11.0',
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': jsDelivr (' . __('highlightjs.org recommend', 'wp-code-highlight.js') . ') ' . __('lastest version', 'wp-code-highlight.js') . ': 9.11.0)',
             'css' => '.min',
             'js' => '.min',
             'readme' => 'http://www.jsdelivr.com/#!highlight.js'
         ),
         'MaxCDN' => array(
-            'cdn' => '//oss.maxcdn.com/highlight.js/' . hljs_get_lib_version(),
-            //'cdn' => '//oss.maxcdn.com/highlight.js/9.6.0',
-            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': MaxCDN ' . __('lastest version', 'wp-code-highlight.js') . ': 9.6.0)',
+            //'cdn' => '//oss.maxcdn.com/highlight.js/' . hljs_get_lib_version(),
+            'cdn' => '//oss.maxcdn.com/highlight.js/9.11.0',
+            'desc' => __('Public CDN', 'wp-code-highlight.js') . ': MaxCDN ' . __('lastest version', 'wp-code-highlight.js') . ': 9.11.0)',
             'css' => '.min',
             'js' => '.min',
             'readme' => 'http://osscdn.com/#/highlight.js'
@@ -369,9 +369,9 @@ function hljs_code_handler($attrs, $content) {
         }
     }
     if($enable_inner_bbcode) {
-        return "<pre class=\"hljs\"><code $language>" . do_shortcode(ltrim($content, '\n')) . '</code></pre>';
+        return "<pre><code $language>" . do_shortcode(ltrim($content, '\n')) . '</code></pre>';
     } else {
-        return "<pre class=\"hljs\"><code $language>" . ltrim($content, '\n') . '</code></pre>';
+        return "<pre><code $language>" . ltrim($content, '\n') . '</code></pre>';
     }
 }
 if (hljs_get_option('shortcode')) {
