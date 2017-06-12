@@ -3,7 +3,7 @@
  * Plugin Name: WP Code Highlight.js
  * Plugin URI: https://github.com/owt5008137/WP-Code-Highlight.js
  * Description: This is simple wordpress plugin for <a href="http://highlightjs.org/">highlight.js</a> library. Highlight.js highlights syntax in code examples on blogs, forums and in fact on any web pages. It&acute;s very easy to use because it works automatically: finds blocks of code, detects a language, highlights it.
- * Version: 0.6.0
+ * Version: 0.6.1
  * Author: OWenT
  * Author URI: https://owent.net/
  * License: 3-clause BSD
@@ -14,7 +14,7 @@ $PLUGIN_DIR =  plugins_url() . '/' . dirname(plugin_basename(__FILE__));
  * Get version of this plugins
  */
 function hljs_get_version() {
-    return '0.6.0';
+    return '0.6.1';
 }
 /**
  * Get version of Highlight.js
@@ -542,181 +542,186 @@ function hljs_settings_page() {
                 <p><b>Common</b></p>
                 <ul id="language_support_list_common">
                   <!-- copy from view-source:https://highlightjs.org/download/ -->
-                    <li><label><input name="apache.js" checked="" type="checkbox"> Apache</label>
-                    </li><li><label><input name="bash.js" checked="" type="checkbox"> Bash</label>
-                    </li><li><label><input name="cs.js" checked="" type="checkbox"> C#</label>
-                    </li><li><label><input name="cpp.js" checked="" type="checkbox"> C++</label>
-                    </li><li><label><input name="css.js" checked="" type="checkbox"> CSS</label>
-                    </li><li><label><input name="coffeescript.js" checked="" type="checkbox"> CoffeeScript</label>
-                    </li><li><label><input name="diff.js" checked="" type="checkbox"> Diff</label>
-                    </li><li><label><input name="xml.js" checked="" type="checkbox"> HTML, XML</label>
-                    </li><li><label><input name="http.js" checked="" type="checkbox"> HTTP</label>
-                    </li><li><label><input name="ini.js" checked="" type="checkbox"> Ini</label>
-                    </li><li><label><input name="json.js" checked="" type="checkbox"> JSON</label>
-                    </li><li><label><input name="java.js" checked="" type="checkbox"> Java</label>
-                    </li><li><label><input name="javascript.js" checked="" type="checkbox"> JavaScript</label>
-                    </li><li><label><input name="makefile.js" checked="" type="checkbox"> Makefile</label>
-                    </li><li><label><input name="markdown.js" checked="" type="checkbox"> Markdown</label>
-                    </li><li><label><input name="nginx.js" checked="" type="checkbox"> Nginx</label>
-                    </li><li><label><input name="objectivec.js" checked="" type="checkbox"> Objective-C</label>
-                    </li><li><label><input name="php.js" checked="" type="checkbox"> PHP</label>
-                    </li><li><label><input name="perl.js" checked="" type="checkbox"> Perl</label>
-                    </li><li><label><input name="python.js" checked="" type="checkbox"> Python</label>
-                    </li><li><label><input name="ruby.js" checked="" type="checkbox"> Ruby</label>
-                    </li><li><label><input name="sql.js" checked="" type="checkbox"> SQL</label>
-                    </li>
+                    <li><label><input type="checkbox" name="apache.js" checked /> Apache</label></li>
+                    <li><label><input type="checkbox" name="bash.js" checked /> Bash</label></li>
+                    <li><label><input type="checkbox" name="cs.js" checked /> C#</label></li>
+                    <li><label><input type="checkbox" name="cpp.js" checked /> C++</label></li>
+                    <li><label><input type="checkbox" name="css.js" checked /> CSS</label></li>
+                    <li><label><input type="checkbox" name="coffeescript.js" checked /> CoffeeScript</label></li>
+                    <li><label><input type="checkbox" name="diff.js" checked /> Diff</label></li>
+                    <li><label><input type="checkbox" name="xml.js" checked /> HTML, XML</label></li>
+                    <li><label><input type="checkbox" name="http.js" checked /> HTTP</label></li>
+                    <li><label><input type="checkbox" name="ini.js" checked /> Ini</label></li>
+                    <li><label><input type="checkbox" name="json.js" checked /> JSON</label></li>
+                    <li><label><input type="checkbox" name="java.js" checked /> Java</label></li>
+                    <li><label><input type="checkbox" name="javascript.js" checked /> JavaScript</label></li>
+                    <li><label><input type="checkbox" name="makefile.js" checked /> Makefile</label></li>
+                    <li><label><input type="checkbox" name="markdown.js" checked /> Markdown</label></li>
+                    <li><label><input type="checkbox" name="nginx.js" checked /> Nginx</label></li>
+                    <li><label><input type="checkbox" name="objectivec.js" checked /> Objective-C</label></li>
+                    <li><label><input type="checkbox" name="php.js" checked /> PHP</label></li>
+                    <li><label><input type="checkbox" name="perl.js" checked /> Perl</label></li>
+                    <li><label><input type="checkbox" name="python.js" checked /> Python</label></li>
+                    <li><label><input type="checkbox" name="ruby.js" checked /> Ruby</label></li>
+                    <li><label><input type="checkbox" name="sql.js" checked /> SQL</label></li>
+                    <li><label><input type="checkbox" name="shell.js" checked /> Shell Session</label></li>
                 </ul>
                 <p><b>Other</b></p>
                 <ul id="language_support_list_other">
                     <!-- copy from view-source:https://highlightjs.org/download/ -->
-                    <li><label><input name="1c.js" type="checkbox"> 1C</label>
-                    </li><li><label><input name="armasm.js" type="checkbox"> ARM Assembly</label>
-                    </li><li><label><input name="avrasm.js" type="checkbox"> AVR Assembler</label>
-                    </li><li><label><input name="accesslog.js" type="checkbox"> Access log</label>
-                    </li><li><label><input name="actionscript.js" type="checkbox"> ActionScript</label>
-                    </li><li><label><input name="ada.js" type="checkbox"> Ada</label>
-                    </li><li><label><input name="applescript.js" type="checkbox"> AppleScript</label>
-                    </li><li><label><input name="arduino.js" type="checkbox"> Arduino</label>
-                    </li><li><label><input name="asciidoc.js" type="checkbox"> AsciiDoc</label>
-                    </li><li><label><input name="aspectj.js" type="checkbox"> AspectJ</label>
-                    </li><li><label><input name="abnf.js" type="checkbox"> Augmented Backus-Naur Form</label>
-                    </li><li><label><input name="autohotkey.js" type="checkbox"> AutoHotkey</label>
-                    </li><li><label><input name="autoit.js" type="checkbox"> AutoIt</label>
-                    </li><li><label><input name="awk.js" type="checkbox"> Awk</label>
-                    </li><li><label><input name="axapta.js" type="checkbox"> Axapta</label>
-                    </li><li><label><input name="bnf.js" type="checkbox"> Backus–Naur Form</label>
-                    </li><li><label><input name="basic.js" type="checkbox"> Basic</label>
-                    </li><li><label><input name="brainfuck.js" type="checkbox"> Brainfuck</label>
-                    </li><li><label><input name="cal.js" type="checkbox"> C/AL</label>
-                    </li><li><label><input name="cmake.js" type="checkbox"> CMake</label>
-                    </li><li><label><input name="csp.js" type="checkbox"> CSP</label>
-                    </li><li><label><input name="cos.js" type="checkbox"> Caché Object Script</label>
-                    </li><li><label><input name="capnproto.js" type="checkbox"> Cap’n Proto</label>
-                    </li><li><label><input name="ceylon.js" type="checkbox"> Ceylon</label>
-                    </li><li><label><input name="clean.js" type="checkbox"> Clean</label>
-                    </li><li><label><input name="clojure.js" type="checkbox"> Clojure</label>
-                    </li><li><label><input name="clojure-repl.js" type="checkbox"> Clojure REPL</label>
-                    </li><li><label><input name="coq.js" type="checkbox"> Coq</label>
-                    </li><li><label><input name="crystal.js" type="checkbox"> Crystal</label>
-                    </li><li><label><input name="d.js" type="checkbox"> D</label>
-                    </li><li><label><input name="dns.js" type="checkbox"> DNS Zone file</label>
-                    </li><li><label><input name="dos.js" type="checkbox"> DOS .bat</label>
-                    </li><li><label><input name="dart.js" type="checkbox"> Dart</label>
-                    </li><li><label><input name="delphi.js" type="checkbox"> Delphi</label>
-                    </li><li><label><input name="dts.js" type="checkbox"> Device Tree</label>
-                    </li><li><label><input name="django.js" type="checkbox"> Django</label>
-                    </li><li><label><input name="dockerfile.js" type="checkbox"> Dockerfile</label>
-                    </li><li><label><input name="dust.js" type="checkbox"> Dust</label>
-                    </li><li><label><input name="erb.js" type="checkbox"> ERB (Embedded Ruby)</label>
-                    </li><li><label><input name="elixir.js" type="checkbox"> Elixir</label>
-                    </li><li><label><input name="elm.js" type="checkbox"> Elm</label>
-                    </li><li><label><input name="erlang.js" type="checkbox"> Erlang</label>
-                    </li><li><label><input name="erlang-repl.js" type="checkbox"> Erlang REPL</label>
-                    </li><li><label><input name="excel.js" type="checkbox"> Excel</label>
-                    </li><li><label><input name="ebnf.js" type="checkbox"> Extended Backus-Naur Form</label>
-                    </li><li><label><input name="fsharp.js" type="checkbox"> F#</label>
-                    </li><li><label><input name="fix.js" type="checkbox"> FIX</label>
-                    </li><li><label><input name="flix.js" type="checkbox"> Flix</label>
-                    </li><li><label><input name="fortran.js" type="checkbox"> Fortran</label>
-                    </li><li><label><input name="gcode.js" type="checkbox"> G-code (ISO 6983)</label>
-                    </li><li><label><input name="gams.js" type="checkbox"> GAMS</label>
-                    </li><li><label><input name="gauss.js" type="checkbox"> GAUSS</label>
-                    </li><li><label><input name="glsl.js" type="checkbox"> GLSL</label>
-                    </li><li><label><input name="gherkin.js" type="checkbox"> Gherkin</label>
-                    </li><li><label><input name="go.js" type="checkbox"> Go</label>
-                    </li><li><label><input name="golo.js" type="checkbox"> Golo</label>
-                    </li><li><label><input name="gradle.js" type="checkbox"> Gradle</label>
-                    </li><li><label><input name="groovy.js" type="checkbox"> Groovy</label>
-                    </li><li><label><input name="hsp.js" type="checkbox"> HSP</label>
-                    </li><li><label><input name="htmlbars.js" type="checkbox"> HTMLBars</label>
-                    </li><li><label><input name="haml.js" type="checkbox"> Haml</label>
-                    </li><li><label><input name="handlebars.js" type="checkbox"> Handlebars</label>
-                    </li><li><label><input name="haskell.js" type="checkbox"> Haskell</label>
-                    </li><li><label><input name="haxe.js" type="checkbox"> Haxe</label>
-                    </li><li><label><input name="irpf90.js" type="checkbox"> IRPF90</label>
-                    </li><li><label><input name="inform7.js" type="checkbox"> Inform 7</label>
-                    </li><li><label><input name="x86asm.js" type="checkbox"> Intel x86 Assembly</label>
-                    </li><li><label><input name="julia.js" type="checkbox"> Julia</label>
-                    </li><li><label><input name="kotlin.js" type="checkbox"> Kotlin</label>
-                    </li><li><label><input name="ldif.js" type="checkbox"> LDIF</label>
-                    </li><li><label><input name="llvm.js" type="checkbox"> LLVM IR</label>
-                    </li><li><label><input name="lasso.js" type="checkbox"> Lasso</label>
-                    </li><li><label><input name="less.js" type="checkbox"> Less</label>
-                    </li><li><label><input name="lsl.js" type="checkbox"> Linden Scripting Language</label>
-                    </li><li><label><input name="lisp.js" type="checkbox"> Lisp</label>
-                    </li><li><label><input name="livecodeserver.js" type="checkbox"> LiveCode</label>
-                    </li><li><label><input name="livescript.js" type="checkbox"> LiveScript</label>
-                    </li><li><label><input name="lua.js" type="checkbox"> Lua</label>
-                    </li><li><label><input name="mel.js" type="checkbox"> MEL</label>
-                    </li><li><label><input name="mipsasm.js" type="checkbox"> MIPS Assembly</label>
-                    </li><li><label><input name="mathematica.js" type="checkbox"> Mathematica</label>
-                    </li><li><label><input name="matlab.js" type="checkbox"> Matlab</label>
-                    </li><li><label><input name="maxima.js" type="checkbox"> Maxima</label>
-                    </li><li><label><input name="mercury.js" type="checkbox"> Mercury</label>
-                    </li><li><label><input name="mizar.js" type="checkbox"> Mizar</label>
-                    </li><li><label><input name="mojolicious.js" type="checkbox"> Mojolicious</label>
-                    </li><li><label><input name="monkey.js" type="checkbox"> Monkey</label>
-                    </li><li><label><input name="moonscript.js" type="checkbox"> MoonScript</label>
-                    </li><li><label><input name="nsis.js" type="checkbox"> NSIS</label>
-                    </li><li><label><input name="nimrod.js" type="checkbox"> Nimrod</label>
-                    </li><li><label><input name="nix.js" type="checkbox"> Nix</label>
-                    </li><li><label><input name="ocaml.js" type="checkbox"> OCaml</label>
-                    </li><li><label><input name="openscad.js" type="checkbox"> OpenSCAD</label>
-                    </li><li><label><input name="ruleslanguage.js" type="checkbox"> Oracle Rules Language</label>
-                    </li><li><label><input name="oxygene.js" type="checkbox"> Oxygene</label>
-                    </li><li><label><input name="parser3.js" type="checkbox"> Parser3</label>
-                    </li><li><label><input name="pony.js" type="checkbox"> Pony</label>
-                    </li><li><label><input name="powershell.js" type="checkbox"> PowerShell</label>
-                    </li><li><label><input name="processing.js" type="checkbox"> Processing</label>
-                    </li><li><label><input name="prolog.js" type="checkbox"> Prolog</label>
-                    </li><li><label><input name="protobuf.js" type="checkbox"> Protocol Buffers</label>
-                    </li><li><label><input name="puppet.js" type="checkbox"> Puppet</label>
-                    </li><li><label><input name="purebasic.js" type="checkbox"> PureBASIC</label>
-                    </li><li><label><input name="profile.js" type="checkbox"> Python profile</label>
-                    </li><li><label><input name="q.js" type="checkbox"> Q</label>
-                    </li><li><label><input name="qml.js" type="checkbox"> QML</label>
-                    </li><li><label><input name="r.js" type="checkbox"> R</label>
-                    </li><li><label><input name="rib.js" type="checkbox"> RenderMan RIB</label>
-                    </li><li><label><input name="rsl.js" type="checkbox"> RenderMan RSL</label>
-                    </li><li><label><input name="roboconf.js" type="checkbox"> Roboconf</label>
-                    </li><li><label><input name="rust.js" type="checkbox"> Rust</label>
-                    </li><li><label><input name="scss.js" type="checkbox"> SCSS</label>
-                    </li><li><label><input name="sml.js" type="checkbox"> SML</label>
-                    </li><li><label><input name="sqf.js" type="checkbox"> SQF</label>
-                    </li><li><label><input name="step21.js" type="checkbox"> STEP Part 21</label>
-                    </li><li><label><input name="scala.js" type="checkbox"> Scala</label>
-                    </li><li><label><input name="scheme.js" type="checkbox"> Scheme</label>
-                    </li><li><label><input name="scilab.js" type="checkbox"> Scilab</label>
-                    </li><li><label><input name="smali.js" type="checkbox"> Smali</label>
-                    </li><li><label><input name="smalltalk.js" type="checkbox"> Smalltalk</label>
-                    </li><li><label><input name="stan.js" type="checkbox"> Stan</label>
-                    </li><li><label><input name="stata.js" type="checkbox"> Stata</label>
-                    </li><li><label><input name="stylus.js" type="checkbox"> Stylus</label>
-                    </li><li><label><input name="subunit.js" type="checkbox"> SubUnit</label>
-                    </li><li><label><input name="swift.js" type="checkbox"> Swift</label>
-                    </li><li><label><input name="tp.js" type="checkbox"> TP</label>
-                    </li><li><label><input name="taggerscript.js" type="checkbox"> Tagger Script</label>
-                    </li><li><label><input name="tcl.js" type="checkbox"> Tcl</label>
-                    </li><li><label><input name="tex.js" type="checkbox"> TeX</label>
-                    </li><li><label><input name="tap.js" type="checkbox"> Test Anything Protocol</label>
-                    </li><li><label><input name="thrift.js" type="checkbox"> Thrift</label>
-                    </li><li><label><input name="twig.js" type="checkbox"> Twig</label>
-                    </li><li><label><input name="typescript.js" type="checkbox"> TypeScript</label>
-                    </li><li><label><input name="vbnet.js" type="checkbox"> VB.NET</label>
-                    </li><li><label><input name="vbscript.js" type="checkbox"> VBScript</label>
-                    </li><li><label><input name="vbscript-html.js" type="checkbox"> VBScript in HTML</label>
-                    </li><li><label><input name="vhdl.js" type="checkbox"> VHDL</label>
-                    </li><li><label><input name="vala.js" type="checkbox"> Vala</label>
-                    </li><li><label><input name="verilog.js" type="checkbox"> Verilog</label>
-                    </li><li><label><input name="vim.js" type="checkbox"> Vim Script</label>
-                    </li><li><label><input name="xl.js" type="checkbox"> XL</label>
-                    </li><li><label><input name="xquery.js" type="checkbox"> XQuery</label>
-                    </li><li><label><input name="yaml.js" type="checkbox"> YAML</label>
-                    </li><li><label><input name="zephir.js" type="checkbox"> Zephir</label>
-                    </li><li><label><input name="crmsh.js" type="checkbox"> crmsh</label>
-                    </li><li><label><input name="dsconfig.js" type="checkbox"> dsconfig</label>
-                    </li><li><label><input name="pf.js" type="checkbox"> pf</label>
-                    </li>
+                    <li><label><input type="checkbox" name="1c.js" /> 1C:Enterprise (v7, v8)</label></li>
+                    <li><label><input type="checkbox" name="armasm.js" /> ARM Assembly</label></li>
+                    <li><label><input type="checkbox" name="avrasm.js" /> AVR Assembler</label></li>
+                    <li><label><input type="checkbox" name="accesslog.js" /> Access log</label></li>
+                    <li><label><input type="checkbox" name="actionscript.js" /> ActionScript</label></li>
+                    <li><label><input type="checkbox" name="ada.js" /> Ada</label></li>
+                    <li><label><input type="checkbox" name="applescript.js" /> AppleScript</label></li>
+                    <li><label><input type="checkbox" name="arduino.js" /> Arduino</label></li>
+                    <li><label><input type="checkbox" name="asciidoc.js" /> AsciiDoc</label></li>
+                    <li><label><input type="checkbox" name="aspectj.js" /> AspectJ</label></li>
+                    <li><label><input type="checkbox" name="abnf.js" /> Augmented Backus-Naur Form</label></li>
+                    <li><label><input type="checkbox" name="autohotkey.js" /> AutoHotkey</label></li>
+                    <li><label><input type="checkbox" name="autoit.js" /> AutoIt</label></li>
+                    <li><label><input type="checkbox" name="awk.js" /> Awk</label></li>
+                    <li><label><input type="checkbox" name="axapta.js" /> Axapta</label></li>
+                    <li><label><input type="checkbox" name="bnf.js" /> Backus–Naur Form</label></li>
+                    <li><label><input type="checkbox" name="basic.js" /> Basic</label></li>
+                    <li><label><input type="checkbox" name="brainfuck.js" /> Brainfuck</label></li>
+                    <li><label><input type="checkbox" name="cal.js" /> C/AL</label></li>
+                    <li><label><input type="checkbox" name="cmake.js" /> CMake</label></li>
+                    <li><label><input type="checkbox" name="csp.js" /> CSP</label></li>
+                    <li><label><input type="checkbox" name="cos.js" /> Caché Object Script</label></li>
+                    <li><label><input type="checkbox" name="capnproto.js" /> Cap’n Proto</label></li>
+                    <li><label><input type="checkbox" name="ceylon.js" /> Ceylon</label></li>
+                    <li><label><input type="checkbox" name="clean.js" /> Clean</label></li>
+                    <li><label><input type="checkbox" name="clojure.js" /> Clojure</label></li>
+                    <li><label><input type="checkbox" name="clojure-repl.js" /> Clojure REPL</label></li>
+                    <li><label><input type="checkbox" name="coq.js" /> Coq</label></li>
+                    <li><label><input type="checkbox" name="crystal.js" /> Crystal</label></li>
+                    <li><label><input type="checkbox" name="d.js" /> D</label></li>
+                    <li><label><input type="checkbox" name="dns.js" /> DNS Zone file</label></li>
+                    <li><label><input type="checkbox" name="dos.js" /> DOS .bat</label></li>
+                    <li><label><input type="checkbox" name="dart.js" /> Dart</label></li>
+                    <li><label><input type="checkbox" name="delphi.js" /> Delphi</label></li>
+                    <li><label><input type="checkbox" name="dts.js" /> Device Tree</label></li>
+                    <li><label><input type="checkbox" name="django.js" /> Django</label></li>
+                    <li><label><input type="checkbox" name="dockerfile.js" /> Dockerfile</label></li>
+                    <li><label><input type="checkbox" name="dust.js" /> Dust</label></li>
+                    <li><label><input type="checkbox" name="erb.js" /> ERB (Embedded Ruby)</label></li>
+                    <li><label><input type="checkbox" name="elixir.js" /> Elixir</label></li>
+                    <li><label><input type="checkbox" name="elm.js" /> Elm</label></li>
+                    <li><label><input type="checkbox" name="erlang.js" /> Erlang</label></li>
+                    <li><label><input type="checkbox" name="erlang-repl.js" /> Erlang REPL</label></li>
+                    <li><label><input type="checkbox" name="excel.js" /> Excel</label></li>
+                    <li><label><input type="checkbox" name="ebnf.js" /> Extended Backus-Naur Form</label></li>
+                    <li><label><input type="checkbox" name="fsharp.js" /> F#</label></li>
+                    <li><label><input type="checkbox" name="fix.js" /> FIX</label></li>
+                    <li><label><input type="checkbox" name="flix.js" /> Flix</label></li>
+                    <li><label><input type="checkbox" name="fortran.js" /> Fortran</label></li>
+                    <li><label><input type="checkbox" name="gcode.js" /> G-code (ISO 6983)</label></li>
+                    <li><label><input type="checkbox" name="gams.js" /> GAMS</label></li>
+                    <li><label><input type="checkbox" name="gauss.js" /> GAUSS</label></li>
+                    <li><label><input type="checkbox" name="glsl.js" /> GLSL</label></li>
+                    <li><label><input type="checkbox" name="gherkin.js" /> Gherkin</label></li>
+                    <li><label><input type="checkbox" name="go.js" /> Go</label></li>
+                    <li><label><input type="checkbox" name="golo.js" /> Golo</label></li>
+                    <li><label><input type="checkbox" name="gradle.js" /> Gradle</label></li>
+                    <li><label><input type="checkbox" name="groovy.js" /> Groovy</label></li>
+                    <li><label><input type="checkbox" name="hsp.js" /> HSP</label></li>
+                    <li><label><input type="checkbox" name="htmlbars.js" /> HTMLBars</label></li>
+                    <li><label><input type="checkbox" name="haml.js" /> Haml</label></li>
+                    <li><label><input type="checkbox" name="handlebars.js" /> Handlebars</label></li>
+                    <li><label><input type="checkbox" name="haskell.js" /> Haskell</label></li>
+                    <li><label><input type="checkbox" name="haxe.js" /> Haxe</label></li>
+                    <li><label><input type="checkbox" name="hy.js" /> Hy</label></li>
+                    <li><label><input type="checkbox" name="irpf90.js" /> IRPF90</label></li>
+                    <li><label><input type="checkbox" name="inform7.js" /> Inform 7</label></li>
+                    <li><label><input type="checkbox" name="x86asm.js" /> Intel x86 Assembly</label></li>
+                    <li><label><input type="checkbox" name="julia.js" /> Julia</label></li>
+                    <li><label><input type="checkbox" name="julia-repl.js" /> Julia REPL</label></li>
+                    <li><label><input type="checkbox" name="kotlin.js" /> Kotlin</label></li>
+                    <li><label><input type="checkbox" name="ldif.js" /> LDIF</label></li>
+                    <li><label><input type="checkbox" name="llvm.js" /> LLVM IR</label></li>
+                    <li><label><input type="checkbox" name="lasso.js" /> Lasso</label></li>
+                    <li><label><input type="checkbox" name="leaf.js" /> Leaf</label></li>
+                    <li><label><input type="checkbox" name="less.js" /> Less</label></li>
+                    <li><label><input type="checkbox" name="lsl.js" /> Linden Scripting Language</label></li>
+                    <li><label><input type="checkbox" name="lisp.js" /> Lisp</label></li>
+                    <li><label><input type="checkbox" name="livecodeserver.js" /> LiveCode</label></li>
+                    <li><label><input type="checkbox" name="livescript.js" /> LiveScript</label></li>
+                    <li><label><input type="checkbox" name="lua.js" /> Lua</label></li>
+                    <li><label><input type="checkbox" name="mel.js" /> MEL</label></li>
+                    <li><label><input type="checkbox" name="mipsasm.js" /> MIPS Assembly</label></li>
+                    <li><label><input type="checkbox" name="mathematica.js" /> Mathematica</label></li>
+                    <li><label><input type="checkbox" name="matlab.js" /> Matlab</label></li>
+                    <li><label><input type="checkbox" name="maxima.js" /> Maxima</label></li>
+                    <li><label><input type="checkbox" name="mercury.js" /> Mercury</label></li>
+                    <li><label><input type="checkbox" name="routeros.js" /> Microtik RouterOS script</label></li>
+                    <li><label><input type="checkbox" name="mizar.js" /> Mizar</label></li>
+                    <li><label><input type="checkbox" name="mojolicious.js" /> Mojolicious</label></li>
+                    <li><label><input type="checkbox" name="monkey.js" /> Monkey</label></li>
+                    <li><label><input type="checkbox" name="moonscript.js" /> MoonScript</label></li>
+                    <li><label><input type="checkbox" name="n1ql.js" /> N1QL</label></li>
+                    <li><label><input type="checkbox" name="nsis.js" /> NSIS</label></li>
+                    <li><label><input type="checkbox" name="nimrod.js" /> Nimrod</label></li>
+                    <li><label><input type="checkbox" name="nix.js" /> Nix</label></li>
+                    <li><label><input type="checkbox" name="ocaml.js" /> OCaml</label></li>
+                    <li><label><input type="checkbox" name="openscad.js" /> OpenSCAD</label></li>
+                    <li><label><input type="checkbox" name="ruleslanguage.js" /> Oracle Rules Language</label></li>
+                    <li><label><input type="checkbox" name="oxygene.js" /> Oxygene</label></li>
+                    <li><label><input type="checkbox" name="parser3.js" /> Parser3</label></li>
+                    <li><label><input type="checkbox" name="pony.js" /> Pony</label></li>
+                    <li><label><input type="checkbox" name="powershell.js" /> PowerShell</label></li>
+                    <li><label><input type="checkbox" name="processing.js" /> Processing</label></li>
+                    <li><label><input type="checkbox" name="prolog.js" /> Prolog</label></li>
+                    <li><label><input type="checkbox" name="protobuf.js" /> Protocol Buffers</label></li>
+                    <li><label><input type="checkbox" name="puppet.js" /> Puppet</label></li>
+                    <li><label><input type="checkbox" name="purebasic.js" /> PureBASIC</label></li>
+                    <li><label><input type="checkbox" name="profile.js" /> Python profile</label></li>
+                    <li><label><input type="checkbox" name="q.js" /> Q</label></li>
+                    <li><label><input type="checkbox" name="qml.js" /> QML</label></li>
+                    <li><label><input type="checkbox" name="r.js" /> R</label></li>
+                    <li><label><input type="checkbox" name="rib.js" /> RenderMan RIB</label></li>
+                    <li><label><input type="checkbox" name="rsl.js" /> RenderMan RSL</label></li>
+                    <li><label><input type="checkbox" name="roboconf.js" /> Roboconf</label></li>
+                    <li><label><input type="checkbox" name="rust.js" /> Rust</label></li>
+                    <li><label><input type="checkbox" name="scss.js" /> SCSS</label></li>
+                    <li><label><input type="checkbox" name="sml.js" /> SML</label></li>
+                    <li><label><input type="checkbox" name="sqf.js" /> SQF</label></li>
+                    <li><label><input type="checkbox" name="step21.js" /> STEP Part 21</label></li>
+                    <li><label><input type="checkbox" name="scala.js" /> Scala</label></li>
+                    <li><label><input type="checkbox" name="scheme.js" /> Scheme</label></li>
+                    <li><label><input type="checkbox" name="scilab.js" /> Scilab</label></li>
+                    <li><label><input type="checkbox" name="smali.js" /> Smali</label></li>
+                    <li><label><input type="checkbox" name="smalltalk.js" /> Smalltalk</label></li>
+                    <li><label><input type="checkbox" name="stan.js" /> Stan</label></li>
+                    <li><label><input type="checkbox" name="stata.js" /> Stata</label></li>
+                    <li><label><input type="checkbox" name="stylus.js" /> Stylus</label></li>
+                    <li><label><input type="checkbox" name="subunit.js" /> SubUnit</label></li>
+                    <li><label><input type="checkbox" name="swift.js" /> Swift</label></li>
+                    <li><label><input type="checkbox" name="tp.js" /> TP</label></li>
+                    <li><label><input type="checkbox" name="taggerscript.js" /> Tagger Script</label></li>
+                    <li><label><input type="checkbox" name="tcl.js" /> Tcl</label></li>
+                    <li><label><input type="checkbox" name="tex.js" /> TeX</label></li>
+                    <li><label><input type="checkbox" name="tap.js" /> Test Anything Protocol</label></li>
+                    <li><label><input type="checkbox" name="thrift.js" /> Thrift</label></li>
+                    <li><label><input type="checkbox" name="twig.js" /> Twig</label></li>
+                    <li><label><input type="checkbox" name="typescript.js" /> TypeScript</label></li>
+                    <li><label><input type="checkbox" name="vbnet.js" /> VB.NET</label></li>
+                    <li><label><input type="checkbox" name="vbscript.js" /> VBScript</label></li>
+                    <li><label><input type="checkbox" name="vbscript-html.js" /> VBScript in HTML</label></li>
+                    <li><label><input type="checkbox" name="vhdl.js" /> VHDL</label></li>
+                    <li><label><input type="checkbox" name="vala.js" /> Vala</label></li>
+                    <li><label><input type="checkbox" name="verilog.js" /> Verilog</label></li>
+                    <li><label><input type="checkbox" name="vim.js" /> Vim Script</label></li>
+                    <li><label><input type="checkbox" name="xl.js" /> XL</label></li>
+                    <li><label><input type="checkbox" name="xquery.js" /> XQuery</label></li>
+                    <li><label><input type="checkbox" name="yaml.js" /> YAML</label></li>
+                    <li><label><input type="checkbox" name="zephir.js" /> Zephir</label></li>
+                    <li><label><input type="checkbox" name="crmsh.js" /> crmsh</label></li>
+                    <li><label><input type="checkbox" name="dsconfig.js" /> dsconfig</label></li>
+                    <li><label><input type="checkbox" name="jboss-cli.js" /> jboss-cli</label></li>
+                    <li><label><input type="checkbox" name="pf.js" /> pf</label></li>
                 </ul>
                 <div style="clear: both;"></div>
               </div>
