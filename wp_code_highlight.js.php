@@ -369,9 +369,9 @@ function hljs_code_handler($attrs, $content) {
         }
     }
     if($enable_inner_bbcode) {
-        return "<pre><code $language>" . do_shortcode(ltrim($content, '\n')) . '</code></pre>';
+        return "<pre><code $language>" . do_shortcode(ltrim($content, "\n")) . '</code></pre>';
     } else {
-        return "<pre><code $language>" . ltrim($content, '\n') . '</code></pre>';
+        return "<pre><code $language>" . ltrim($content, "\n") . '</code></pre>';
     }
 }
 if (hljs_get_option('shortcode')) {
