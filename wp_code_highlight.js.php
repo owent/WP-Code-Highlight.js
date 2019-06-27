@@ -454,6 +454,7 @@ function hljs_settings_page() {
     global $PLUGIN_DIR;
     if (isset( $_POST['cmd'] ) && $_POST['cmd'] == 'hljs_save')
     {
+        check_admin_referer('hljs_save');
         $upload_options = array(
             'location' => $_POST['hljs_location'],
             'package' => $_POST['hljs_package'],
@@ -505,6 +506,7 @@ function hljs_settings_page() {
     <!-- html code of settings page -->
     <div class="wrap">
       <form id="hljs" method="post" action="<?php echo $_SERVER['REQUEST_URI'];?>">
+        <?php wp_nonce_field('hljs_save'); ?>
         <script type="text/javascript" src="<?php echo ($PLUGIN_DIR . '/highlight.common.pack.js'); ?>"></script>
         <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
         <link rel="stylesheet" href="<?php echo ($PLUGIN_DIR . '/styles/default.css'); ?>" />
