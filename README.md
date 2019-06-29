@@ -70,20 +70,12 @@ Report Problems: https://github.com/owt5008137/WP-Code-Highlight.js/issues
 
 See [readme.txt](readme.txt) for more detail
 
-Donate
-------
-Scan these QR-Code to donate me a cup of coffee?
-
-Platform |  WeChat | Alipay
----------|---------|--------
-QR-Code  | ![WeChat](donate/wechat.png) | ![Alipay](donate/alipay.png)
-
 Notes
 ------
 
   [stackedit]: [StackEdit](https://stackedit.io/) is a full-featured, open-source Markdown editor based on PageDown, the Markdown library used by Stack Overflow and the other Stack Exchange sites.
 
-  [highlight.js]: [Highlight.js][4]  is a syntax highlighter written in JavaScript. It works in the browser as well as on the server. It works with pretty much any markup, doesn't depend on any framework and has automatic language detection. 
+  [highlight.js]: [Highlight.js][4]  is a syntax highlighter written in JavaScript. It works in the browser as well as on the server. It works with pretty much any markup, doesn't depend on any framework and has automatic language detection.
 
   [wp-code-highlight.js]: [WP Code Highlight.js][7] is a syntax highlight plugin for [Wordpress][3], which using [highlight.js][4] to highlight codes.
 
