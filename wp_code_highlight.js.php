@@ -430,6 +430,16 @@ function hljs_on_update_complete($plugin, $data) {
     }
 }
 add_action('upgrader_process_complete', 'hljs_on_update_complete', 10, 2);
+
+function hljs_check_post_bool($name) {
+    if (!isset($_POST[$name])) {
+        return false;
+    }
+
+    $val = sanitize_text_field($_POST[$name])
+    return $val != '' && $val != '0';
+}
+
 /**
  * Highlight.js Settings Page
  */
@@ -439,20 +449,20 @@ function hljs_settings_page() {
     {
         check_admin_referer('hljs_save');
         $upload_options = array(
-            'location' => $_POST['hljs_location'],
-            'package' => $_POST['hljs_package'],
-            'theme' => $_POST['hljs_theme'],
+            'location' => sanitize_text_field($_POST['hljs_location']),
+            'package' => sanitize_text_field($_POST['hljs_package']),
+            'theme' => sanitize_text_field($_POST['hljs_theme']),
             'hljs_option' => array(
-                'tabReplace' => $_POST['hljs_option_tab_replace'],
-                'classPrefix' => $_POST['hljs_option_class_prefix'],
-                'useBR' => (isset($_POST['hljs_option_use_br']) && $_POST['hljs_option_use_br'])? true: false,
-                'languages' => $_POST['hljs_option_languages']
+                'tabReplace' => sanitize_text_field($_POST['hljs_option_tab_replace']),
+                'classPrefix' => sanitize_text_field($_POST['hljs_option_class_prefix']),
+                'useBR' => hljs_check_post_bool('hljs_option_use_br'),
+                'languages' => sanitize_textarea_field($_POST['hljs_option_languages'])
             ),
-            'additional_css' => $_POST['hljs_additional_css'],
-            'syntaxhighlighter_compatible' => (isset($_POST['hljs_syntaxhighlighter_compatible']) && $_POST['hljs_syntaxhighlighter_compatible'])? true: false,
-            'prettify_compatible' => (isset($_POST['hljs_prettify_compatible']) && $_POST['hljs_prettify_compatible'])? true: false,
-            'crayonsyntaxhighlighter_compatible' => (isset($_POST['hljs_crayonsyntaxhighlighter_compatible']) && $_POST['hljs_crayonsyntaxhighlighter_compatible'])? true: false,
-            'shortcode' => (isset($_POST['hljs_enable_shortcode']) && $_POST['hljs_enable_shortcode'])? true: false,
+            'additional_css' => sanitize_textarea_field($_POST['hljs_additional_css']),
+            'syntaxhighlighter_compatible' => hljs_check_post_bool('hljs_syntaxhighlighter_compatible'),
+            'prettify_compatible' => hljs_check_post_bool('hljs_prettify_compatible'),
+            'crayonsyntaxhighlighter_compatible' => hljs_check_post_bool('hljs_crayonsyntaxhighlighter_compatible'),
+            'shortcode' => hljs_check_post_bool('hljs_enable_shortcode'),
             'custom_lang' => hljs_get_option('custom_lang')
         );
         // generate custom language pack
@@ -489,10 +499,12 @@ function hljs_settings_page() {
     <!-- html code of settings page -->
     <div class="wrap">
       <form id="hljs" method="post" action="<?php echo $_SERVER['REQUEST_URI'];?>">
-        <?php wp_nonce_field('hljs_save'); ?>
-        <script type="text/javascript" src="<?php echo ($PLUGIN_DIR . '/highlight.common.pack.js'); ?>"></script>
-        <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
-        <link rel="stylesheet" href="<?php echo ($PLUGIN_DIR . '/styles/default.css'); ?>" />
+        <?php 
+            wp_nonce_field('hljs_save'); 
+            wp_enqueue_script('hljs_preload', $PLUGIN_DIR . '/highlight.common.pack.js', array('jquery'), hljs_get_version(), false );
+            wp_add_inline_script('hljs_preload', 'hljs.initHighlightingOnLoad();', 'after');
+            wp_enqueue_style('hljstheme', $PLUGIN_DIR . '/styles/default.css', array(), hljs_get_version());
+        ?>
         <style>
             .info { padding: 15px; background: #EDEDED; border: 1px solid #333333; font: 14px #333333 Verdana; margin: 30px 10px 0px 0px; }
             .section { padding: 10px; margin: 30px 0 0px; background: #FAFAFA; border: 1px solid #DDDDDD; display: block; }
