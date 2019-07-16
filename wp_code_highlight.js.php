@@ -436,7 +436,7 @@ function hljs_check_post_bool($name) {
         return false;
     }
 
-    $val = sanitize_text_field($_POST[$name])
+    $val = sanitize_text_field($_POST[$name]);
     return $val != '' && $val != '0';
 }
 
@@ -584,14 +584,14 @@ function hljs_settings_page() {
                     <li><label><input type="checkbox" name="autoit.js"> AutoIt</label></li>
                     <li><label><input type="checkbox" name="awk.js"> Awk</label></li>
                     <li><label><input type="checkbox" name="axapta.js"> Axapta</label></li>
-                    <li><label><input type="checkbox" name="bnf.js"> Backus–Naur Form</label></li>
+                    <li><label><input type="checkbox" name="bnf.js"> Backus?Naur Form</label></li>
                     <li><label><input type="checkbox" name="basic.js"> Basic</label></li>
                     <li><label><input type="checkbox" name="brainfuck.js"> Brainfuck</label></li>
                     <li><label><input type="checkbox" name="cal.js"> C/AL</label></li>
                     <li><label><input type="checkbox" name="cmake.js"> CMake</label></li>
                     <li><label><input type="checkbox" name="csp.js"> CSP</label></li>
-                    <li><label><input type="checkbox" name="cos.js"> Caché Object Script</label></li>
-                    <li><label><input type="checkbox" name="capnproto.js"> Cap’n Proto</label></li>
+                    <li><label><input type="checkbox" name="cos.js"> Cach? Object Script</label></li>
+                    <li><label><input type="checkbox" name="capnproto.js"> Cap?n Proto</label></li>
                     <li><label><input type="checkbox" name="ceylon.js"> Ceylon</label></li>
                     <li><label><input type="checkbox" name="clean.js"> Clean</label></li>
                     <li><label><input type="checkbox" name="clojure.js"> Clojure</label></li>
