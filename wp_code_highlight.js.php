@@ -351,6 +351,9 @@ function hljs_code_handler($attrs, $content) {
             $enable_inner_bbcode = false;
         }
     }
+    if($attrs['lang'] == "xml"){
+        $content = htmlentities(str_replace(array("<p>", "<br>", "</p>"), "",  $content));
+    }
     if($enable_inner_bbcode) {
         return "<pre><code $language>" . do_shortcode(ltrim($content, "\n")) . '</code></pre>';
     } else {
